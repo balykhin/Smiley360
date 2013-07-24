@@ -35,7 +35,7 @@ Ext.define('smiley360.view.Login', {
                 cls: 'cust-input cust-input-user',
                 clearIcon: false,
                 required: true,
-                value: '1234@outofchaos.com',
+                value: 'mantelln@hotmail.com',
             }, {
                 xtype: 'passwordfield',
                 maxHeight: '20px',
@@ -46,7 +46,7 @@ Ext.define('smiley360.view.Login', {
                 cls: 'cust-input cust-input-pwd',
                 clearIcon: false,
                 required: true,
-                value: '123456',
+                value: 'General1234',
             }, {
                 xtype: 'spacer',
                 height: '12px'
@@ -76,14 +76,7 @@ Ext.define('smiley360.view.Login', {
                 ui: 'action',
                 listeners: {
                     tap: function () {
-                        //window.location = 'http://173.18.18.52/Index.html?uuid=' + Ext.device.Device.uuid;
-                    }
-                }
-            }, {
-                xtype: 'label',
-                listeners: {
-                    initialize: function () {
-                        //this.setHtml(Ext.device.Device.uuid);
+                        window.location = 'http://173.18.18.52/Index.html?uuid=111111';// + Ext.device.Device.uuid;
                     }
                 }
             }, {
