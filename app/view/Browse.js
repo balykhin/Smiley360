@@ -75,7 +75,7 @@ Ext.define('smiley360.view.Browse', {
                     {
                     	xtype: 'container',
                     	layout: 'hbox',
-                    	id: 'missions-cont',
+                    	//id: 'missions-cont',
                     	style: 'box-shadow: 0px 1px 2px rgba(0,0,0,0.5);',
                     	items: [{
                     		xtype: 'container',
@@ -407,14 +407,22 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
+												id: 'Auto',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
+                                            	listeners: {
+                                            		element: 'element',
+                                            		tap: function () {
+                                            			this.up('#xBrowse').doTap(this.id);
+                                            		},
+                                            	},
                                             	//style: 'background: #e2ddda; border-radius: 5px;margin-right: 20px ',
                                             	items: [
 
                                                     {
                                                     	xtype: 'image',
+                                                    	id: 'xAutoPict',
                                                     	src: 'resources/images/auto_c.png',
                                                     	height: 50,
                                                     	width: '100%',
@@ -422,6 +430,7 @@ Ext.define('smiley360.view.Browse', {
                                                     },
                                                      {
                                                      	xtype: 'label',
+                                                     	id: 'xAutoLabel',
                                                      	html: 'Automotive',
                                                      	cls: 'browse_text',
                                                      	//style: 'text-align: center; font-size:1.25em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din bold\';',
@@ -431,13 +440,21 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
+												id: 'Baby',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
+                                            	listeners: {
+                                            		element: 'element',
+                                            		tap: function () {
+                                            			this.up('#xBrowse').doTap(this.id);
+                                            		},
+                                            	},
                                             	items: [
 
                                                     {
                                                     	xtype: 'image',
+                                                    	id: 'xBabyPict',
                                                     	src: 'resources/images/baby_c.png',
                                                     	height: 40,
                                                     	width: '70%',
@@ -445,6 +462,7 @@ Ext.define('smiley360.view.Browse', {
                                                     },
                                                      {
                                                      	xtype: 'label',
+                                                     	id: 'xBabyLabel',
                                                      	html: 'Baby',
                                                      	cls: 'browse_text',
                                                      },
@@ -453,13 +471,21 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
+												id: 'Clothes',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
+                                            	listeners: {
+                                            		element: 'element',
+                                            		tap: function () {
+                                            			this.up('#xBrowse').doTap(this.id);
+                                            		},
+                                            	},
                                             	items: [
 
                                                     {
                                                     	xtype: 'image',
+                                                    	id: 'xClothesPict',
                                                     	src: 'resources/images/clothes_c.png',
                                                     	height: 50,
                                                     	width: '100%',
@@ -467,6 +493,7 @@ Ext.define('smiley360.view.Browse', {
                                                     },
                                                      {
                                                      	xtype: 'label',
+                                                     	id: 'xClothesLabel',
                                                      	html: 'Clothing & Accessories',
                                                      	style: 'margin-top: -20px;',
                                                      	cls: 'browse_text',
@@ -475,6 +502,50 @@ Ext.define('smiley360.view.Browse', {
                                             },//3rd item carousel
                                     	],//1st row items
                                     },//1st row end
+									 {
+									 	xtype: 'container',
+									 	layout: 'vbox',
+									 	id: 'xAuto_panel_browse',
+									 	width: '100%',
+									 	style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
+									 	listeners: {
+									 		initialize: function () {
+									 			var arr = ['Cars', 'Trucks', 'Motorcycles','Boats'];
+									 			Ext.getCmp('xBrowse').doCreateItems(arr, this.id, 'left');
+									 			this.hide();
+									 		}
+									 	}
+									 },
+									 {
+									 	xtype: 'container',
+									 	layout: 'vbox',
+									 	id: 'xBaby_panel_browse',
+									 	width: '100%',
+									 	style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
+									 	listeners: {
+									 		initialize: function () {
+									 			var arr = ['Baby Toys', 'Clothing & Shoe Brands', 'Diapers & Accessories', 'Feeding',
+													'General Parenting Info', 'Safety', 'Strollers & Carriers'];
+									 			Ext.getCmp('xBrowse').doCreateItems(arr, this.id, 'middle');
+									 			this.hide();
+									 		}
+									 	}
+									 },
+									 {
+									 	xtype: 'container',
+									 	layout: 'vbox',
+									 	id: 'xClothes_panel_browse',
+									 	width: '100%',
+									 	style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
+									 	listeners: {
+									 		initialize: function () {
+									 			var arr = ['Athletic', 'Clothing Retailers', 'Department Stores', 'Fashion Designers & Retailers',
+									 			'Jewelry & Wathches', 'Maternity', 'Shoes', 'Sunglasses, Handbags<br> and Other Accessories'];
+									 			Ext.getCmp('xBrowse').doCreateItems(arr, this.id, 'right');
+									 			this.hide();
+									 		}
+									 	}
+									 },
                                     //software,eco,education
                                     {
                                     	xtype: 'container',
@@ -485,13 +556,21 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
+												id: 'Computer',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
+                                            	listeners: {
+                                            		element: 'element',
+                                            		tap: function () {
+                                            			this.up('#xBrowse').doTap(this.id);
+                                            		},
+                                            	},
                                             	items: [
 
                                                     {
                                                     	xtype: 'image',
+                                                    	id: 'xComputerPict',
                                                     	src: 'resources/images/computer_c.png',
                                                     	height: 50,
                                                     	align: 'center',
@@ -499,6 +578,7 @@ Ext.define('smiley360.view.Browse', {
                                                     },
                                                      {
                                                      	xtype: 'label',
+                                                     	id: 'xComputerLabel',
                                                      	html: 'Computer & Software',
                                                      	style: 'margin-top: -20px;',
                                                      	cls: 'browse_text',
@@ -508,19 +588,28 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
+                                            	id: 'Eco_Friendly',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
+                                            	listeners: {
+                                            		element: 'element',
+                                            		tap: function () {
+                                            			this.up('#xBrowse').doTap(this.id);
+                                            		},
+                                            	},
                                             	items: [
 
                                                     {
                                                     	xtype: 'image',
+                                                    	id: 'xEco_FriendlyPict',
                                                     	src: 'resources/images/eco_friendly_c.png',
                                                     	height: 50,
                                                     	margin: '15px 35px',
                                                     },
                                                      {
                                                      	xtype: 'label',
+                                                     	id: 'xEco_FriendlyLabel',
                                                      	html: 'Eco-Friendly',
                                                      	cls: 'browse_text',
                                                      },
@@ -528,14 +617,22 @@ Ext.define('smiley360.view.Browse', {
                                             },//2nd item carousel
                                             {
                                             	xtype: 'container',
+												id: 'Edu',
                                             	layout: 'vbox',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
+                                            	listeners: {
+                                            		element: 'element',
+                                            		tap: function () {
+                                            			this.up('#xBrowse').doTap(this.id);
+                                            		},
+                                            	},
                                             	items: [
 
                                                     {
                                                     	xtype: 'image',
+                                                    	id: 'xEduPict',
                                                     	src: 'resources/images/edu_c.png',
                                                     	height: 50,
                                                     	width: '60%',
@@ -543,6 +640,7 @@ Ext.define('smiley360.view.Browse', {
                                                     },
                                                      {
                                                      	xtype: 'label',
+                                                     	id: 'xEduLabel',
                                                      	html: 'Education',
                                                      	cls: 'browse_text',
                                                      },
@@ -550,6 +648,48 @@ Ext.define('smiley360.view.Browse', {
                                             },//3rd item carousel
                                     	],//1st row items
                                     },//2nd row end
+									{
+										xtype: 'container',
+										layout: 'vbox',
+										id: 'xComputer_panel_browse',
+										width: '100%',
+										style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
+										listeners: {
+											initialize: function () {
+												var arr = ['Computer Makes & Models', 'Social Networking & Email Program', 'General Software'];
+												Ext.getCmp('xBrowse').doCreateItems(arr, this.id, 'left');
+												this.hide();
+											}
+										}
+									},
+									 {
+									 	xtype: 'container',
+									 	layout: 'vbox',
+									 	id: 'xEco_Friendly_panel_browse',
+									 	width: '100%',
+									 	style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
+									 	listeners: {
+									 		initialize: function () {
+									 			var arr = ['Cleaning & Household', 'Food & Beverage', 'General Eco-Friendly', ' Wellness Products'];
+									 			Ext.getCmp('xBrowse').doCreateItems(arr, this.id, 'middle');
+									 			this.hide();
+									 		}
+									 	}
+									 },
+									 {
+									 	xtype: 'container',
+									 	layout: 'vbox',
+									 	id: 'xEdu_panel_browse',
+									 	width: '100%',
+									 	style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
+									 	listeners: {
+									 		initialize: function () {
+									 			var arr = ['Colleges & Universities', 'Educational Services & Websites', 'General Education'];
+									 			Ext.getCmp('xBrowse').doCreateItems(arr, this.id, 'right');
+									 			this.hide();
+									 		}
+									 	}
+									 },
                                     //electronics, financial,food
                                     {
                                     	xtype: 'container',
@@ -560,19 +700,28 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
+												id: 'Mobile',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
+                                            	listeners: {
+                                            		element: 'element',
+                                            		tap: function () {
+                                            			this.up('#xBrowse').doTap(this.id);
+                                            		},
+                                            	},
                                             	items: [
 
                                                     {
                                                     	xtype: 'image',
+                                                    	id: 'xMobilePict',
                                                     	src: 'resources/images/mobile_c.png',
                                                     	height: 50,
                                                     	margin: '15px 35px',
                                                     },
                                                      {
                                                      	xtype: 'label',
+                                                     	id: 'xMobileLabel',
                                                      	html: 'Electronics',
                                                      	cls: 'browse_text',
                                                      },
@@ -581,19 +730,28 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
+												id: 'Finance',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
+                                            	listeners: {
+                                            		element: 'element',
+                                            		tap: function () {
+                                            			this.up('#xBrowse').doTap(this.id);
+                                            		},
+                                            	},
                                             	items: [
 
                                                     {
                                                     	xtype: 'image',
+                                                    	id: 'xFinancePict',
                                                     	src: 'resources/images/finance_c.png',
                                                     	height: 50,
                                                     	margin: '15px 35px',
                                                     },
                                                      {
                                                      	xtype: 'label',
+                                                     	id: 'xFinanceLabel',
                                                      	html: 'Financial Services',
                                                      	style: 'margin-top: -20px;',
                                                      	cls: 'browse_text',
@@ -623,6 +781,35 @@ Ext.define('smiley360.view.Browse', {
                                             },//3rd item carousel
                                     	],//1st row items
                                     },//3rd row end
+									{
+										xtype: 'container',
+										layout: 'vbox',
+										id: 'xMobile_panel_browse',
+										width: '100%',
+										style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
+										listeners: {
+											initialize: function () {
+												var arr = ['Cameras', ' Computers', 'Electronics Misc', 'Music Players',
+												'Phones', 'Retailers, Websites & Models'];
+												Ext.getCmp('xBrowse').doCreateItems(arr, this.id, 'left');
+												this.hide();
+											}
+										}
+									},
+									 {
+									 	xtype: 'container',
+									 	layout: 'vbox',
+									 	id: 'xFinance_panel_browse',
+									 	width: '100%',
+									 	style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
+									 	listeners: {
+									 		initialize: function () {
+									 			var arr = ['Banking', ' Mortgages & Loans'];
+									 			Ext.getCmp('xBrowse').doCreateItems(arr, this.id, 'middle');
+									 			this.hide();
+									 		}
+									 	}
+									 },
                                     //health,hobbies,home
                                     {
                                     	xtype: 'container',
@@ -785,34 +972,10 @@ Ext.define('smiley360.view.Browse', {
                                     	style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
                                     	listeners: {
                                     		initialize: function () {
-                                    			var arr = ['ArtSupplies', 'Artists'];
-                                    			Ext.getCmp('xBrowse').doCreateItems(arr, this.id);
+                                    			var arr = ['ArtSupplies', 'Artists','Instruments','Musical Gear', 'Performers'];
+                                    			Ext.getCmp('xBrowse').doCreateItems(arr, this.id,'middle');
                                     		}
-                                    	}//function ()
-                                    	//items: function () {
-                                    		
-                                    		//	[{
-                                    		//	xtype: 'label',
-                                    		//	html: 'Art Supplies',
-                                    		//	style: 'text-align: left; font-size:1.25em; padding: 10px 0px 10px 175px ; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                    		//}, {
-                                    		//	xtype: 'label',
-                                    		//	html: 'Artists',
-                                    		//	style: 'text-align: left;  font-size:1.25em; padding: 10px 0px 10px 175px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                    		//}, {
-                                    		//	xtype: 'label',
-                                    		//	html: 'Instruments',
-                                    		//	style: 'text-align: left;  font-size:1.25em; padding: 10px 0px 10px 175px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                    		//}, {
-                                    		//	xtype: 'label',
-                                    		//	html: 'Musical Gear',
-                                    		//	style: 'text-align: left; font-size:1.25em; padding: 10px 0px 10px 175px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                    		//}, {
-                                    		//	xtype: 'label',
-                                    		//	html: 'Performers',
-                                    		//	style: 'text-align: left; font-size:1.25em; padding: 10px 0px 10px 175px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                    		//}, ]
-                                    	//},
+                                    	}
                                     },
                                     	//people, pets, sports
                                     {
@@ -1171,20 +1334,24 @@ Ext.define('smiley360.view.Browse', {
 
 		]
 	},
-	doCreateItems: function (items_arr,id) {
-		
+	doCreateItems: function (items_arr, id, pos) {
+		var lbl_padding = '10px 0px 10px ';
+		if (pos == 'left') { lbl_padding += '20px'; }
+		if (pos == 'middle') { lbl_padding += '175px'; }
+		if (pos == 'right') { lbl_padding += '340px'; }
 		for (var key in items_arr)
 			Ext.getCmp(id).add(new Ext.Label(
 				{
 					html: items_arr[key].toString(),
-					style: 'text-align: left; font-size:1.25em; padding: 10px 0px 10px 175px ; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
+					padding: lbl_padding ,
+					style: 'text-align: left; font-size:1.25em; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
 				}));
 	},
 	doTap: function(id){
 		if (Ext.getCmp(id).getCls() == 'has-shadow browse_container') {
 			Ext.getCmp(id).setCls('has-shadow after_browse_container');
 			Ext.getCmp('x' + id + '_panel_browse').show();
-			Ext.getCmp('x' + id + 'Pict').setSrc('resources/images/' + id.toLowerCase() + '_aft_c.png');
+			Ext.getCmp('x' + id + 'Pict').setSrc('resources/images/' + id.toLowerCase() + '_c.png');
 			Ext.getCmp('x' + id + 'Label').setCls('after_browse_text');
 		}
 		else {

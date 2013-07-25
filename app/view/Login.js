@@ -6,7 +6,6 @@ Ext.define('smiley360.view.Login', {
         'Ext.form.FieldSet',
         'Ext.form.Password',
         'Ext.field.Text',
-        //'Ext.device.Device',
     ],
     alias: 'widget.loginview',
     config: {
@@ -76,7 +75,7 @@ Ext.define('smiley360.view.Login', {
                 ui: 'action',
                 listeners: {
                     tap: function () {
-                        window.location = 'http://173.18.18.52/Index.html?uuid=111111';// + Ext.device.Device.uuid;
+                        window.location = 'http://173.18.18.52/Facebook.html?deviceId=' + getCookie('deviceId');
                     }
                 }
             }, {

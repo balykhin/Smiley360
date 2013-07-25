@@ -3,6 +3,7 @@ Ext.define('smiley360.view.Offers', {
     extend: 'Ext.tab.Panel',
     alias: 'widget.offersview',
     requires: [
+
         'Ext.TitleBar',
         'Ext.Video'
     ],
@@ -777,12 +778,12 @@ Ext.define('smiley360.view.Offers', {
     setOffers: function () {
     	
 
-    	for (var key in smiley360.userData.Offers) {
-    		var oneItem = smiley360.userData.Offers[key];
+    	for (var key in smiley360.memberData.Offers) {
+    		var oneItem = smiley360.memberData.Offers[key];
     		var allContainer = new Ext.Container({
 
     			layout: { type: 'hbox' },
-    			style: 'padding: 0px 15px 260px 15px; background-color: #efecea;',
+    			style: 'padding: 0px 15px 220px 15px; background-color: #efecea;',
     			flex: 1,
     		});
 
@@ -800,7 +801,15 @@ Ext.define('smiley360.view.Offers', {
             	cls: 'has-shadow',
             	width: 100,
             	height: 100,
-            	src: smiley360.configuration.getOfferImagesUrl(oneItem.missionID,oneItem.link),//'resources/images/lays.png',
+            	id: 'OfferID_pict' + oneItem.missionID,
+            	src: smiley360.configuration.getOfferImagesUrl(oneItem.missionID, oneItem.link),//'resources/images/lays.png',
+            	listeners: {
+            		tap: function () {
+            			console.log('OfferDetailsCommand', oneItem.missionID, this.valueOf());
+            			this.up('#xOfferView').fireEvent('LoadOfferDetailsCommand', this, this.getId().substr(12));
+
+            		}
+            	}
             }));
     		var includeContainerLabels = new Ext.Container({
 
@@ -824,15 +833,15 @@ Ext.define('smiley360.view.Offers', {
 
     		allContainer.add(includeContainerImage);
     		allContainer.add(includeContainerLabels);
-    		if (oneItem.mission_typeID != 1)
-    		{ oneItem.mission_typeID -= 1 };
-    		var xOfferList = this.down('#xOfferList' + oneItem.mission_typeID );
-    		if (xOfferList && smiley360.userData.isProfileComplete.complete) {
+    		//if (oneItem.mission_typeID != 1)
+    		//{ oneItem.mission_typeID -= 1 };
+    		var xOfferList = this.down('#xOfferList' + oneItem.mission_categoryID);
+    		if (xOfferList) { //&& smiley360.memberData.isProfileComplete.complete) {
     			//xOfferList.removeAll(true, true);
     			xOfferList.add(allContainer);
-    			this.down('#xOfferListHeader' + oneItem.mission_typeID).setCls('heading-text active-sign');
+    			this.down('#xOfferListHeader' + oneItem.mission_categoryID).setCls('heading-text active-sign');
     		} 
-    		else Ext.widget('missingoffersview').show();
+    		//else Ext.widget('missingoffersview').show();
     	}
     },
 	//place functions there

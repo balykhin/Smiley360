@@ -25,11 +25,14 @@ Ext.application({
     requires: [
         'Ext.MessageBox', 'Ext.data.Validations', 'smiley360.model.SignupModel'
     ],
-	stores: ['Members'],
+    stores: ['Members'],
     models: ['Member'],
-
     controllers: ['Index'],
-
+    viewport: {
+        layout: {
+            type: 'card'
+        }
+    },
     views: [
         'Login',
         'Signup',
@@ -63,7 +66,6 @@ Ext.application({
 		'MissionCompleted',
 		'MissingOffers',
     ],
-
     icon: {
         '36': 'resources/icons/Icon_Android36.png',
         '48': 'resources/icons/Icon_Android48.png',
@@ -72,9 +74,7 @@ Ext.application({
         '114': 'resources/icons/Icon@2x.png',
         '144': 'resources/icons/Icon~ipad@2x.png'
     },
-
     isIconPrecomposed: true,
-
     startupImage: {
         '320x460': 'resources/startup/320x460.jpg',
         '640x920': 'resources/startup/640x920.png',
@@ -85,7 +85,7 @@ Ext.application({
     },
 
     launch: function () {
-        console.log('App launched!');
+        console.log('App -> launched!');
 
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
