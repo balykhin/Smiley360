@@ -5,7 +5,8 @@ Ext.define('smiley360.view.Details', {
 	requires: [
         'Ext.carousel.Carousel',
         'Ext.TitleBar',
-        'Ext.Video'
+        'Ext.Video',
+		'Ext.Rating'
 	],
 	config: {
 		id: 'xDetailsView',
@@ -156,23 +157,34 @@ Ext.define('smiley360.view.Details', {
 												//margin: '20px 25px',
 												style: 'background-color: #F4F3F1; padding: 40px 25px;',
 												layout: { type: 'vbox' },
-												items: [
-													{
-														xtype: 'button',
-														itemId: 'recievebtn',
-														cls: 'menu-list-btn-recieve',
-														style: 'padding: 30px 0px 50px 0px; margin: -50px 0px; margin-top: -15px 0px;',
-														text: 'WHAT YOU\'LL RECIEVE',
-														listeners:
-															{
-																tap: function () {
-																	if (Ext.getCmp('recieve_panel').getHidden() == true)
-																	{ Ext.getCmp('recieve_panel').show(); this.setCls('after-menu-list-btn-recieve'); }
-																	else { Ext.getCmp('recieve_panel').hide(); this.setCls('menu-list-btn-recieve'); }
-																}
+												items: [{
+													xtype: 'container',
+													id: 'xMission',
+													layout: { type: 'vbox', },
+												},
+												{
+													xtype: 'label',
+													id: 'xDetailsPromo',
+													style: 'font-family: franklin; font-size:1em;',
+													html: '1 Campbell\'s Slow Kettle Soup',
+													padding: '10px 20px',
+												},
+												{
+													xtype: 'button',
+													itemId: 'recievebtn',
+													cls: 'menu-list-btn-recieve',
+													style: 'padding: 30px 0px 50px 0px; margin: -50px 0px; margin-top: -15px 0px;',
+													text: 'WHAT YOU\'LL RECIEVE',
+													listeners:
+														{
+															tap: function () {
+																if (Ext.getCmp('recieve_panel').getHidden() == true)
+																{ Ext.getCmp('recieve_panel').show(); this.setCls('after-menu-list-btn-recieve'); }
+																else { Ext.getCmp('recieve_panel').hide(); this.setCls('menu-list-btn-recieve'); }
 															}
+														}
 
-													},
+												},
 																{
 																	xtype: 'panel',
 																	layout: 'vbox',
@@ -243,7 +255,7 @@ Ext.define('smiley360.view.Details', {
 																},
 																{
 																	xtype: 'label',
-																	id: 'DetailsShipment',
+																	id: 'xDetailsShipment',
 																	style: 'font-family: franklin; font-size:1em;',
 																	//cls:'mission-t',
 																	html: 'This will ship later.',
@@ -284,12 +296,35 @@ Ext.define('smiley360.view.Details', {
 																			style: 'background-color:#fba00a; margin: 0px 0px 0px 0px; '
 																		},
 																		{
-																			xtype: 'label',
-																			id: 'DetailsMissionSmiles',
-																			style: 'font-family: franklin; font-size:1em;',
-																			//cls:'mission-t',
-																			html: '1 Campbell\'s Slow Kettle Soup',
-																			padding: '10px 20px',
+																			xtype: 'container',
+																			id: 'xMissionSmileScore',
+																			layout: { type: 'vbox', },
+																			items: [{
+																				xtype: 'label',
+																				id: 'xMissionSmileScoreLabel',
+																				style: 'font-family: franklin; font-size:1em;',
+																				padding: '10px 20px',
+																			},
+																			],
+																		},
+																		{
+																			xtype: 'panel',
+																			layout: 'hbox',
+																			style: 'padding: 20px;',
+																			items: [{
+																				xtype: 'label',
+																				id: 'xMissionUserLevelLabel',
+																				html: 'LEVEL',
+																				cls: 'heading-text headings-home',
+																			}, {
+																				xtype: 'rating',
+																				id: 'xMissionUserLevelRating',
+																				disabled: true,
+																				itemsCount: 5,
+																				baseCls: 'x-level-field',
+																				itemCls: 'x-level-star',
+																				itemHoverCls: 'x-level-star-hover',
+																			}]
 																		},
 																	],
 															},
@@ -405,8 +440,7 @@ Ext.define('smiley360.view.Details', {
 			show: function () {
 				console.log('Details view showed!');
 				this.setMissionDetails();
-				//this.setWhatsHappening();
-				//this.setSpecialOffers();
+				this.setUserLevel();
 			},
 		},
 	},
@@ -428,5 +462,58 @@ Ext.define('smiley360.view.Details', {
 		Ext.getCmp('DetailsHero').setSrc(smiley360.configuration.getOfferImagesUrl(smiley360.missionData.MissionDetails.MissionId, smiley360.missionData.MissionDetails.MissionDetails.link));
 		Ext.getCmp('DetailsWhatYoullRecieve').setHtml(smiley360.missionData.MissionDetails.MissionDetails.youllReceive);
 		Ext.getCmp('DetailsTryNew').setHtml(smiley360.missionData.MissionDetails.MissionDetails.tryNewThings);
+
+		
+		Ext.getCmp('xMissionSmileScore').removeAll(true, true);
+		var smilesArray = smiley360.missionData.MissionDetails.MissionPoints.sharingToolScore;
+		var pointsArray = smiley360.missionData.MissionDetails.MissionPoints;
+		var detailsArray = smiley360.missionData.MissionDetails.MissionDetails;
+		if (detailsArray.mission_promo_Activated == '0') Ext.getCmp('xDetailsPromo').setHtml('somepromo');//detailsArray.promo_message);
+
+		if (detailsArray.mission_shipment_active == '0') Ext.getCmp('xDetailsShipment').setHtml('someship');//detailsArray.promo_message);
+
+		for (var key in smilesArray) {
+			var oneItem = smilesArray[key];
+			this.setSmileItem(oneItem.sharingTool_name, oneItem.sharingTool_current_smiles + '/' + oneItem.sharingTool_max_smiles, 'padding: 15px;');
+				
+		};
+		this.setSmileItem('Bonus', pointsArray.mission_bonus_smiles, 'padding: 15px;');
+		this.setSmileItem('Mission Total', pointsArray.mission_current_smiles + '/' + pointsArray.mission_max_smiles, 'padding: 20px 15px; font-weight: bold;');
+		this.setSmileItem('Total Smiles', pointsArray.mission_total_smiles, 'padding: 30px 15px;');
+		
+	},
+	setSmileItem: function (left_html,right_html, addstyle) {
+		var smilesArrayItem = new Ext.Container({
+
+			style: addstyle,
+			layout: {
+				type: 'hbox',
+			},
+		});
+
+		smilesArrayItem.add(new Ext.Label(
+		{
+			style: 'font-family: franklin; font-size:1em;',
+			html: left_html,
+			docked: 'left',
+		}));
+		smilesArrayItem.add(new Ext.Label(
+		{
+			style: 'font-family: franklin; font-size:1em;',
+			html: right_html,
+			docked: 'right',
+		}));
+		Ext.getCmp('xMissionSmileScore').add(smilesArrayItem);
+	},
+	setUserLevel: function () {
+		var userLevel = smiley360.memberData.UserLevel
+            ? smiley360.memberData.UserLevel : 0;
+
+		Ext.getCmp('xMissionUserLevelLabel').setHtml('LEVEL ' + userLevel);
+
+		var xMissionUserLevelRating = Ext.getCmp('xMissionUserLevelRating');
+
+		xMissionUserLevelRating.applyValue(-1);
+		xMissionUserLevelRating.setValue(userLevel - 1);
 	},
 });

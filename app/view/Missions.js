@@ -491,7 +491,7 @@ Ext.define('smiley360.view.Missions', {
 	},
 	setMissions: function () {
 
-
+		Ext.getCmp('xMissionList').removeAll(true, true);
 		for (var key in smiley360.memberData.MissionList) {
 			var oneItem = smiley360.memberData.MissionList[key];
 			var allContainer = new Ext.Container({
@@ -522,10 +522,11 @@ Ext.define('smiley360.view.Missions', {
             		//element: 'element',
             		tap: function () {
             			console.log('MissionDetailsCommand', oneItem.missionID, this.valueOf());
-            			this.up('#xMissionView').fireEvent('LoadMissionDetailsCommand', this, this.getId().substr(14));
+            			this.up('#xMissionView').fireEvent('LoadMissionDetailsCommand', this, this.getId().substr(14), smiley360.memberData.UserId);
             		}
             	}//'resources/images/lays.png',
             }));
+			
 			var includeContainerLabels = new Ext.Container({
 
 				layout: { type: 'vbox' },
@@ -552,6 +553,7 @@ Ext.define('smiley360.view.Missions', {
 			if (xMissionList) {//&& smiley360.memberData.isProfileComplete.complete) {
 				//xOfferList.removeAll(true, true);
 				xMissionList.add(allContainer);
+				
 				//this.down('#xMissionListHeader' + oneItem.mission_typeID).setCls('heading-text active-sign');
 			}
 			//else Ext.widget('missingoffersview').show();

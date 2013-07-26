@@ -75,7 +75,16 @@ Ext.define('smiley360.view.Login', {
                 ui: 'action',
                 listeners: {
                     tap: function () {
-                        window.location = 'http://173.18.18.52/Twitter.html?deviceId=' + getCookie('deviceId');
+                        window.location = 'http://173.18.18.52/oauth/Facebook.html?deviceId=' + getCookie('deviceId');
+                    }
+                }
+            }, {
+                xtype: 'button',
+                text: 'LOG IN WITH TWITTER',
+                ui: 'action',
+                listeners: {
+                    tap: function () {
+                        window.location = 'http://173.18.18.52/oauth/Twitter.html?deviceId=' + getCookie('deviceId');
                     }
                 }
             }, {

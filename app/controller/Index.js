@@ -108,7 +108,7 @@ Ext.define('smiley360.controller.Index', {
         //================================
         console.log("");
         //================================
-        Ext.Viewport.animateActiveItem(this.getHomeView(), this.slideLeftTransition);
+        Ext.Viewport.animateActiveItem(this.getMissionsView(), this.slideLeftTransition);
 
         //this.activateForgetPassword();
     },
@@ -223,10 +223,10 @@ Ext.define('smiley360.controller.Index', {
 				}
 			});
 	},
-	LoadMissionDetailsCommand: function (image, missionID)
+	LoadMissionDetailsCommand: function (image, missionID, memberID)
 	{
 		var me = this;
-		smiley360.services.getMissionDetails(missionID,
+		smiley360.services.getMissionDetails(missionID, memberID,
 			function(response) {
 				if (response.success) {
 					smiley360.missionData.MissionDetails = response;
