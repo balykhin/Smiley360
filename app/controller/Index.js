@@ -108,7 +108,7 @@ Ext.define('smiley360.controller.Index', {
         //================================
         console.log("");
         //================================
-        Ext.Viewport.animateActiveItem(this.getLoginView(), this.slideLeftTransition);
+        Ext.Viewport.animateActiveItem(this.getHomeView(), this.slideLeftTransition);
 
         //this.activateForgetPassword();
     },

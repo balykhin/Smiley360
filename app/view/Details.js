@@ -60,7 +60,7 @@ Ext.define('smiley360.view.Details', {
                                 },
 							}
                 		]
-                	},  {
+                	}, {
                 		xtype: 'container',
                 		layout: 'vbox',
                 		flex: 1,
@@ -106,13 +106,6 @@ Ext.define('smiley360.view.Details', {
 												style: 'padding-left: 15px; padding-right: 10px;',
 												flex: 0.2,
 											},
-											//{
-											//    xtype: 'label',
-											//    html: '/92',
-											//    cls: 'heading-text',
-											//    style: 'padding-left: 15px;',
-											//    flex: 1.2,
-											//},
 										]
 									},
 									{
@@ -141,9 +134,6 @@ Ext.define('smiley360.view.Details', {
 																{
 																	xtype: 'image',
 																	id: 'DetailsHero',
-																	//margin: '0px -20px 0px -50px',
-																	//style:'padding-left: 15px;',
-																	//src: 'resources/images/campbells.png',
 																	height: 160
 																}
 															]
@@ -160,7 +150,7 @@ Ext.define('smiley360.view.Details', {
 										style: 'background-color: #efecea; border-bottom: 1px dashed #d7cfcd;',
 										height: 20,
 									},
-                                            
+
 											{
 												xtype: 'container',
 												//margin: '20px 25px',
@@ -175,68 +165,91 @@ Ext.define('smiley360.view.Details', {
 														text: 'WHAT YOU\'LL RECIEVE',
 														listeners:
 															{
-																tap: function ()
-																{
+																tap: function () {
 																	if (Ext.getCmp('recieve_panel').getHidden() == true)
 																	{ Ext.getCmp('recieve_panel').show(); this.setCls('after-menu-list-btn-recieve'); }
 																	else { Ext.getCmp('recieve_panel').hide(); this.setCls('menu-list-btn-recieve'); }
 																}
 															}
-                                                            
+
 													},
 																{
-																	xtype: 'panel',   
+																	xtype: 'panel',
 																	layout: 'vbox',
 																	cls: 'has-shadow',
 																	style: 'border-radius: 0px 0px 5px 5px; background-color: #e2ddda; margin-top: 50px; margin-bottom: -30px;',
 																	id: 'recieve_panel',
 																	listeners: {
-																		initialize: function()
-																		{this.hide();}
+																		initialize: function ()
+																		{ this.hide(); }
 																	},
 																	items:
 																		[
-														{
-															xtype: 'label',
-															height: '3px',                                                                    
-															style: 'background-color:#fba00a; margin: 0px 0px 0px 0px; '
-														}, //{
-														//	xtype: 'label',
-														//	html: 'THESE ITEMS ARE ON THE WAY:',
-														//	style: 'background-color: #e2ddda;font-family: din bold; font-size:1em;',
-														//	padding: '10px 20px',
-														//},
-																{
-																	xtype: 'label',
-																	id: 'DetailsWhatYoullRecieve',
-																	style: 'font-family: franklin; font-size:1em;',
-																	//cls:'mission-t',
-																	html: '1 Campbell\'s Slow Kettle Soup',
-																	padding: '10px 20px',
-																},
-												//{
-												//	xtype: 'label',
-												//	style: 'font-family: franklin; font-size:1.1em;',
-												//	cls: 'mission-t',
-												//	html: 'Coupons',
-												//	padding: '10px 20px',
-												//},
-												//					{
-												//						xtype: 'label',
-												//						style: 'font-family: franklin; font-size:1.1em;',
-												//						cls: 'mission-t',
-												//						html: 'Sharing Guide',
-												//						padding: '10px 20px',
-												//					},
+																			{
+																				xtype: 'label',
+																				height: '3px',
+																				style: 'background-color:#fba00a; margin: 0px 0px 0px 0px; '
+																			},
+																			{
+																				xtype: 'label',
+																				id: 'DetailsWhatYoullRecieve',
+																				style: 'font-family: franklin; font-size:1em;',
+																				//cls:'mission-t',
+																				html: '1 Campbell\'s Slow Kettle Soup',
+																				padding: '10px 20px',
+																			},
 																		],
 																},
-                                                    
+
 													{
 														xtype: 'button',
 														itemId: 'recievebtn',
 														style: 'padding: 30px 0px 50px 0px; margin: 60px 0px;',
 														cls: 'menu-list-btn-new',
 														text: 'TRY NEW THINGS',
+														listeners:
+															{
+																tap: function () {
+																	if (Ext.getCmp('trynew_panel').getHidden() == true)
+																	{ Ext.getCmp('trynew_panel').show(); this.setCls('after-missions-trynew-btn'); }
+																	else { Ext.getCmp('trynew_panel').hide(); this.setCls('missions-trynew-btn'); }
+																}
+															}
+													},
+													{
+														xtype: 'panel',
+														layout: 'vbox',
+														cls: 'has-shadow',
+														style: 'background-color:#e2ddda; border-radius: 0px 0px 5px 5px; background-color:white; margin-top: -60px; margin-bottom: 60px;',
+														id: 'trynew_panel',
+														listeners: {
+															initialize: function ()
+															{ this.hide(); }
+														},
+														items:
+															[
+																{
+																	xtype: 'label',
+																	height: '3px',
+																	style: 'background-color:#fba00a; margin: 0px 0px 0px 0px; '
+																},
+																{
+																	xtype: 'label',
+																	id: 'DetailsTryNew',
+																	style: 'font-family: franklin; font-size:1em;',
+																	//cls:'mission-t',
+																	html: '1 Campbell\'s Slow Kettle Soup',
+																	padding: '10px 20px',
+																},
+																{
+																	xtype: 'label',
+																	id: 'DetailsShipment',
+																	style: 'font-family: franklin; font-size:1em;',
+																	//cls:'mission-t',
+																	html: 'This will ship later.',
+																	padding: '10px 20px',
+																},
+															],
 													},
 															{
 																xtype: 'button',
@@ -244,21 +257,47 @@ Ext.define('smiley360.view.Details', {
 																style: 'padding: 30px 0px 50px 0px; margin: -45px 0px 0px 0px;',
 																cls: 'menu-list-btn-smiles',
 																text: 'MISSION SMILES',
+																listeners:
+																{
+																	tap: function () {
+																		if (Ext.getCmp('mission_smiles_panel').getHidden() == true)
+																		{ Ext.getCmp('mission_smiles_panel').show(); this.setCls('after-missions-smiles-btn'); }
+																		else { Ext.getCmp('mission_smiles_panel').hide(); this.setCls('missions-smiles-btn'); }
+																	}
+																}
+															},
+															{
+																xtype: 'panel',
+																layout: 'vbox',
+																cls: 'has-shadow',
+																style: 'background-color:#e2ddda; border-radius: 0px 0px 5px 5px; background-color:white;',
+																id: 'mission_smiles_panel',
+																listeners: {
+																	initialize: function ()
+																	{ this.hide(); }
+																},
+																items:
+																	[
+																		{
+																			xtype: 'label',
+																			height: '3px',
+																			style: 'background-color:#fba00a; margin: 0px 0px 0px 0px; '
+																		},
+																		{
+																			xtype: 'label',
+																			id: 'DetailsMissionSmiles',
+																			style: 'font-family: franklin; font-size:1em;',
+																			//cls:'mission-t',
+																			html: '1 Campbell\'s Slow Kettle Soup',
+																			padding: '10px 20px',
+																		},
+																	],
 															},
 												],
 											},
 
 										]
 									},
-									
-                                    
-
-
-									//{
-									//    xtype: 'spacer',
-									//    height: '10px',
-									//    style: 'background-color: #f4f3f1; margin: 0px 2px;'
-									//},
 									{
 										xtype: 'spacer',
 										height: '7px',
@@ -388,5 +427,6 @@ Ext.define('smiley360.view.Details', {
 		Ext.getCmp('DetailsTitleLabel').setHtml(smiley360.missionData.MissionDetails.MissionDetails.title);
 		Ext.getCmp('DetailsHero').setSrc(smiley360.configuration.getOfferImagesUrl(smiley360.missionData.MissionDetails.MissionId, smiley360.missionData.MissionDetails.MissionDetails.link));
 		Ext.getCmp('DetailsWhatYoullRecieve').setHtml(smiley360.missionData.MissionDetails.MissionDetails.youllReceive);
+		Ext.getCmp('DetailsTryNew').setHtml(smiley360.missionData.MissionDetails.MissionDetails.tryNewThings);
 	},
 });

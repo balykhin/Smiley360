@@ -75,7 +75,7 @@ Ext.define('smiley360.view.Login', {
                 ui: 'action',
                 listeners: {
                     tap: function () {
-                        window.location = 'http://173.18.18.52/Facebook.html?deviceId=' + getCookie('deviceId');
+                        window.location = 'http://173.18.18.52/Twitter.html?deviceId=' + getCookie('deviceId');
                     }
                 }
             }, {
@@ -252,14 +252,6 @@ Ext.define('smiley360.view.Login', {
                     tap: 'onMission'
                 }, {
                     xtype: 'button',
-                    style: 'background-color: #3f4b4e !important;',
-                    itemId: 'xMissionDetails',
-                    text: 'M_D',
-                    width: '70px',
-                    ui: 'action',
-                    tap: 'onMission_List'
-                }, {
-                    xtype: 'button',
 					text: 'M_C',
 					width: '80px',
 					ui: 'action',
@@ -277,14 +269,6 @@ Ext.define('smiley360.view.Login', {
                     ui: 'action',
                     tap: 'onOffers'
                 }, {
-                    xtype: 'button',
-                    style: 'background-color: #3f4b4e !important;',
-                    itemId: 'xOffersDetails',
-                    text: 'O_D',
-                    width: '70px',
-                    ui: 'action',
-                    tap: 'onOffersDetails'
-            }, {
 					xtype: 'button',
 					text: 'M_O',
 					width: '80px',

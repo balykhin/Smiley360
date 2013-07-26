@@ -578,6 +578,43 @@
 .icon-recieve {
 	/*background: url();*/
 }
+/*MISSION styles*/
+.after-missions-trynew-btn {
+	background: url(../images/code.png) no-repeat 98% center, -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);
+	height: 50px;
+	margin: -10px;
+	font-size: 14pt;
+	font-family: din medium;
+	color: white;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.missions-trynew-btn {
+	background: url(../images/code.png) no-repeat 98% center, -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);
+	height: 50px;
+	margin: -10px;
+	font-size: 14pt;
+	font-family: din medium;
+	color: white;
+}
+.after-missions-smiles-btn {
+	background: url(../images/bookmark-missions.png) no-repeat 98% center, -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);
+	height: 50px;
+	margin: -10px;
+	font-size: 14pt;
+	font-family: din medium;
+	color: white;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.missions-smiles-btn {
+	background: url(../images/bookmark-missions.png) no-repeat 98% center, -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);
+	height: 50px;
+	margin: -10px;
+	font-size: 14pt;
+	font-family: din medium;
+	color: white;
+}
 /*OFFERS styles*/
 .after-offers-offer-btn {
 	background: url(../images/offer_offer_btn.png) no-repeat 98% center, -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);
