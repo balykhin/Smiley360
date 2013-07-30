@@ -136,22 +136,44 @@ smiley360.services.getMissionDetails = function (missionID, memberID, onComplete
 					else { delete response.success; }
 
 					missionResponse.MissionPoints = response;
-					//smiley360.services.ajax("getMissionSharingToolDetails",
-					//	{
-					//		missionID: missionID,
-					//		memberID: memberID,
-					//		sharingTool_typeID: 0,
-					//	},
-					//	function (response) {
-					//		if (!response.success) { onCompleted(response) }
-					//		else { delete response.success; }
-
-					//		missionResponse.MissionSharingToolDetails = response;
-
+					
 								missionResponse.success = true;
 
 								onCompleted(missionResponse);
-					//});
+					
+				});
+        });
+}
+
+smiley360.services.getConnectBrand = function (memberID, brandID, start, howmany, onCompleted) {
+	var brandResponse = { BrandId: brandID };
+	smiley360.services.ajax(
+		"get_smileyConnect_details",
+		{
+			memberID: memberID,
+			brandID: brandID
+		},
+        function (response) {
+        	if (!response.success) { onCompleted(response) }
+        	else { delete response.success; }
+
+        	brandResponse.BrandDetails = response;
+        	smiley360.services.ajax("get_smileyConnect_comments",
+				{
+					brandID: brandID,
+					start: start,
+					howmany: howmany
+				},
+				function (response) {
+					if (!response.success) { onCompleted(response) }
+					else { delete response.success; }
+
+					brandResponse.BrandComments = response;
+
+					brandResponse.success = true;
+
+					onCompleted(brandResponse);
+
 				});
         });
 }

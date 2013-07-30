@@ -102,7 +102,8 @@ Ext.define('smiley360.view.Details', {
 											},
 											{
 												xtype: 'label',
-												html: '13/92',
+												id: 'xTopMissionScore',
+												html: '',
 												cls: 'heading-text',
 												style: 'padding-left: 15px; padding-right: 10px;',
 												flex: 0.2,
@@ -165,31 +166,56 @@ Ext.define('smiley360.view.Details', {
 												{
 													xtype: 'label',
 													id: 'xDetailsPromo',
-													style: 'font-family: franklin; font-size:1em;',
-													html: '1 Campbell\'s Slow Kettle Soup',
+													style: 'font-family: franklin; font-size:1em;padding: 30px 0px 50px 0px; margin: -66px 0px 50px 0px;',
+													html: '',
 													padding: '10px 20px',
 												},
 												{
-													xtype: 'button',
-													itemId: 'recievebtn',
+													xtype: 'panel',
+													layout: 'hbox',
 													cls: 'menu-list-btn-recieve',
-													style: 'padding: 30px 0px 50px 0px; margin: -50px 0px; margin-top: -15px 0px;',
-													text: 'WHAT YOU\'LL RECIEVE',
 													listeners:
 														{
+															element: 'element',
 															tap: function () {
 																if (Ext.getCmp('recieve_panel').getHidden() == true)
 																{ Ext.getCmp('recieve_panel').show(); this.setCls('after-menu-list-btn-recieve'); }
 																else { Ext.getCmp('recieve_panel').hide(); this.setCls('menu-list-btn-recieve'); }
 															}
-														}
+														},
+													items: [
+														{
+																xtype: 'container',
+																docked: 'left',
+																items: [
+																{
+																	xtype: 'label',style: 'padding: 15px 2px 15px 15px;',
+																	html: 'WHAT YOU\'LL RECIEVE',
+																},],
+														}, {
+															xtype: 'spacer',
+															style: 'background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%); height: 50px;',
+														},
+														{
+															xtype: 'container',
+															docked: 'right',
+															items: [
+															{
+																xtype: 'image',
+																src: 'resources/images/missions-box.png',
+																padding: 20,
+																
+															}, ]
+														}, ],
+
+
 
 												},
 																{
 																	xtype: 'panel',
 																	layout: 'vbox',
 																	cls: 'has-shadow',
-																	style: 'border-radius: 0px 0px 5px 5px; background-color: #e2ddda; margin-top: 50px; margin-bottom: -30px;',
+																	style: 'border-radius: 0px 0px 5px 5px; background-color: #e2ddda; margin: -20px -10px 20px -10px;',
 																	id: 'recieve_panel',
 																	listeners: {
 																		initialize: function ()
@@ -206,33 +232,75 @@ Ext.define('smiley360.view.Details', {
 																				xtype: 'label',
 																				id: 'DetailsWhatYoullRecieve',
 																				style: 'font-family: franklin; font-size:1em;',
-																				//cls:'mission-t',
 																				html: '1 Campbell\'s Slow Kettle Soup',
 																				padding: '10px 20px',
 																			},
 																		],
 																},
 
+													//{
+													//	xtype: 'button',
+													//	itemId: 'recievebtn',
+													//	style: 'padding: 30px 0px 50px 0px; margin: 60px 0px;text-align: left;',
+													//	cls: 'menu-list-btn-new',
+													//	text: 'TRY NEW THINGS',
+													//	listeners:
+													//		{
+													//			tap: function () {
+													//				if (Ext.getCmp('trynew_panel').getHidden() == true)
+													//				{ Ext.getCmp('trynew_panel').show(); this.setCls('after-missions-trynew-btn'); }
+													//				else { Ext.getCmp('trynew_panel').hide(); this.setCls('missions-trynew-btn'); }
+													//			}
+													//		}
+													//},
 													{
-														xtype: 'button',
-														itemId: 'recievebtn',
-														style: 'padding: 30px 0px 50px 0px; margin: 60px 0px;',
-														cls: 'menu-list-btn-new',
-														text: 'TRY NEW THINGS',
+														xtype: 'panel',
+														layout: 'hbox',
+														
+														cls: 'menu-list-btn-recieve',
 														listeners:
 															{
+																element: 'element',
 																tap: function () {
 																	if (Ext.getCmp('trynew_panel').getHidden() == true)
-																	{ Ext.getCmp('trynew_panel').show(); this.setCls('after-missions-trynew-btn'); }
-																	else { Ext.getCmp('trynew_panel').hide(); this.setCls('missions-trynew-btn'); }
+																	{ Ext.getCmp('trynew_panel').show(); this.setCls('after-menu-list-btn-recieve'); }
+																	else { Ext.getCmp('trynew_panel').hide(); this.setCls('menu-list-btn-recieve'); }
 																}
-															}
+															},
+														items: [
+															{
+																xtype: 'container',
+																docked: 'left',
+																items: [
+																{
+																	xtype: 'label', style: 'padding: 15px 2px 15px 15px;',
+																	html: 'TRY NEW THINGS',
+																}, ],
+															}, {
+																xtype: 'spacer',
+																style: 'background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%); height: 50px;',
+															},
+															{
+																xtype: 'container',
+																docked: 'right',
+																items: [
+																{
+																	xtype: 'image',
+																	style: 'margin-right: 5px;',
+																	src: 'resources/images/code.png',
+																	padding: '20px 15px',
+
+																}, ]
+															}, ],
+
+
+
 													},
 													{
 														xtype: 'panel',
 														layout: 'vbox',
 														cls: 'has-shadow',
-														style: 'background-color:#e2ddda; border-radius: 0px 0px 5px 5px; background-color:white; margin-top: -60px; margin-bottom: 60px;',
+														style: 'background-color:#e2ddda; border-radius: 0px 0px 5px 5px; background-color:white; margin: -20px -10px 20px -10px;',
 														id: 'trynew_panel',
 														listeners: {
 															initialize: function ()
@@ -249,7 +317,6 @@ Ext.define('smiley360.view.Details', {
 																	xtype: 'label',
 																	id: 'DetailsTryNew',
 																	style: 'font-family: franklin; font-size:1em;',
-																	//cls:'mission-t',
 																	html: '1 Campbell\'s Slow Kettle Soup',
 																	padding: '10px 20px',
 																},
@@ -257,32 +324,73 @@ Ext.define('smiley360.view.Details', {
 																	xtype: 'label',
 																	id: 'xDetailsShipment',
 																	style: 'font-family: franklin; font-size:1em;',
-																	//cls:'mission-t',
 																	html: 'This will ship later.',
 																	padding: '10px 20px',
 																},
 															],
 													},
+															//{
+															//	xtype: 'button',
+															//	itemId: 'recievebtn',
+															//	style: 'padding: 30px 0px 50px 0px; margin: -45px 0px 0px 0px;',
+															//	cls: 'menu-list-btn-smiles',
+															//	text: 'MISSION SMILES',
+															//	listeners:
+															//	{
+															//		tap: function () {
+															//			if (Ext.getCmp('mission_smiles_panel').getHidden() == true)
+															//			{ Ext.getCmp('mission_smiles_panel').show(); this.setCls('after-missions-smiles-btn'); }
+															//			else { Ext.getCmp('mission_smiles_panel').hide(); this.setCls('missions-smiles-btn'); }
+															//		}
+															//	}
+															//},
 															{
-																xtype: 'button',
-																itemId: 'recievebtn',
-																style: 'padding: 30px 0px 50px 0px; margin: -45px 0px 0px 0px;',
-																cls: 'menu-list-btn-smiles',
-																text: 'MISSION SMILES',
+																xtype: 'panel',
+																layout: 'hbox',
+																
+																cls: 'menu-list-btn-recieve',
 																listeners:
-																{
-																	tap: function () {
-																		if (Ext.getCmp('mission_smiles_panel').getHidden() == true)
-																		{ Ext.getCmp('mission_smiles_panel').show(); this.setCls('after-missions-smiles-btn'); }
-																		else { Ext.getCmp('mission_smiles_panel').hide(); this.setCls('missions-smiles-btn'); }
-																	}
-																}
+																	{
+																		element: 'element',
+																		tap: function () {
+																			if (Ext.getCmp('mission_smiles_panel').getHidden() == true)
+																			{ Ext.getCmp('mission_smiles_panel').show(); this.setCls('after-menu-list-btn-recieve'); }
+																			else { Ext.getCmp('mission_smiles_panel').hide(); this.setCls('menu-list-btn-recieve'); }
+																		}
+																	},
+																items: [
+																	{
+																		xtype: 'container',
+																		docked: 'left',
+																		items: [
+																		{
+																			xtype: 'label', style: 'padding: 15px 2px 15px 15px;',
+																			html: 'MISSION SMILES',
+																		}, ],
+																	}, {
+																		xtype: 'spacer',
+																		style: 'background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%); height: 50px;',
+																	},
+																	{
+																		xtype: 'container',
+																		docked: 'right',
+																		items: [
+																		{
+																			xtype: 'image',
+																			src: 'resources/images/bookmark-missions.png',
+																			padding: '15px 25px',
+
+																		}, ]
+																	}, ],
+
+
+
 															},
 															{
 																xtype: 'panel',
 																layout: 'vbox',
 																cls: 'has-shadow',
-																style: 'background-color:#e2ddda; border-radius: 0px 0px 5px 5px; background-color:white;',
+																style: 'background-color:#e2ddda; border-radius: 0px 0px 5px 5px; background-color:white; margin: -20px -10px 20px -10px;',
 																id: 'mission_smiles_panel',
 																listeners: {
 																	initialize: function ()
@@ -468,9 +576,15 @@ Ext.define('smiley360.view.Details', {
 		var smilesArray = smiley360.missionData.MissionDetails.MissionPoints.sharingToolScore;
 		var pointsArray = smiley360.missionData.MissionDetails.MissionPoints;
 		var detailsArray = smiley360.missionData.MissionDetails.MissionDetails;
-		if (detailsArray.mission_promo_Activated == '0') Ext.getCmp('xDetailsPromo').setHtml('somepromo');//detailsArray.promo_message);
+		if (detailsArray.mission_promo_Activated == '1') {
+			Ext.getCmp('xDetailsPromo').setHtml(detailsArray.promo_message);
+			//detailsArray.promo_message);
+		}
 
-		if (detailsArray.mission_shipment_active == '0') Ext.getCmp('xDetailsShipment').setHtml('someship');//detailsArray.promo_message);
+		if (detailsArray.mission_shipment_active == '1') {
+			Ext.getCmp('xDetailsShipment').setHtml(detailsArray.mission_shipment_message);//detailsArray.promo_message);
+			
+		}
 
 		for (var key in smilesArray) {
 			var oneItem = smilesArray[key];
@@ -480,7 +594,7 @@ Ext.define('smiley360.view.Details', {
 		this.setSmileItem('Bonus', pointsArray.mission_bonus_smiles, 'padding: 15px;');
 		this.setSmileItem('Mission Total', pointsArray.mission_current_smiles + '/' + pointsArray.mission_max_smiles, 'padding: 20px 15px; font-weight: bold;');
 		this.setSmileItem('Total Smiles', pointsArray.mission_total_smiles, 'padding: 30px 15px;');
-		
+		Ext.getCmp('xTopMissionScore').setHtml(pointsArray.mission_current_smiles + '/' + pointsArray.mission_max_smiles);
 	},
 	setSmileItem: function (left_html,right_html, addstyle) {
 		var smilesArrayItem = new Ext.Container({

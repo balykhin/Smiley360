@@ -554,28 +554,31 @@
 }
 
 .after-menu-list-btn-recieve {
-	background: url(../images/missions-box.png) no-repeat 98% center, -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%), -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);
+	background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);
 	height: 50px;
-	margin: -10px;
-	font-size: 14pt;
+	margin: -10px -10px 20px -10px;
+	font-size: 12pt;
 	font-family: din medium;
 	color: white;
 	border-radius: 5px 5px 0px 0px;
 }
 
 .menu-list-btn-recieve {
-	background: url(../images/missions-box.png) no-repeat 98% center, -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);
+	background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);
 	height: 50px;
-	margin: -10px;
-	font-size: 14pt;
+	margin: -10px -10px 20px -10px;
+	font-size: 12pt;
 	font-family: din medium;
 	color: white;
+	border-radius: 5px;
 }
 
 .x-tab .x-button-icon.after-menu-btn, .x-button .x-button-icon.x-icon-mask.after-menu-btn {
 	-webkit-mask-image: url('resources/images/shade_menu.png');
 }
-
+.recieveimage{
+	background: url('resources/images/missions-box.png');
+}
 .icon-recieve {
 	/*background: url();*/
 }
@@ -729,9 +732,10 @@
 }
 
 .x-label.rew_comment .x-innerhtml:before {
-	content: url("../images/bullet-13.png");
-	position: absolute;
-	left: 18px;
+	content: url("../images/comment_bubble.png");
+	/*position: absolute;
+	left: 18px;*/
+	padding-right: 8px;
 }
 
 .x-label.rew_comment .x-innerhtml {
@@ -914,4 +918,9 @@
 	top: -8px;
 	left: -17px;
 	color: #939498;
+}
+
+.x-layout-box.x-vertical > .x-layout-box-item.x-flexed
+{
+	height: auto;
 }

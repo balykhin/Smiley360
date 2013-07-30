@@ -35,10 +35,7 @@ Ext.define('smiley360.controller.Index', {
                 onMissionDetailsTapCommand: 'onMissionDetailsTapCommand',
                 onOffersTapCommand: 'onOffersTapCommand',
                 onOffersDetailsTapCommand: 'onOffersDetailsTapCommand',
-                onBrowseTapCommand: 'onBrowseTapCommand',
-                onConnectTapCommand: 'onConnectTapCommand',
-                onBrowseInstrumentsTapCommand: 'onBrowseInstrumentsTapCommand',
-                onBrandTapCommand: 'onBrandTapCommand',
+                onConnectTapCommand: 'onConnectTapCommand',                               
                 onShareTapCommand: 'onShareTapCommand',
             },
             signupView: {
@@ -81,10 +78,13 @@ Ext.define('smiley360.controller.Index', {
                 backButtonCommandOfferDetails: 'backButtonCommandOfferDetails'
             },
             browseView: {
-                backButtonCommandBrowse: 'backButtonCommandSignup'
+            	backButtonCommandBrowse: 'backButtonCommandSignup',
+            	onBrowseInstrumentsTapCommand: 'onBrowseInstrumentsTapCommand',
             },
             connectView: {
-                backButtonCommandConnect: 'backButtonCommandSignup'
+            	backButtonCommandConnect: 'backButtonCommandSignup',
+            	onBrandTapCommand: 'onBrandTapCommand',
+            	onBrowseTapCommand: 'onBrowseTapCommand',
             },
             browseInstrumentsView: {
                 backButtonCommandBrowseInstruments: 'backButtonCommandSignup'
@@ -116,9 +116,21 @@ Ext.define('smiley360.controller.Index', {
         console.log("onShareTapCommand");
         Ext.Viewport.animateActiveItem(this.getShareView(), this.slideLeftTransition);
     },
-    onBrandTapCommand: function () {
-        console.log("onBrandTapCommand");
-        Ext.Viewport.animateActiveItem(this.getBrandView(), this.slideLeftTransition);
+    onBrandTapCommand: function (from, memberID, brandID, start, howmany)
+    	{
+    		var me = this;
+    		console.log("onBrandTapCommand");
+    		smiley360.services.getConnectBrand(memberID, brandID, start, howmany,
+				function (response) {
+					if (response.success) {
+						smiley360.brandData = response;
+						Ext.Viewport.animateActiveItem(
+							me.getBrandView(), me.slideLeftTransition);
+					}
+					else {
+						console.log('BrandDetails is corrupted!');//show error on view
+					}
+				});
     },
     onConnectTapCommand: function () {
         console.log("onConnectTapCommand");
@@ -131,6 +143,7 @@ Ext.define('smiley360.controller.Index', {
     onBrowseTapCommand: function () {
         console.log("onConnectTapCommand");
         Ext.Viewport.animateActiveItem(this.getBrowseView(), this.slideLeftTransition);
+
     },
 
     onLocalstoragetestTapCommand: function () {
@@ -207,10 +220,10 @@ Ext.define('smiley360.controller.Index', {
         Ext.Viewport.animateActiveItem(this.getEditProfileView(), this.slideLeftTransition);
 
     },
-	LoadOfferDetailsCommand: function (image, missionID) 
+    LoadOfferDetailsCommand: function (image, missionID, memberID)
 	{
 		var me = this;
-		smiley360.services.getMissionDetails(missionID,
+		smiley360.services.getMissionDetails(missionID, memberID,
 			function (response) {
 				if (response.success) {
 					smiley360.missionData.MissionDetails = response;
@@ -524,6 +537,8 @@ Ext.define('smiley360.controller.Index', {
 
 smiley360.memberData = {};
 smiley360.missionData = {};
+smiley360.brandData = {};
+
 smiley360.viewStatus =
 {
     initial: 'initial',
@@ -549,6 +564,7 @@ smiley360.setViewStatus = function (view, status) {
 
     view.setStatus(status);
 }
+
 
 //smiley360.animateViewLeft = function (viewAlias) {
 //    var view = smiley360.getOrCreateView(viewAlias);

@@ -167,16 +167,18 @@ Ext.define('smiley360.view.UploadPhoto', {
                 xtype: 'panel',
                 cls: 'popup-button-panel',
                 items: [{
-                    xtype: 'button',
+                    xtype: 'fileupload',
+                    autoUpload: true,
                     text: 'POST',
                     icon: 'resources/images/share-initial.png',
                     iconAlign: 'right',
                     iconCls: 'popup-post-icon',
                     id: 'xShareButton',
                     cls: 'popup-post-button',
+                    url: 'http://173.18.18.52/getfile.php',
                     listeners: {
                         tap: function () {
-                            //Ext.getCmp('xView').doUpload();
+                        //Ext.getCmp('xView').doUpload();
                         }
                     },
                 }],

@@ -1345,6 +1345,12 @@ Ext.define('smiley360.view.Browse', {
 					html: items_arr[key].toString(),
 					padding: lbl_padding ,
 					style: 'text-align: left; font-size:1.25em; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
+					listeners: {
+						element: 'element',
+						tap: function () {
+							this.up('#xBrowse').fireEvent('onBrowseInstrumentsTapCommand', this);
+						}
+					}
 				}));
 	},
 	doTap: function(id){

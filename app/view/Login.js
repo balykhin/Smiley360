@@ -75,7 +75,7 @@ Ext.define('smiley360.view.Login', {
                 ui: 'action',
                 listeners: {
                     tap: function () {
-                        window.location = 'http://173.18.18.52/oauth/Facebook.html?deviceId=' + getCookie('deviceId');
+                    	window.location = 'http://smileys.ekonx.net.ua/oauth/Facebook.html?deviceId=' + getCookie('deviceId');
                     }
                 }
             }, {
@@ -84,7 +84,7 @@ Ext.define('smiley360.view.Login', {
                 ui: 'action',
                 listeners: {
                     tap: function () {
-                        window.location = 'http://173.18.18.52/oauth/Twitter.html?deviceId=' + getCookie('deviceId');
+                    	window.location = 'http://smileys.ekonx.net.ua/oauth/Twitter.html?deviceId=' + getCookie('deviceId');
                     }
                 }
             }, {
@@ -299,29 +299,30 @@ Ext.define('smiley360.view.Login', {
 					    width: '50px',
 					    ui: 'confirm',
 					    tap: ''
-					}, {
-					    xtype: 'button',
-					    itemId: 'xBrowse',
-					    text: 'B',
-					    width: '50px',
-					    ui: 'confirm',
-					    tap: 'onxBrowse'
-					},
-                {
-                    xtype: 'button',
-                    itemId: 'xBrowseInstruments',
-                    text: 'B_I',
-                    width: '70px',
-                    ui: 'confirm',
-                    tap: 'onxBrowseInstruments'
-                }, {
-                    xtype: 'button',
-                    itemId: 'xBrand',
-                    text: 'Br',
-                    width: '70px',
-                    ui: 'confirm',
-                    tap: 'onxBrand'
-                }, {
+					},// {
+					//    xtype: 'button',
+					//    itemId: 'xBrowse',
+					//    text: 'B',
+					//    width: '50px',
+					//    ui: 'confirm',
+					//    tap: 'onxBrowse'
+					//},
+                //{
+                //    xtype: 'button',
+                //    itemId: 'xBrowseInstruments',
+                //    text: 'B_I',
+                //    width: '70px',
+                //    ui: 'confirm',
+                //    tap: 'onxBrowseInstruments'
+                //}, {
+                //    xtype: 'button',
+                //    itemId: 'xBrand',
+                //    text: 'Br',
+                //    width: '70px',
+                //    ui: 'confirm',
+                //    tap: 'onxBrand'
+                //}, 
+				{
                 	xtype: 'button',
                 	itemId: 'xShare',
                 	text: 'Sh',

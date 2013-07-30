@@ -374,8 +374,7 @@ Ext.define('smiley360.view.Home', {
         }],
         listeners: {
             show: function () {
-                console.log('Home view showed!');
-
+                console.log('Home view showed!');                
                 this.setUserLevel();
                 this.setWhatsHappening();
                 this.setSpecialOffers();
@@ -390,8 +389,7 @@ Ext.define('smiley360.view.Home', {
 
     setUserLevel: function () {
         var userLevel = smiley360.memberData.UserLevel
-            ? smiley360.memberData.UserLevel : 0;
-
+            ? smiley360.memberData.UserLevel : 0;        
         this.down('#xUserLevelLabel').setHtml('LEVEL ' + userLevel);
 
         var xUserLevelRating = this.down('#xUserLevelRating');

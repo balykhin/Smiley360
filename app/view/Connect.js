@@ -190,14 +190,12 @@ Ext.define('smiley360.view.Connect', {
 														cls: 'connect-btn-search',
 														style: 'margin: -50px 0px;',
 														text: 'SEARCH',
-														listeners:
-															{
-																tap: function () {
-																	//if (Ext.getCmp('search_panel').getHidden() == true)
-																	//{ Ext.getCmp('search_panel').show(); this.setCls('after-menu-list-btn-recieve'); }
-																	//else { Ext.getCmp('search_panel').hide(); this.setCls('menu-list-btn-recieve'); }
-																}
+														listeners: {
+															tap: function () {
+																smiley360.brandData.BrandId = '3250',
+																this.up('#xConnect').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, smiley360.brandData.BrandId, 0, 10 );
 															}
+														}
 
 													},
 																{
@@ -237,6 +235,11 @@ Ext.define('smiley360.view.Connect', {
 														style: 'padding: 30px 0px 50px 0px; margin: 60px 0px;',
 														cls: 'connect-btn-browse',
 														text: 'BROWSE',
+														listeners: {
+															tap: function () {
+																this.up('#xConnect').fireEvent('onBrowseTapCommand', this);
+															}
+														}
 													},
 												],
 											},

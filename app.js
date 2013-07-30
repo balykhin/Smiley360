@@ -16,6 +16,7 @@
 //<debug>
 Ext.Loader.setPath({
     'Ext': 'touch/src',
+    'Ext.ux': 'src/ux',
     'smiley360': 'app'
 });
 //</debug>
@@ -23,7 +24,7 @@ Ext.Loader.setPath({
 Ext.application({
     name: 'smiley360',
     requires: [
-        'Ext.MessageBox', 'Ext.data.Validations', 'smiley360.model.SignupModel'
+        'Ext.MessageBox', 'Ext.data.Validations', 'smiley360.model.SignupModel', 'Ext.ux.Fileup',
     ],
     stores: ['Members'],
     models: ['Member'],
