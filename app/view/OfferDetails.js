@@ -337,6 +337,12 @@ items: [
                                   html: 'NO THANKS, REMOVE THIS OFFER.',
                                   style: 'text-decoration:underline; background-color:#efecea; font-family: din bold; font-size:1em;',
                                   padding: '20px 30px',
+                                  listeners: {
+                                  	element: 'element',
+                                  	tap: function () {
+                                  		Ext.widget('').show();
+                                  	},
+                                  },
                               },
                         ],
                     

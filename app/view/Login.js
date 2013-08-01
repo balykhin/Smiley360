@@ -75,7 +75,8 @@ Ext.define('smiley360.view.Login', {
                 ui: 'action',
                 listeners: {
                     tap: function () {
-                    	window.location = 'http://smileys.ekonx.net.ua/oauth/Facebook.html?deviceId=' + getCookie('deviceId');
+                        Ext.widget('loginwithfacebookview').show();
+                    	//window.location = 'http://smileys.ekonx.net.ua/oauth/Facebook.html?deviceId=' + getCookie('deviceId');
                     }
                 }
             }, {
@@ -177,27 +178,29 @@ Ext.define('smiley360.view.Login', {
                             Ext.widget('reviewforfenderview').show();
                         }
                     }
-                }, {
-                    xtype: 'button',
-                    text: 'C',
-                    width: '40px',
-                    ui: 'action',
-                    listeners: {
-                        tap: function () {
-                            Ext.widget('contactusview').show();
-                        }
-                    }
-                }, {
-                    xtype: 'button',
-                    text: 'T',
-                    width: '40px',
-                    ui: 'action',
-                    listeners: {
-                        tap: function () {
-                            Ext.widget('termsofuseview').show();
-                        }
-                    }
-                }, {
+                },
+				//{
+                //    xtype: 'button',
+                //    text: 'C',
+                //    width: '40px',
+                //    ui: 'action',
+                //    listeners: {
+                //        tap: function () {
+                //            Ext.widget('contactusview').show();
+                //        }
+                //    }
+                //}, {
+                //    xtype: 'button',
+                //    text: 'T',
+                //    width: '40px',
+                //    ui: 'action',
+                //    listeners: {
+                //        tap: function () {
+                //            Ext.widget('termsofuseview').show();
+                //        }
+                //    }
+                //},
+				{
                     xtype: 'button',
                     text: 'OA',
                     width: '55px',
@@ -461,6 +464,8 @@ Ext.define('smiley360.view.Login', {
     onLoginTap: function () {
         Ext.getCmp('login_btn').setDisabled(true);
         this.fireEvent('AuthentificateCommand', this, this.down("#txtLogin").getValue(), this.down("#txtPassword").getValue());
+        
+
     },
 
     onSignupTap: function () {

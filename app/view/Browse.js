@@ -264,6 +264,7 @@ Ext.define('smiley360.view.Browse', {
                                     	items: [{
                                     		xtype: 'container',
                                     		layout: 'hbox',
+											id: 'xMyFavorited',
                                     		style: 'background-color: #efecea;',
                                     		cls: 'has-shadow',
                                     		padding: 20,
@@ -539,8 +540,8 @@ Ext.define('smiley360.view.Browse', {
 									 	style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
 									 	listeners: {
 									 		initialize: function () {
-									 			var arr = ['Athletic', 'Clothing Retailers', 'Department Stores', 'Fashion Designers & Retailers',
-									 			'Jewelry & Wathches', 'Maternity', 'Shoes', 'Sunglasses, Handbags<br> and Other Accessories'];
+									 			var arr = ['Athletic', 'Clothing Retailers', 'Department Stores', 'Fashion Designers &<br> Retailers',
+									 			'Jewelry & Wathches', 'Maternity', 'Shoes', 'Sunglasses, Handbags and Other<br> Accessories'];
 									 			Ext.getCmp('xBrowse').doCreateItems(arr, this.id, 'right');
 									 			this.hide();
 									 		}
@@ -684,7 +685,7 @@ Ext.define('smiley360.view.Browse', {
 									 	style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
 									 	listeners: {
 									 		initialize: function () {
-									 			var arr = ['Colleges & Universities', 'Educational Services & Websites', 'General Education'];
+									 			var arr = ['Colleges & Universities', 'Educational Services &<br> Websites', 'General Education'];
 									 			Ext.getCmp('xBrowse').doCreateItems(arr, this.id, 'right');
 									 			this.hide();
 									 		}
@@ -1314,26 +1315,57 @@ Ext.define('smiley360.view.Browse', {
             	]
             }
 		],
-		listeners: [
-			{
-				delegate: "#backBtn",
-				event: "tap",
-				fn: "onBackButtonTap"
-			},
-            //{
-            //    delegate: '#editprofileLabel',
-            //    fn: 'oneditLabel',
-            //    element: 'element',
-            //    event: 'painted',
-            //},
-            {
-            	delegate: "#gotoeditprofileBtn",
-            	event: "tap",
-            	fn: "onGoToProfileTap",
-            },
-
-		]
+		listeners: {
+			show: function () {
+				this.setFavorited();
+			}
+		}
 	},
+	setFavorited: function(){
+		Ext.getCmp('xMyFavorited').removeAll(true, true);
+		var FavBrands = smiley360.memberData.UserBrands;
+		for (var key in FavBrands) {
+			var oneItem = FavBrands[key];
+			if (oneItem.title)
+				this.setFavoritedItem(oneItem);
+		};
+	},
+	setFavoritedItem: function(oneItem) {
+		var FavoritedItem = new Ext.Container({
+			//id: id + 'container',
+			layout: 'vbox',
+			cls: 'has-shadow',
+			style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
+		});
+		var ContItem = FavoritedItem.add(new Ext.Container(
+		{
+			height: 100,
+			width: 100,
+			style: 'border-radius: 5px;',
+		}));
+		var Item = ContItem.add(new Ext.Img(
+		{
+			//src: 'resources/images/secret-logo.png',
+			src: smiley360.configuration.getResourceDomain() + '/' + oneItem.imageURL,
+			padding: 10,
+		}));
+		
+		var NextItem = FavoritedItem.add(new Ext.Label(
+		{
+			//html: 'McDonald\'s',
+			id: 'next_htm',
+			html: oneItem.title,
+			style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
+		 
+		}));
+
+		Ext.getCmp('xMyFavorited').add(FavoritedItem);
+		//alert(Ext.getCmp('next_htm').getHtml());
+		if (Ext.getCmp('next_htm').getHtml().toString().length > 12) {
+			Ext.getCmp('next_htm').setHtml(Ext.getCmp('next_htm').getHtml().toString().substr(0, 9) + '...');
+		};
+	},
+	
 	doCreateItems: function (items_arr, id, pos) {
 		var lbl_padding = '10px 0px 10px ';
 		if (pos == 'left') { lbl_padding += '20px'; }
@@ -1344,7 +1376,7 @@ Ext.define('smiley360.view.Browse', {
 				{
 					html: items_arr[key].toString(),
 					padding: lbl_padding ,
-					style: 'text-align: left; font-size:1.25em; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
+					style: 'max-width: 260px; text-align: left; font-size:1.2em; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
 					listeners: {
 						element: 'element',
 						tap: function () {

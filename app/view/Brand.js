@@ -119,42 +119,47 @@ Ext.define('smiley360.view.Brand', {
 																width: 50,
 																height: 50,
 																style: 'border-radius:0px; margin-left:-4px;',
-																src: 'resources/images/secret-logo.png',
+																src: 'resources/images/brands_1.png',
+																listeners: {
+																	tap: function () {
+																		Ext.widget('brandimageview').show();
+																	}
+																},
 															},//1
 															{
 																xtype: 'image',
 																width: 50,
 																height: 50,
 																style: 'border-radius:0px; margin-left:-4px;',
-																src: 'resources/images/secret-logo.png',
+																src: 'resources/images/brands_2.png',
 															},//2
 															{
 																xtype: 'image',
 																width: 50,
 																height: 50,
 																style: 'border-radius:0px; margin-left:-4px;',
-																src: 'resources/images/secret-logo.png',
+																src: 'resources/images/brands_3.png',
 															},//3
 															{
 																xtype: 'image',
 																width: 50,
 																height: 50,
 																style: 'border-radius:0px; margin-left:-4px;',
-																src: 'resources/images/secret-logo.png',
+																src: 'resources/images/brands_4.png',
 															},//4
 															{
 																xtype: 'image',
 																width: 50,
 																height: 50,
 																style: 'border-radius:0px; margin-left:-4px;',
-																src: 'resources/images/secret-logo.png',
+																src: 'resources/images/brands_5.png',
 															},//5
 															{
 																xtype: 'image',
 																width: 50,
 																height: 50,
 																style: 'border-radius:0px; margin-left:-4px;',
-																src: 'resources/images/secret-logo.png',
+																src: 'resources/images/brands_6.png',
 															}//6
 															],
 														}
@@ -346,7 +351,7 @@ Ext.define('smiley360.view.Brand', {
                                                         	cls: 'has-shadow',
                                                         	width: 70,
                                                         	height: 70,
-                                                        	src: 'resources/images/lays.png',
+                                                        	src: 'resources/images/brands_1.png',
                                                         	listeners: {
                                                         		tap: function () {
                                                         			Ext.widget('brandimageview').show();
@@ -442,7 +447,7 @@ Ext.define('smiley360.view.Brand', {
                                                         	cls: 'has-shadow',
                                                         	width: 70,
                                                         	height: 70,
-                                                        	src: 'resources/images/lays.png',
+                                                        	src: 'resources/images/brands_1.png',
                                                         },
 												],
 
@@ -812,7 +817,12 @@ Ext.define('smiley360.view.Brand', {
 			cls: 'has-shadow',
 			width: 70,
 			height: 70,
-			src: 'resources/images/lays.png',
+			src: 'resources/images/brands_1.png',
+			listeners: {
+				tap: function () {
+					Ext.widget('brandimageview').show();
+				}
+			},
 		}));
 		Ext.getCmp('xAllCommentsContainer').add(commentsArrayItem);
 		//////////////////////////////////

@@ -237,7 +237,7 @@ Ext.define('smiley360.view.Connect', {
 														text: 'BROWSE',
 														listeners: {
 															tap: function () {
-																this.up('#xConnect').fireEvent('onBrowseTapCommand', this);
+																this.up('#xConnect').fireEvent('onBrowseTapCommand', this, smiley360.memberData.UserId);
 															}
 														}
 													},
@@ -349,26 +349,9 @@ Ext.define('smiley360.view.Connect', {
             	]
             }
 		],
-		listeners: [
-			{
-				delegate: "#backBtn",
-				event: "tap",
-				fn: "onBackButtonTap"
-			},
-            //{
-            //    delegate: '#editprofileLabel',
-            //    fn: 'oneditLabel',
-            //    element: 'element',
-            //    event: 'painted',
-            //},
-            {
-            	delegate: "#gotoeditprofileBtn",
-            	event: "tap",
-            	fn: "onGoToProfileTap",
-            },
-
-		]
+		
 	},
+	
 	onBackButtonTap: function () {
 		console.log('back button tapped');
 		this.fireEvent('backButtonCommandDetails', this);

@@ -843,13 +843,13 @@ Ext.define('smiley360.view.Offers', {
     		//if (oneItem.mission_typeID != 1)
     		//{ oneItem.mission_typeID -= 1 };
     		var xOfferList = this.down('#xOfferList' + oneItem.mission_categoryID);
-    		if (xOfferList) { //&& smiley360.memberData.isProfileComplete.complete) {
+    		if ((xOfferList) && (smiley360.memberData.isProfileComplete.complete == 'true')) {
     			//xOfferList.removeAll(true, true);
     			xOfferList.removeAll(true, true);
     			xOfferList.add(allContainer);
     			this.down('#xOfferListHeader' + oneItem.mission_categoryID).setCls('heading-text active-sign');
     		} 
-    		//else Ext.widget('missingoffersview').show();
+    		else Ext.widget('missingoffersview').show();
     	}
     },
 	//place functions there

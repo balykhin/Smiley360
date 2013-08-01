@@ -66,6 +66,7 @@ Ext.application({
 		'OfferAcceptAddress',
 		'MissionCompleted',
 		'MissingOffers',
+        'LoginWithFacebook',
     ],
     icon: {
         '36': 'resources/icons/Icon_Android36.png',

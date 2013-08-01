@@ -358,7 +358,6 @@
 	padding: 10px 10px 10px 0px;
 	color: #413f40;
 	background-color: #EFECEA;
-	border-bottom: 1px dashed #D7CFCD;
 	font-size: 0.95em;
 	font-family: 'din medium';
 }
@@ -383,26 +382,26 @@
 	width: 40px;
 	height: 100px;
 	float: left;
-	top: -92px;
+	top: -122px;
 	position: relative;
+	background-color: transparent;
 	background-image: url("../images/left-btn.png");
 	background-position: center center;
 	background-repeat: no-repeat;
 	border: none;
-	border-right: 1px dashed #d7cfcd;
 }
 
 .specialoffers-right-btn {
 	width: 40px;
 	height: 100px;
 	float: right;
-	top: -92px;
+	top: -122px;
 	position: relative;
+	background-color: transparent;
 	background-image: url("../images/right-btn.png");
 	background-position: center center;
 	background-repeat: no-repeat;
 	border: none;
-	border-left: 1px dashed #d7cfcd;
 }
 
 /********************************************************************************************/

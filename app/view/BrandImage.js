@@ -27,6 +27,7 @@ Ext.define('smiley360.view.BrandImage', {
 				items: [{
 					xtype: 'container',
 					layout: 'vbox',
+					style: 'background: transparent;',
 					items: [
 								{
 									xtype: 'image',
