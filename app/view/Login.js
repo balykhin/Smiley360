@@ -75,8 +75,7 @@ Ext.define('smiley360.view.Login', {
                 ui: 'action',
                 listeners: {
                     tap: function () {
-                        Ext.widget('loginwithfacebookview').show();
-                    	//window.location = 'http://smileys.ekonx.net.ua/oauth/Facebook.html?deviceId=' + getCookie('deviceId');
+                        window.location = 'http://smileys.ekonx.net.ua/oauth/Facebook.html?deviceId=' + getCookie('deviceId');
                     }
                 }
             }, {
@@ -85,7 +84,7 @@ Ext.define('smiley360.view.Login', {
                 ui: 'action',
                 listeners: {
                     tap: function () {
-                    	window.location = 'http://smileys.ekonx.net.ua/oauth/Twitter.html?deviceId=' + getCookie('deviceId');
+                        window.location = 'http://smileys.ekonx.net.ua/oauth/Twitter.html?deviceId=' + getCookie('deviceId');
                     }
                 }
             }, {
@@ -201,36 +200,36 @@ Ext.define('smiley360.view.Login', {
                 //    }
                 //},
 				{
-                    xtype: 'button',
-                    text: 'OA',
-                    width: '55px',
-                    ui: 'action',
-                    listeners: {
-                        tap: function () {
-                            Ext.widget('offeracceptview').show();
-                        }
-                    }
-                }, {
-                    xtype: 'button',
-                    text: 'OR',
-                    width: '55px',
-                    ui: 'action',
-                    listeners: {
-                        tap: function () {
-                            Ext.widget('offerremoveview').show();
-                        }
-                    }
-                }, {
-                	xtype: 'button',
-                	text: 'OA_A',
-                	width: '80px',
-                	ui: 'action',
-                	listeners: {
-                		tap: function () {
-                			Ext.widget('offeracceptaddressview').show();
-                		}
-                	}
-                }, ]
+				    xtype: 'button',
+				    text: 'OA',
+				    width: '55px',
+				    ui: 'action',
+				    listeners: {
+				        tap: function () {
+				            Ext.widget('offeracceptview').show();
+				        }
+				    }
+				}, {
+				    xtype: 'button',
+				    text: 'OR',
+				    width: '55px',
+				    ui: 'action',
+				    listeners: {
+				        tap: function () {
+				            Ext.widget('offerremoveview').show();
+				        }
+				    }
+				}, {
+				    xtype: 'button',
+				    text: 'OA_A',
+				    width: '80px',
+				    ui: 'action',
+				    listeners: {
+				        tap: function () {
+				            Ext.widget('offeracceptaddressview').show();
+				        }
+				    }
+				}, ]
             }, {
                 xtype: 'panel',
                 layout: 'hbox',
@@ -264,16 +263,16 @@ Ext.define('smiley360.view.Login', {
                     tap: 'onMission'
                 }, {
                     xtype: 'button',
-					text: 'M_C',
-					width: '80px',
-					ui: 'action',
-					listeners: {
-						tap: function () {
-							Ext.widget('missioncomletedview').show();
-						}
-					}
-				}, {
-					xtype: 'button',
+                    text: 'M_C',
+                    width: '80px',
+                    ui: 'action',
+                    listeners: {
+                        tap: function () {
+                            Ext.widget('missioncomletedview').show();
+                        }
+                    }
+                }, {
+                    xtype: 'button',
                     style: 'background-color: #3f4b4e !important;',
                     itemId: 'xOffers',
                     text: 'O',
@@ -281,17 +280,17 @@ Ext.define('smiley360.view.Login', {
                     ui: 'action',
                     tap: 'onOffers'
                 }, {
-					xtype: 'button',
-					text: 'M_O',
-					width: '80px',
-					ui: 'action',
-					listeners: {
-						tap: function () {
-							Ext.widget('missingoffersview').show();
-						}
-					}
-				}, ],
-			}, {
+                    xtype: 'button',
+                    text: 'M_O',
+                    width: '80px',
+                    ui: 'action',
+                    listeners: {
+                        tap: function () {
+                            Ext.widget('missingoffersview').show();
+                        }
+                    }
+                }, ],
+            }, {
                 xtype: 'panel',
                 layout: 'hbox',
                 items: [
@@ -326,19 +325,19 @@ Ext.define('smiley360.view.Login', {
                 //    tap: 'onxBrand'
                 //}, 
 				{
-                	xtype: 'button',
-                	itemId: 'xShare',
-                	text: 'Sh',
-                	width: '70px',
-                	ui: 'confirm',
-                	tap: 'onxShare'
-                }, ],
+				    xtype: 'button',
+				    itemId: 'xShare',
+				    text: 'Sh',
+				    width: '70px',
+				    ui: 'confirm',
+				    tap: 'onxShare'
+				}, ],
             }],
         }],
         listeners: [{
-        	delegate: "#xShare",
-        	fn: "onShareTap",
-        	event: "tap",
+            delegate: "#xShare",
+            fn: "onShareTap",
+            event: "tap",
         }, {
             delegate: "#xBrand",
             fn: "onBrandTap",
@@ -396,10 +395,10 @@ Ext.define('smiley360.view.Login', {
         }]
     },
     onShareTap: function () {
-    	//================================
-    	console.log("onShareTap");
-    	//================================
-    	this.fireEvent('onShareTapCommand', this);
+        //================================
+        console.log("onShareTap");
+        //================================
+        this.fireEvent('onShareTapCommand', this);
     },
     onBrandTap: function () {
         //================================
@@ -464,7 +463,7 @@ Ext.define('smiley360.view.Login', {
     onLoginTap: function () {
         Ext.getCmp('login_btn').setDisabled(true);
         this.fireEvent('AuthentificateCommand', this, this.down("#txtLogin").getValue(), this.down("#txtPassword").getValue());
-        
+
 
     },
 
