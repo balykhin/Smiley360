@@ -24,7 +24,11 @@ Ext.Loader.setPath({
 Ext.application({
     name: 'smiley360',
     requires: [
-        'Ext.MessageBox', 'Ext.data.Validations', 'smiley360.model.SignupModel', 'Ext.ux.Fileup',
+        'Ext.MessageBox',
+        'Ext.data.JsonP',
+        'Ext.data.Validations',
+        'smiley360.model.SignupModel',
+        'Ext.ux.Fileup',
     ],
     stores: ['Members'],
     models: ['Member'],
@@ -66,7 +70,6 @@ Ext.application({
 		'OfferAcceptAddress',
 		'MissionCompleted',
 		'MissingOffers',
-        'LoginWithFacebook',
     ],
     icon: {
         '36': 'resources/icons/Icon_Android36.png',

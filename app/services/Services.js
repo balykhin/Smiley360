@@ -1,8 +1,6 @@
 ﻿smiley360 = smiley360 || {};
 smiley360.services = smiley360.services || {};
 
-Ext.require('Ext.data.JsonP');
-
 smiley360.services.authenticateservice = function (login, password, onCompleted) {
     smiley360.services.ajax(
 		"authenticate",
@@ -214,12 +212,15 @@ smiley360.services.getProfile = function (memberID, onCompleted) {
 
 smiley360.services.getMemberIdByDeviceId = function (deviceID, onCompleted) {
     smiley360.services.ajax(
-        "getMemberIdByDeviceId",
+        "getUserByDeviceId",
         {
             guid: deviceID
         },
-            onCompleted
-        );
+        function (response) {
+            response.success = response.success && response.memberID != 0;
+            response.ID = response.memberID;
+            onCompleted(response);
+        });
 }
 
 smiley360.services.getMemberLevel = function (memberID, onCompleted) {

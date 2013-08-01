@@ -3,7 +3,7 @@ smiley360.configuration = smiley360.configuration || {};
 
 
 smiley360.configuration.isDebugMode = function () {
-    return true;
+    return false;
 }
 
 smiley360.configuration.getServerUrl = function () {

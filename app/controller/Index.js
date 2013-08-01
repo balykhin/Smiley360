@@ -499,7 +499,7 @@ Ext.define('smiley360.controller.Index', {
 		if (members.getCount() > 0) {
 			var memberId = members.getAt(0).data.memberId;
 
-			console.log('Index -> [tryLoginUser] memberId:' + memberId);
+			console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
 
 			this.getMemberData(memberId);
 		}
@@ -507,13 +507,18 @@ Ext.define('smiley360.controller.Index', {
 			var me = this;
 			var deviceId = getCookie('deviceId');
 
+			console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
+
 			smiley360.services.getMemberIdByDeviceId(deviceId,
                 function (response) {
-                	if (response.success) {
-                	    me.updateMemberId(response.memberId);
-                	    me.getMemberData(response.memberId);
+                    if (response.success) {
+                        console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
+
+                	    me.updateMemberId(response.ID);
+                	    me.getMemberData(response.ID);
                 	}
-                	else {
+                    else {
+                        console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
                 		//Ext.Viewport.add({ xtype: 'loginview' });
                 	}
                 });
