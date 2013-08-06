@@ -33,6 +33,11 @@ Ext.application({
     stores: ['Members'],
     models: ['Member'],
     controllers: ['Index'],
+    viewport: {
+        layout: {
+            type: 'card'
+        }
+    },
     views: [
         'Login',
         'Main',
