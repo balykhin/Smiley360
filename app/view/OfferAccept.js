@@ -6,7 +6,7 @@ Ext.define('smiley360.view.OfferAccept', {
         centered: true,
         fullscreen: true,
         hideOnMaskTap: true,
-        id: 'xView',
+        id: 'xOAView',
         scrollable: 'vertical',
         cls: 'popup-panel',
         items: [{
@@ -18,7 +18,7 @@ Ext.define('smiley360.view.OfferAccept', {
                 cls: 'popup-close-button',
                 listeners: {
                     tap: function () {
-                        Ext.getCmp('xView').destroy();
+                        Ext.getCmp('xOAView').destroy();
                     }
                 }
             }, {
@@ -55,8 +55,9 @@ Ext.define('smiley360.view.OfferAccept', {
                         cls: 'popup-photo-button',
                         style: 'padding: 5px; font-size: 10pt;',
                         listeners: {
-                            tap: function () {
-                                //Ext.getCmp('xView').doEditAddress();
+                        	tap: function () {
+                        		console.log('i am tapped');
+                                Ext.getCmp('xOAView').doEditAddress();
                             }
                         },
                     }],
@@ -87,6 +88,12 @@ Ext.define('smiley360.view.OfferAccept', {
                         height: 30,
                         src: 'resources/images/question.png',
                         cls: 'popup-post-icon',
+                        listeners: {
+                        	tap: function () {
+                        		Ext.widget('contactusview').show();
+                        		Ext.widget('offeracceptview').hide();
+                        	}
+                        }
                     }, {
                         xtype: 'button',
                         docked: 'right',
@@ -97,9 +104,10 @@ Ext.define('smiley360.view.OfferAccept', {
                         //iconAlign: 'right',
                         //iconCls: 'popup-post-icon',
                         listeners: {
-                            tap: function () {
-                                //Ext.getCmp('xView').showHelp();
-                            }
+                        	tap: function () {
+                        		Ext.widget('contactusview').show();
+                        		Ext.widget('offeracceptview').hide();
+                        	}
                         }
                     }],
                 }],
@@ -108,12 +116,14 @@ Ext.define('smiley360.view.OfferAccept', {
                 cls: 'popup-button-panel',
                 items: [{
                     xtype: 'button',
-                    text: 'REMOVE THIS OFFER',
+                    text: 'CONTINUE TO MISSION',
                     id: 'xSubmitButton',
                     cls: 'popup-submit-button',
                     listeners: {
-                        tap: function () {
-                            //Ext.getCmp('xView').doRemoveOffer();
+                    	tap: function () {
+                    		//go accept mission
+                    		Ext.getCmp('xOfferView').fireEvent('acceptMissionCommand', this, '1', '1');
+
                         }
                     },
                 }],
@@ -125,10 +135,16 @@ Ext.define('smiley360.view.OfferAccept', {
             },
             hide: function () {
                 this.destroy();
+            },
+            show: function () {
             }
         },
     },
-
+    doEditAddress: function () {
+    	Ext.widget('offeracceptview').hide();
+    	Ext.widget('offeracceptaddressview').show();
+    	
+    },
     doRemoveOffer: function () {
         var submitView = this;
         var submitData = {

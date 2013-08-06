@@ -84,11 +84,12 @@ Ext.define('smiley360.view.OfferAcceptAddress', {
 					style: 'margin-top: 10px;',
 					items: [{
 						xtype: 'label',
-						id:'verify-label',
+						id: 'verify-label',
 						width: 150,
+						docked: 'left',
 						cls: 'popup-address-comment',
 						html: 'This address is VERIFIED!',
-					},{
+					}, {
 						xtype: 'spacer',
 						id: 'verify-spacer',
 					},
@@ -97,9 +98,16 @@ Ext.define('smiley360.view.OfferAcceptAddress', {
 						id: 'question-icon',
 						width: 30,
 						height: 30,
-						docked:'right',
+						docked: 'right',
 						src: 'resources/images/question.png',
 						cls: 'popup-post-icon',
+						listeners: {
+							tap: function () {
+								Ext.widget('offeracceptaddressview').hide();
+								Ext.widget('contactusview').show();
+								
+							}
+						}
 					}, {
 						xtype: 'button',
 						id: 'question-help-button',
@@ -111,13 +119,19 @@ Ext.define('smiley360.view.OfferAcceptAddress', {
 						//iconAlign: 'right',
 						//iconCls: 'popup-post-icon',
 						listeners: {
+							tap: function () {
+								Ext.widget('offeracceptaddressview').hide();
+								Ext.widget('contactusview').show();
+								
+							},
 							initialize: function () {
-								Ext.getCmp('verify-label').hide();
-								Ext.getCmp('verify-spacer').hide();
-								//Ext.getCmp('question-icon').setDocked('left');
-								//Ext.getCmp('question-help-button').setDocked('left');
-								//Ext.getCmp('xView').showHelp();
-							}
+								Ext.getCmp('verify-label').setHtml('This address is not VERIFIED!');
+								Ext.getCmp('verify-label').setCls('popup-address-comment-not');
+								Ext.getCmp('question-icon').setDocked('right');
+								Ext.getCmp('question-help-button').setDocked('right');
+								Ext.getCmp('verify-label').setDocked('left');
+							},
+							
 						}
 					}],
 				}],
@@ -131,12 +145,11 @@ Ext.define('smiley360.view.OfferAcceptAddress', {
 					html: 'SAVE ADDRESS<br> AND CONTINUE TO MISSION',
 					listeners: {
 						tap: function () {
-							Ext.getCmp('verify-label').setHtml('This address is not VERIFIED!');
-							Ext.getCmp('verify-label').setCls('popup-address-comment-not');
-							Ext.getCmp('verify-label').show();
-							Ext.getCmp('verify-spacer').show();
-							//Ext.getCmp('question-icon').setDocked('right');
-							//Ext.getCmp('question-help-button').setDocked('right');
+							//save address always
+							//verify on need							
+							//go accept mission
+							Ext.getCmp('xOfferView').fireEvent('acceptMissionCommand', this, '1', '1');
+
 						}
 					}
 				}, ],
@@ -146,9 +159,14 @@ Ext.define('smiley360.view.OfferAcceptAddress', {
 			initialize: function () {
 				this.setHeight(Ext.getCmp('xRootPanel').element.getHeight());
 			},
+			painted: function () {
+				if (smiley360.memberData.Profile.address_status == '2') {
+					this.down('#verify-label').hide();
+				}
+			},
 			hide: function () {
 				this.destroy();
-			}
+			},
 		},
 	},
 

@@ -6,6 +6,7 @@ Ext.define('smiley360.controller.Index', {
 	config: {
 		id: 'ParentController',
 		refs: {
+			mainView: 'mainview',
 			//newList   : '#newList',
 			homeView: 'homeview',
 			loginView: 'loginview',
@@ -23,19 +24,19 @@ Ext.define('smiley360.controller.Index', {
 			browseInstrumentsView: 'browseinstrumentsview',
 			connectView: 'connectview',
 			brandView: 'brandview',
-			shareView: 'shareview',
 		},
 		control: {
+			mainView: {
+			},
 			loginView: {
 				AuthentificateCommand: 'AuthentificateCommand',
 				ShowSignupViewCommand: 'ShowSignupViewCommand',
 				getProfileCommand: 'getProfileHomeCommand',
-				ShowSurveyViewCommand: 'ShowSurveyViewCommand',
+				//ShowSurveyViewCommand: 'ShowSurveyViewCommand',
 				onMissionTapCommand: 'onMissionTapCommand',
 				onMissionDetailsTapCommand: 'onMissionDetailsTapCommand',
-				onOffersTapCommand: 'onOffersTapCommand',
+				onOffersTapCommand: 'onShowOffersView',
 				onOffersDetailsTapCommand: 'onOffersDetailsTapCommand',
-				onConnectTapCommand: 'onConnectTapCommand',
 				onShareTapCommand: 'onShareTapCommand',
 				getSpecialOffersCommand: 'getSpecialOffersCommand'
 			},
@@ -50,7 +51,7 @@ Ext.define('smiley360.controller.Index', {
 				oneditLabelCommand: 'oneditLabelCommand',
 				//GoToProfileCommand: 'GoToProfileCommand',
 				getProfileHomeCommand: 'getProfileHomeCommand'
-				
+
 			},
 			sharetofacebookview: {
 			},
@@ -69,33 +70,38 @@ Ext.define('smiley360.controller.Index', {
             	backButtonCommandMissions: 'backButtonCommandMissions'
             },
 			detailsView: {
-
+				LoadMissionDetailsCommand: 'LoadMissionDetailsCommand',
 				backButtonCommandDetails: 'backButtonCommandDetails'
 			},
 			offersView: {
 				LoadOfferDetailsCommand: 'LoadOfferDetailsCommand',
-				backButtonCommandOffers: 'backButtonCommandOffers'
+				backButtonCommandOffers: 'backButtonCommandOffers',
+				LoadOfferSurveyCommand: 'ShowSurveyViewCommand',
+				acceptMissionCommand: 'acceptMissionCommand',
+				declineMissionCommand: 'declineMissionCommand'
 			},
 			offerDetailsView: {
-				backButtonCommandOfferDetails: 'backButtonCommandOfferDetails'
+				backButtonCommandOfferDetails: 'backButtonCommandOfferDetails',
+				LoadMissionDetailsCommand: 'LoadMissionDetailsCommand'
 			},
 			browseView: {
 				backButtonCommandBrowse: 'backButtonCommandSignup',
-				onBrowseInstrumentsTapCommand: 'onBrowseInstrumentsTapCommand',
+				onBrowseResultsByCategoryTapCommand: 'onBrowseResultsByCategoryTapCommand',
+				onBrandTapCommand: 'onBrandTapCommand'
 			},
 			connectView: {
 				backButtonCommandConnect: 'backButtonCommandSignup',
 				onBrandTapCommand: 'onBrandTapCommand',
 				onBrowseTapCommand: 'onBrowseTapCommand',
+				onSearchTapCommand: 'onSearchTapCommand',
+				onConnectTapCommand: 'onConnectTapCommand',
+				onBrowseLoadCommand: 'onBrowseLoadCommand'
 			},
 			browseInstrumentsView: {
 				backButtonCommandBrowseInstruments: 'backButtonCommandSignup'
 			},
 			brandView: {
 				backButtonCommandBrand: 'backButtonCommandSignup'
-			},
-			shareView: {
-				backButtonCommandShare: 'backButtonCommandSignup'
 			},
 		}
 	},
@@ -140,31 +146,73 @@ Ext.define('smiley360.controller.Index', {
 			function (response) {
 				if (response.success) {
 					smiley360.brandData = response;
-					Ext.Viewport.animateActiveItem(
-						me.getBrandView(), me.slideLeftTransition);
+					Ext.getCmp('xMainView').showExternalView('brandview');
 				}
 				else {
 					console.log('BrandDetails is corrupted!');//show error on view
 				}
 			});
 	},
+
 	onConnectTapCommand: function () {
 		console.log("onConnectTapCommand");
-		Ext.Viewport.animateActiveItem(this.getConnectView(), this.slideLeftTransition);
+		var me = this;
+		smiley360.services.getFeaturedBrands(
+								function (response) {
+									if (response.success) {
+										delete response.success;
+										smiley360.FeaturedBrands = response;
+									}
+								});
 	},
-	onBrowseInstrumentsTapCommand: function () {
-		console.log("onConnectTapCommand");
-		Ext.Viewport.animateActiveItem(this.getBrowseInstrumentsView(), this.slideLeftTransition);
+	onBrowseLoadCommand: function () {
+		console.log("onBrowseLoadCommand");
+		var me = this;
+		smiley360.services.getHotBrands(
+								function (response) {
+									if (response.success) {
+										delete response.success;
+										smiley360.HotBrands = response;
+									}
+								});
+	},
+	onBrowseResultsByCategoryTapCommand: function (from, category, subcategory, index, pageSize) {
+		console.log("onBrInstrTapCommand");
+		var me = this;
+		smiley360.services.getConnects_byCategory(category, subcategory, index, pageSize,
+			function (response) {
+				if (response.success) {
+					smiley360.CategoryResults = response;
+					Ext.getCmp('xMainView').showExternalView('browseinstrumentsview');
+				}
+				else {
+					console.log('Categories is corrupted!');//show error on view
+				}
+			});
+	},
+	onSearchTapCommand: function (from, query, index, pageSize) {
+		console.log("onSearchTapCommand");
+		var me = this;
+		smiley360.services.getConnects_bySearch(query, index, pageSize,
+			function (response) {
+				alert('Searched!');
+				if (response.success) {
+					smiley360.SearchResults = response;
+					Ext.getCmp('xMainView').showExternalView('browseview');
+				}
+				else {
+					console.log('Search is corrupted!');//show error on view
+				}
+			});
 	},
 	onBrowseTapCommand: function (from, memberID) {
 		console.log("onBrowseTapCommand");
 		var me = this;
-		smiley360.services.getMyBrands(memberID, 
+		smiley360.services.getMyBrands(memberID,
 			function (response) {
 				if (response.success) {
 					smiley360.memberData.UserBrands = response;
-					Ext.Viewport.animateActiveItem(
-						me.getBrowseView(), me.slideLeftTransition);
+					Ext.getCmp('xMainView').showExternalView('browseview');
 				}
 				else {
 					console.log('UserBrandDetails is corrupted!');//show error on view
@@ -177,13 +225,33 @@ Ext.define('smiley360.controller.Index', {
 	},
 
 	onOffersDetailsTapCommand: function () {
-		Ext.Viewport.animateActiveItem(this.getOfferDetailsView(), this.slideLeftTransition);
+		Ext.getCmp('xOfferView').showExternalView('offerdetailsview');
+		//Ext.Viewport.animateActiveItem(this.getOfferDetailsView(), this.slideLeftTransition);
 	},
 
-	onOffersTapCommand: function () {
-
+	onShowOffersView: function (reloadData) {
+		console.log("onShowOffersView -> reloadData:", reloadData === true);
 		//if (smiley360.memberData.isProfileComplete.complete)
-		Ext.Viewport.animateActiveItem(this.getOffersView(), this.slideLeftTransition)
+		if (reloadData === true) {
+			var me = this;
+
+			smiley360.services.getOffers(smiley360.memberData.UserId,
+				function (response) {
+					if (response.success) {
+						delete response.success;
+						smiley360.memberData.Offers = response;
+
+						Ext.Viewport.animateActiveItem(
+							me.getOffersView(), me.slideLeftTransition);
+					}
+					else {
+						console.log('getOffers is corrupted!');//show error on view
+					}
+				});
+		}
+		else {
+			Ext.Viewport.animateActiveItem(this.getOffersView(), this.slideLeftTransition);
+		}
 
 		//smiley360.services.getOffers(function (response) {
 		//	if (response.success) {
@@ -234,7 +302,9 @@ Ext.define('smiley360.controller.Index', {
 	//    if (isLogined) { Ext.Viewport.animateActiveItem(this.getEditProfileView(), this.slideLeftTransition); }
 	//},
 	onMissionDetailsTapCommand: function () {
-		Ext.Viewport.animateActiveItem(this.getDetailsView(), this.slideLeftTransition);
+	    Ext.getCmp('xMissionView').showExternalView('detailsview');
+	    Ext.getCmp('xDetailsView').hideSharePanel();
+		//Ext.Viewport.animateActiveItem(this.getDetailsView(), this.slideLeftTransition);
 	},
 
 	onMissionTapCommand: function () {
@@ -246,6 +316,82 @@ Ext.define('smiley360.controller.Index', {
 		Ext.Viewport.animateActiveItem(this.getEditProfileView(), this.slideLeftTransition);
 
 	},
+	declineMissionCommand: function (from, memberID, missionID) {
+		var me = this;
+		console.log('offer declined');
+		smiley360.services.declineMission(memberID, missionID,
+			function (response) {
+				if (response.success) {
+					//smiley360.missionData.MissionDetails = response;
+
+					//Ext.getCmp('xMainView').showExternalView('offerdetailsview');
+				}
+				else {
+					console.log('Offer is not declined!');//show error on view
+				}
+			});
+	},
+	getAddressCommand: function (from, memberID) {
+		var me = this;		
+		smiley360.services.getMemberAddress(memberID,
+			function (response) {
+				if (response.success) {
+					console.log('Address is got successfully!');
+					//smiley360.missionData.MissionDetails = response;
+
+					//Ext.getCmp('xMainView').showExternalView('offerdetailsview');
+				}
+				else {
+					console.log('Address load error!');//show error on view
+				}
+			});
+	},
+	setAddressCommand: function (from, memberID, addr1, addr2, city, stateID, zip, countryID) {
+		var me = this;
+		smiley360.services.setMemberAddress(memberID, addr1, addr2, city, stateID, zip, countryID,
+			function (response) {
+				if (response.success) {
+					console.log('Address is set successfully!');
+					//smiley360.missionData.MissionDetails = response;
+
+					//Ext.getCmp('xMainView').showExternalView('offerdetailsview');
+				}
+				else {
+					console.log('Address setting error!');//show error on view
+				}
+			});
+	},
+	verifyAddressCommand: function (from, memberID) {
+		var me = this;
+		smiley360.services.verifyMemberAddress(memberID,
+			function (response) {
+				if (response.success) {
+					console.log('Address is verified successfully!');
+					//smiley360.missionData.MissionDetails = response;
+
+					//Ext.getCmp('xMainView').showExternalView('offerdetailsview');
+				}
+				else {
+					console.log('Address verification error!');//show error on view
+				}
+			});
+	},
+	acceptMissionCommand: function (from, memberID, missionID) {
+		var me = this;
+		console.log('offer accepted');
+		smiley360.services.acceptMission(memberID, missionID,
+			function (response) {
+				if (response.success) {
+					//smiley360.missionData.MissionDetails = response;
+
+					//Ext.getCmp('xMainView').showExternalView('offerdetailsview');
+				}
+				else {
+					console.log('Offer is not accepted!');//show error on view
+				}
+			});
+	},
+
 	LoadOfferDetailsCommand: function (image, missionID, memberID) {
 		var me = this;
 		smiley360.services.getMissionDetails(missionID, memberID,
@@ -253,8 +399,7 @@ Ext.define('smiley360.controller.Index', {
 				if (response.success) {
 					smiley360.missionData.MissionDetails = response;
 
-					Ext.Viewport.animateActiveItem(
-						me.getOfferDetailsView(), me.slideLeftTransition);
+					Ext.getCmp('xMainView').showExternalView('offerdetailsview');
 				}
 				else {
 					console.log('Offerdetails is corrupted!');//show error on view
@@ -263,40 +408,57 @@ Ext.define('smiley360.controller.Index', {
 	},
 	LoadMissionDetailsCommand: function (image, missionID, memberID) {
 		var me = this;
+		console.log('MissionDetails is loaded for' + missionID);
 		smiley360.services.getMissionDetails(missionID, memberID,
 			function (response) {
 				if (response.success) {
-					smiley360.missionData.MissionDetails = response;
+					if (smiley360.missionData.MissionDetails) {
+						delete smiley360.missionData.MissionDetails;
+						//alert('delete old mission');
+						if (smiley360.missionData.MissionDetails == null) {
+							//alert('new mission setting');
+							smiley360.missionData.MissionDetails = response;
+							Ext.getCmp('xMainView').showExternalView('detailsview');
+							Ext.getCmp('xDetailsView').hideSharePanel();
+							Ext.getCmp('xDetailsView').setMissionDetails();
+						}
+					}
+					else {
+						//alert('firstly mission setting');
+						smiley360.missionData.MissionDetails = response;
+						Ext.getCmp('xMainView').showExternalView('detailsview');
+						Ext.getCmp('xDetailsView').hideSharePanel();
+					}
 
-					Ext.Viewport.animateActiveItem(
-						me.getDetailsView(), me.slideLeftTransition);
 				}
 				else {
 					console.log('Missiondetails is corrupted!');//show error on view
 				}
 			});
 	},
-		
+
 	AuthentificateCommand: function (view, login, password) {
 		var me = this;
 
 		//adding to localstorage;
 		smiley360.services.authenticateservice(login, password,
-            function (response) {
-            	isLogined = response.success;
+			function (response) {
+				isLogined = response.success;
 
-            	if (isLogined) {
-            		console.log('Index -> Login Successful!');
+				if (isLogined) {
+					console.log('Index -> Login Successful!');
 
-            		me.updateMemberId(response.ID);
-            		me.getMemberData(response.ID);
-            	}
-            	else {
-            		console.log('Login unsuccessful!');
+					me.updateMemberId(response.ID);
+					me.loadMemberData(response.ID, function () {
+						smiley360.animateViewLeft('mainview');
+					});
+				}
+				else {
+					console.log('Login unsuccessful!');
 
-            		Ext.getCmp('login_btn').enable();//show error on view
-            	};
-            });
+					Ext.getCmp('login_btn').enable();//show error on view
+				};
+			});
 	},
 
 	ShowSignupViewCommand: function () {
@@ -309,7 +471,7 @@ Ext.define('smiley360.controller.Index', {
 	getProfileCommand: function () {
 		//disabled
 		console.log('getProfileCommand');
-		
+
 		Ext.Viewport.animateActiveItem(this.getEditProfileView(), this.slideLeftTransition);
 	},
 
@@ -325,22 +487,22 @@ Ext.define('smiley360.controller.Index', {
 		console.log('SavechangesCommand');
 
 		var fields = new Array(
-            'fName',
-            'lName',
-            'email',
-            'birthdate',
-            'gender',
-            'blogURL',
-            'aboutself',
-            'address1',
-            'address2',
-            'city',
-            'stateID',
-            'zip',
-            'marital',
-            'children',
-            'howmanychildren',
-            'income');
+			'fName',
+			'lName',
+			'email',
+			'birthdate',
+			'gender',
+			'blogURL',
+			'aboutself',
+			'address1',
+			'address2',
+			'city',
+			'stateID',
+			'zip',
+			'marital',
+			'children',
+			'howmanychildren',
+			'income');
 
 		var profArray = {};
 
@@ -351,25 +513,33 @@ Ext.define('smiley360.controller.Index', {
 		}
 
 		smiley360.services.setProfile(smiley360.memberData.UserId, profArray,
-            function (response) {
-            	if (response.success) {
-            		console.log('Your changes aplied successfully!');
-            	}
-            	else {
-            		console.log('Set Profile return error!');//show error on view
-            	}
-            });
+			function (response) {
+				if (response.success) {
+					console.log('Your changes aplied successfully!');
+				}
+				else {
+					console.log('Set Profile return error!');//show error on view
+				}
+			});
 
 		if (isLogined) {
 			Ext.Viewport.animateActiveItem(this.getEditProfileView(), this.slideLeftTransition);
 		}
 	},
 
-	ShowSurveyViewCommand: function () {
-		//================================
-		console.log('ShowSurveyViewCommand');
-		//================================
-		if (isLogined) { Ext.Viewport.animateActiveItem(this.getSurveyView(), this.slideLeftTransition); }
+	ShowSurveyViewCommand: function (fromView, missionID) {
+		//=========================================================
+		console.log('ShowSurveyViewCommand -> offerId: ', missionID);
+		//=========================================================
+		if (isLogined) {
+			var surveyView = this.getSurveyView();
+			var surveyFrame = Ext.get('xSurveyFrame');
+			var surveyFrameUrl = 'http://smileys.ekonx.net.ua/survey.html?deviceId=' + getCookie('deviceId') + '&offerId=' + missionID;
+
+			surveyFrame.dom.src = surveyFrameUrl;
+
+			Ext.Viewport.animateActiveItem(surveyView, this.slideLeftTransition);
+		}
 	},
 
 	SurveyBackButtonCommand: function () {
@@ -411,14 +581,14 @@ Ext.define('smiley360.controller.Index', {
 										profArray.zip,
 										profArray.birthdate,
 										profArray.gender,
-		    function (response) {
-		    	if (response.success) {
-		    		console.log('Member signup is done successfully!');
-		    	}
-		    	else {
-		    		console.log('Member signup returned an error!');
-		    	}
-		    });
+			function (response) {
+				if (response.success) {
+					console.log('Member signup is done successfully!');
+				}
+				else {
+					console.log('Member signup returned an error!');
+				}
+			});
 
 	},
 
@@ -437,36 +607,38 @@ Ext.define('smiley360.controller.Index', {
 		Ext.Viewport.animateActiveItem(this.getLoginView(), this.slideRightTransition);
 	},
 
-	getBrandData: function (memberID, brandID) {
+	loadBrandData: function (memberID, brandID) {
 		var me = this;
 
 		smiley360.services.getBrandDetails(memberID, brandID,
-            function (response) {
-            	if (response.success) {
-            		smiley360.memberData.SpecialOfferBrand = response;            		
-            	}
-            	else {
-            		//TODO: show error message on view
-            		console.log('Index -> [getBrandData] return error!');
-            	}
-            });
+			function (response) {
+				if (response.success) {
+					smiley360.memberData.SpecialOfferBrand = response;
+				}
+				else {
+					//TODO: show error message on view
+					console.log('Index -> [getBrandDetails] return error!');
+				}
+			});
 	},
 
-	getMemberData: function (memberId) {
+	loadMemberData: function (memberId, success) {
 		var me = this;
 
 		smiley360.services.getMemberData(memberId,
-            function (response) {
-            	if (response.success) {
-            		smiley360.memberData = response;
-            		Ext.Viewport.animateActiveItem(me.getHomeView(), me.slideRightTransition);
+			function (response) {
+				if (response.success) {
+					isLogined = true;
+					smiley360.memberData = response;
 
-            	}
-            	else {
-            		//TODO: show error message on view
-            		console.log('Index -> [getMemberData] return error!');
-            	}
-            });
+					if (success)
+						success();
+				}
+				else {
+					//TODO: show error message on view
+					console.log('Index -> [getMemberData] return error!');
+				}
+			});
 	},
 
 	updateMemberId: function (memberId) {
@@ -493,6 +665,23 @@ Ext.define('smiley360.controller.Index', {
 		Ext.Loader.injectScriptElement(jsPath, onload, onerror, this);
 	},
 
+	loadProfileDropdowns: function (success) {
+		smiley360.services.getProfileDropdowns(
+			function (response) {
+				if (response.success) {
+					smiley360.ProfileDropdowns = response;
+					console.log('Index -> [loadProfileDropdowns] completed!');
+
+					if (success) {
+						success();
+					}
+				}
+				else {
+					console.log('Index -> [loadProfileDropdowns] corrupted!');
+				}
+			});
+	},
+
 	tryLoginUser: function () {
 		var members = Ext.getStore('Members');
 
@@ -501,7 +690,10 @@ Ext.define('smiley360.controller.Index', {
 
 			console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
 
-			this.getMemberData(memberId);
+			this.loadMemberData(memberId, function () {
+				smiley360.destroySplash();
+				smiley360.animateViewLeft('mainview');
+			});
 		}
 		else {
 			var me = this;
@@ -510,18 +702,23 @@ Ext.define('smiley360.controller.Index', {
 			console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
 
 			smiley360.services.getMemberIdByDeviceId(deviceId,
-                function (response) {
-                    if (response.success) {
-                        console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
+				function (response) {
+					if (response.success) {
+						console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
 
-                	    me.updateMemberId(response.ID);
-                	    me.getMemberData(response.ID);
-                	}
-                    else {
-                        console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
-                		//Ext.Viewport.add({ xtype: 'loginview' });
-                	}
-                });
+						me.updateMemberId(response.ID);
+						me.loadMemberData(response.ID, function () {
+							smiley360.destroySplash();
+							smiley360.animateViewLeft('mainview');
+						});
+					}
+					else {
+						console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
+
+						smiley360.destroySplash();
+						smiley360.animateViewLeft('loginview');
+					}
+				});
 		}
 	},
 
@@ -541,36 +738,31 @@ Ext.define('smiley360.controller.Index', {
 
 		me.callParent(arguments);
 		me.doJavascriptLoad('app/services/Configuration.js',
-            function (response) {
-            	if (!response.success) { return }
+			function (response) {
+				if (!response.success) { return }
 
-            	me.doJavascriptLoad('app/services/Services.js',
-                    function (response) {
-                    	if (!response.success) { return }
+				me.doJavascriptLoad('app/services/Services.js',
+					function (response) {
+						if (!response.success) { return }
 
-                    	if (smiley360.configuration.isDebugMode()) {
-                    		me.doJavascriptLoad('app/services/Services.mock.js',
-                                function (response) {
-                                	if (!response.success) { return }
-                                	smiley360.services.getProfileDropdowns(
-										function (response) {
-											if (response.success) {
-												smiley360.ProfileDropdowns = response;
-												console.log('Dropdown data is loaded!');
-											}
-											else {
-												console.log('Dropdown data is corrupted!');
-											}
-										});
-                                	me.tryLoginUser();
-                                });
+						if (smiley360.configuration.isDebugMode()) {
+							me.doJavascriptLoad('app/services/Services.mock.js',
+								function (response) {
+									if (!response.success) { return }
 
-                    	}
-                    	else {
-                    		me.tryLoginUser();
-                    	}
-                    });
-            });
+									me.loadProfileDropdowns(function () {
+										me.tryLoginUser();
+									});
+								});
+
+						}
+						else {
+							me.loadProfileDropdowns(function () {
+								me.tryLoginUser();
+							});
+						}
+					});
+			});
 	}
 });
 
@@ -606,25 +798,27 @@ smiley360.setViewStatus = function (view, status) {
 	view.setStatus(status);
 }
 
+smiley360.animateViewLeft = function (viewAlias) {
+	var view = smiley360.getOrCreateView(viewAlias);
 
-//smiley360.animateViewLeft = function (viewAlias) {
-//    var view = smiley360.getOrCreateView(viewAlias);
+	console.log('Global -> opened [' + viewAlias + ']');
 
-//    console.log('Global -> opened [' + viewAlias + ']');
+	Ext.Viewport.animateActiveItem(view, { type: 'slide', direction: 'left' });
+}
 
-//    Ext.Viewport.animateActiveItem(view, this.slideLeftTransition);
-//}
+smiley360.getOrCreateView = function (viewAlias) {
+	var view = Ext.Viewport.down(viewAlias);
+	//create the form if it doesn't exists
+	if (view == null) {
+		view = Ext.Viewport.add({ xtype: viewAlias });
 
-//smiley360.getOrCreateView = function (viewAlias) {
-//    var view = Ext.Viewport.down(viewAlias);
-//    //create the form if it doesn't exists
-//    if (view == null) {
-//        view = Ext.widget(viewAlias);
+		console.log('Global -> created [' + viewAlias + ']');
+	}
 
-//        Ext.Viewport.add(view);
+	return view;
+}
 
-//        console.log('Global -> created [' + viewAlias + ']');
-//    }
-
-//    return Ext.valueOf(view);
-//}
+smiley360.destroySplash = function () {
+	// Destroy the #appLoadingIndicator element
+	Ext.fly('appLoadingIndicator').destroy();
+}

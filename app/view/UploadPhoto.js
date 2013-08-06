@@ -3,7 +3,11 @@
 Ext.define('smiley360.view.UploadPhoto', {
     extend: 'Ext.Container',
     alias: 'widget.uploadphotoview',
-    requires: ['Ext.Rating', 'Ext.Anim'],
+    requires: [
+        'Ext.Anim',
+        'Ext.Rating',
+        'Ext.ux.Fileup',
+    ],
     config: {
         modal: true,
         centered: true,
@@ -178,7 +182,7 @@ Ext.define('smiley360.view.UploadPhoto', {
                     url: 'http://173.18.18.52/getfile.php',
                     listeners: {
                         tap: function () {
-                        //Ext.getCmp('xView').doUpload();
+                            //Ext.getCmp('xView').doUpload();
                         }
                     },
                 }],

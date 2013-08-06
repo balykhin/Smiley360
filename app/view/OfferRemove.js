@@ -55,7 +55,9 @@ Ext.define('smiley360.view.OfferRemove', {
                     id: 'xSubmitButton',
                     cls: 'popup-submit-button',
                     listeners: {
-                        tap: function () {
+                    	tap: function () {
+                    		Ext.getCmp('xOfferView').fireEvent('declineMissionCommand', this, '1', '1');
+
                             //Ext.getCmp('xView').doRemoveOffer();
                         }
                     },

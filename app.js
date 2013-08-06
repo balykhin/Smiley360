@@ -24,25 +24,22 @@ Ext.Loader.setPath({
 Ext.application({
     name: 'smiley360',
     requires: [
+        'Ext.Anim',
         'Ext.MessageBox',
         'Ext.data.JsonP',
         'Ext.data.Validations',
         'smiley360.model.SignupModel',
-        'Ext.ux.Fileup',
     ],
     stores: ['Members'],
     models: ['Member'],
     controllers: ['Index'],
-    viewport: {
-        layout: {
-            type: 'card'
-        }
-    },
     views: [
         'Login',
+        'Main',
         'Signup',
         'Home',
         'ForgetPassword',
+        'SharePanel',
         'ShareLink',
         'ShareToBlog',
         'ShareToTwitter',
@@ -64,12 +61,12 @@ Ext.application({
 		'BrowseInstruments',
 		'Brand',
 		'BrandImage',
-		'Share',
         'ContactUs',
         'TermsOfUse',
 		'OfferAcceptAddress',
 		'MissionCompleted',
 		'MissingOffers',
+        'SideMenu',
     ],
     icon: {
         '36': 'resources/icons/Icon_Android36.png',
@@ -92,57 +89,8 @@ Ext.application({
     launch: function () {
         console.log('App -> launched!');
 
-        // Destroy the #appLoadingIndicator element
-        Ext.fly('appLoadingIndicator').destroy();
-
-        var shareView = {
-        	xtype: 'shareview'
-        }
-        var loginView = {
-            xtype: 'loginview'
-        }
-        var brandView = {
-        	xtype: 'brandview'
-        }
-        var offersView = {
-            xtype: 'offersview'
-        }
-        var offerDetailsView = {
-            xtype: 'offerdetailsview'
-        }
-
-        var homeView = {
-            xtype: 'homeview'
-        }
-        var detailsView = {
-            xtype: 'detailsview'
-        }
-        var missionsView = {
-            xtype: 'missionsview'
-        }
-
-        var signupView = {
-            xtype: 'signupview'
-        }
-
-        var editprView = {
-            xtype: 'editprofileview'
-        }
-
-        var surveyView = {
-            xtype: 'surveyview'
-        }
-        var browseView = {
-        	xtype: 'browseview'
-        }
-        var connectView = {
-        	xtype: 'connectview'
-        }
-        var browseInstrumentsView = {
-        	xtype: 'browseinstrumentsview'
-        }
-        // Initialize the main view
-        Ext.Viewport.add([loginView, homeView, signupView, editprView, surveyView, missionsView, detailsView, offersView, offerDetailsView, browseView, connectView, browseInstrumentsView,brandView, shareView]);
+        // Initialize global variable
+        _App = this;
     },
 
     onUpdated: function () {

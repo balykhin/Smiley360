@@ -92,7 +92,7 @@ Ext.define('smiley360.view.ForgetPassword', {
         };
 
         //smiley360.setViewStatus(submitView, smiley360.viewStatus.progress);
-        smiley360.services.recoverPassword(submitData, function (response) {
+        smiley360.services.recoverPassword(Ext.getCmp('xEmailField').getValue(), function (response) {
             smiley360.setResponseStatus(submitView, response);
         });
     },

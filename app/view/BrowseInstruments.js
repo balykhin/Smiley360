@@ -1,66 +1,16 @@
 ﻿var hide_panel, first_time, dock_panel;
 Ext.define('smiley360.view.BrowseInstruments', {
-	extend: 'Ext.tab.Panel',
+	extend: 'Ext.Panel',
 	alias: 'widget.browseinstrumentsview',
 	requires: [
         'Ext.TitleBar',
         'Ext.Video'
 	],
 	config: {
-		cls: 'normal-page-bg',
 		id: 'xBrowseInstruments',
-		tabBarPosition: 'bottom',
-		cls: 'cust-tabbar',
+		title: 'CONNECT/browse',
 		items: [
-            {
-            	title: 'HOME',
-            	iconCls: 'home-img',
-            	styleHtmlContent: true,
-            	scrollable: true,
-            	items: [
-                	{
-                		xtype: 'toolbar',
-                		title: 'CONNECT/browse',
-                		cls: 'home-title',
-                		docked: 'top',
-                		ui: 'light',
-                		items: [
-							{
-								xtype: 'button',
-								text: '',
-								ui: 'plain',
-								iconCls: 'back-btn',
-								iconMask: true,
-								itemId: 'backBtn',
-								listeners: {
-									tap: function () {
-										this.up('#xBrowseInstruments').fireEvent('backButtonCommandBrowseInstruments', this);
-									}
-								}
-							},
-							{ xtype: 'spacer' },
-							{
-								xtype: 'button',
-								iconCls: 'menu-btn',
-								iconMask: true,
-								ui: 'plain',
-								text: '',
-								itemId: 'menuBtn',
-								listeners:
-                                {
-                                	tap: function () {
-                                		if (Ext.getCmp('browseinst_menu').getHidden() == false) {
-                                			Ext.getCmp('browseinst_menu').hide({ type: 'slide', direction: 'top', duration: 300 });
-                                		}
-                                		else {
-                                			Ext.getCmp('browseinst_menu').show({ type: 'slide', direction: 'left', duration: 300 });
-                                		}
-                                	},
-
-                                },
-							}
-                		]
-                	},
+                	
                     {
                     	xtype: 'spacer',
                     	height: '14px',
@@ -111,113 +61,113 @@ Ext.define('smiley360.view.BrowseInstruments', {
                                        	xtype: 'container',
                                        	layout: 'vbox',
                                        	items:[{
-                                        		xtype: 'container',
-                                        		layout: 'hbox',
-                                        		style: 'background-color: #efecea;',
-                                        		padding: 20,
-                                        		items: [
+                                       		xtype: 'container',
+                                       		layout: 'hbox',
+                                       		style: 'background-color: #efecea;',
+                                       		padding: 20,
+                                       		items: [
 
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	items: [
-															{
-																xtype: 'container',
-																height: 100,
-																width: 100,
-																style: 'background: white;border-radius: 5px;',
-																items: [{
-																	xtype: 'image',
-																	src: 'resources/images/city-live.png',
-																	style: 'padding: 40px; margin: 10px;',
-																}],
-															}, {
-																xtype: 'label',
-																html: 'McDonald\'s',
-																style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-															},
-                                                    	]
-                                                    },//1st item
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	items: [
+												{
+													xtype: 'container',
+													layout: 'vbox',
+													cls: 'has-shadow',
+													style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
+													items: [
+														{
+															xtype: 'container',
+															height: 100,
+															width: 100,
+															style: 'background: white;border-radius: 5px;',
+															items: [{
+																xtype: 'image',
+																src: 'resources/images/city-live.png',
+																style: 'padding: 40px; margin: 10px;',
+															}],
+														}, {
+															xtype: 'label',
+															html: 'McDonald\'s',
+															style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
+														},
+													]
+												},//1st item
+												{
+													xtype: 'container',
+													layout: 'vbox',
+													cls: 'has-shadow',
+													style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
+													items: [
 
-                                                            {
-                                                            	xtype: 'container',
-                                                            	height: 100,
-                                                            	width: 100,
-                                                            	style: 'background: white;border-radius: 5px;',
-                                                            	items: [{
-                                                            		xtype: 'image',
-                                                            		src: 'resources/images/gibson.png',
-                                                            		style: 'padding: 25px; margin: 10px;',
-                                                            	}],
-                                                            },
-                                                             {
-                                                             	xtype: 'label',
-                                                             	html: 'Secrete',
-                                                             	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                                             },
-                                                    	]
-                                                    },//2nd item 
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	width: 100,
-                                                    	items: [
+														{
+															xtype: 'container',
+															height: 100,
+															width: 100,
+															style: 'background: white;border-radius: 5px;',
+															items: [{
+																xtype: 'image',
+																src: 'resources/images/gibson.png',
+																style: 'padding: 25px; margin: 10px;',
+															}],
+														},
+														 {
+														 	xtype: 'label',
+														 	html: 'Secrete',
+														 	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
+														 },
+													]
+												},//2nd item 
+												{
+													xtype: 'container',
+													layout: 'vbox',
+													cls: 'has-shadow',
+													style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
+													width: 100,
+													items: [
 
-                                                            {
-                                                            	xtype: 'container',
-                                                            	height: 100,
-                                                            	width: 100,
-                                                            	style: 'background: white;border-radius: 5px;',
-                                                            	items: [{
-                                                            		xtype: 'image',
-                                                            		src: 'resources/images/pandora.png',
-                                                            		style: 'padding: 40px; margin: 10px;',
-                                                            	}],
-                                                            },
-                                                             {
-                                                             	xtype: 'label',
-                                                             	html: 'Campbell\'s Go',
-                                                             	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-word; color:#413f40; font-family: \'din medium\';',
-                                                             },
-                                                    	]
-                                                    },//3rd item 
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	items: [
+														{
+															xtype: 'container',
+															height: 100,
+															width: 100,
+															style: 'background: white;border-radius: 5px;',
+															items: [{
+																xtype: 'image',
+																src: 'resources/images/pandora.png',
+																style: 'padding: 40px; margin: 10px;',
+															}],
+														},
+														 {
+														 	xtype: 'label',
+														 	html: 'Campbell\'s Go',
+														 	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-word; color:#413f40; font-family: \'din medium\';',
+														 },
+													]
+												},//3rd item 
+												{
+													xtype: 'container',
+													layout: 'vbox',
+													cls: 'has-shadow',
+													style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
+													items: [
 
-                                                            {
-                                                            	xtype: 'container',
-                                                            	height: 100,
-                                                            	width: 100,
-                                                            	style: 'background: white;border-radius: 5px;',
-                                                            	items: [{
-                                                            		xtype: 'image',
-                                                            		src: 'resources/images/folk-art.png',
-                                                            		style: 'padding: 30px; margin: 10px;',
-                                                            	}],
-                                                            },
-                                                             {
-                                                             	xtype: 'label',
-                                                             	html: 'Brand X',
-                                                             	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                                             },
-                                                    	]
-                                                    },//4th item
-                                        		],//1st row items
-                                        	},//1st row end
+														{
+															xtype: 'container',
+															height: 100,
+															width: 100,
+															style: 'background: white;border-radius: 5px;',
+															items: [{
+																xtype: 'image',
+																src: 'resources/images/folk-art.png',
+																style: 'padding: 30px; margin: 10px;',
+															}],
+														},
+														 {
+														 	xtype: 'label',
+														 	html: 'Brand X',
+														 	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
+														 },
+													]
+												},//4th item
+                                       		],//1st row items
+                                       	},//1st row end
                                         	{
                                         		xtype: 'container',
                                         		layout: 'hbox',
@@ -593,68 +543,7 @@ Ext.define('smiley360.view.BrowseInstruments', {
                                                             	style: 'font-size: 0.8em; margin-bottom: 8px; margin-left: 2px; text-align: right;',
                                                             },
                                                     ],
-                                            },
-                                            {
-                                            	xtype: 'container', layout: 'vbox',
-                                            	//padding: '0px 20px',
-                                            	docked: 'right',
-                                            	style: 'color: white; font-family: franklin; font-size:1.4em; text-align: right;',
-                                            	padding: '30px 10px',
-                                            	items:
-                                                    [
-
-                                            {
-                                            	xtype: 'button',
-                                            	html: 'Edit Profile',
-                                            	margin: '20px 0px 0px 0px',
-                                            	//padding: '0px 20px 0px 0px',
-                                            	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                            	cls: 'listmenuitem',
-                                            	ui: 'plain',
-                                            	itemId: 'gotoeditprofileBtn',
-                                            },
-                                            {
-                                            	xtype: 'button',
-                                            	text: 'Refer Friends',
-                                            	margin: '20px 0px 0px 0px',
-                                            	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                            	cls: 'listmenuitem',
-                                            	ui: 'plain',
-                                            },
-                                             {
-                                             	xtype: 'button',
-                                             	text: 'Terms of Use',
-                                             	margin: '20px 0px 0px 0px',
-                                             	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                             	cls: 'listmenuitem',
-                                             	ui: 'plain',
-                                             },
-                                             {
-                                             	xtype: 'button',
-                                             	text: 'Tutorial',
-                                             	margin: '20px 0px 0px 0px',
-                                             	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                             	cls: 'listmenuitem',
-                                             	ui: 'plain',
-                                             },
-                                              {
-                                              	xtype: 'button',
-                                              	text: 'Contact Us',
-                                              	margin: '20px 0px 0px 0px',
-                                              	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                              	cls: 'listmenuitem',
-                                              	ui: 'plain',
-                                              },
-                                               {
-                                               	xtype: 'button',
-                                               	text: 'Log Out',
-                                               	margin: '20px 0px 0px 0px',
-                                               	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                               	cls: 'listmenuitem',
-                                               	ui: 'plain',
-                                               },
-                                                    ],
-                                            },
+                                            },                                           
 
                                         ],
                                 },///end add
@@ -676,81 +565,6 @@ Ext.define('smiley360.view.BrowseInstruments', {
                     },//end panel added
                     	]
                     }//ens strange container
-            	]
-            },
-            {
-            	title: 'MISSIONS',
-            	iconCls: 'mission-img',
-            	styleHtmlContent: true,
-            	scrollable: true,
-            },
-            {
-            	title: 'SHARE',
-            	iconCls: 'share-img',
-            	styleHtmlContent: true,
-            	scrollable: true,
-
-            },
-            {
-            	title: 'OFFERS',
-            	iconCls: 'offers-img',
-
-            	items: [
-                    {
-                    	xtype: 'toolbar',
-                    	title: 'SIGN UP',
-                    	docked: 'top',
-                    	ui: 'light',
-                    	items: [
-							{
-								xtype: 'button',
-								text: '',
-								ui: 'plain',
-								iconCls: 'cust-back',
-								itemId: 'backBtn'
-							},
-							{ xtype: 'spacer' },
-							{
-								xtype: 'button',
-								iconCls: 'cust-menu',
-								ui: 'plain',
-								text: '',
-								itemId: 'menuBtn'
-							}
-                    	]
-                    },
-            	]
-            },
-            {
-            	title: 'CONNECT',
-            	iconCls: 'connect-img',
-
-            	items: [
-                    {
-                    	xtype: 'toolbar',
-                    	title: 'SIGN UP',
-                    	docked: 'top',
-                    	ui: 'light',
-                    	items: [
-							{
-								xtype: 'button',
-								text: '',
-								ui: 'plain',
-								iconCls: 'cust-back',
-								itemId: 'backBtn'
-							},
-							{ xtype: 'spacer' },
-							{
-								xtype: 'button',
-								iconCls: 'cust-menu',
-								ui: 'plain',
-								text: '',
-								itemId: 'menuBtn'
-							}
-                    	]
-                    },
-            	]
-            }
 		],
 		listeners: [
 			{

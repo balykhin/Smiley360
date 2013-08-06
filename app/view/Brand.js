@@ -1,6 +1,6 @@
 var hide_panel, first_time, dock_panel;
 Ext.define('smiley360.view.Brand', {
-	extend: 'Ext.tab.Panel',
+	extend: 'Ext.Panel',
 	alias: 'widget.brandview',
 	requires: [
         'Ext.TitleBar',
@@ -8,56 +8,9 @@ Ext.define('smiley360.view.Brand', {
 	],
 	config: {
 		id: 'xBrandView',
-		tabBarPosition: 'bottom',
-		cls: 'cust-tabbar normal-page-bg',
+		title: 'Brand',
 		items: [
-            {
-            	title: 'HOME',
-            	iconCls: 'home-img',
-            	styleHtmlContent: true,
-            	scrollable: true,
-            	items: [
-                	{
-                		xtype: 'toolbar',
-                		title: 'BRAND',
-                		cls: 'home-title',
-                		docked: 'top',
-                		ui: 'light',
-                		items: [
-							{
-								xtype: 'button',
-								text: '',
-								ui: 'plain',
-								iconCls: 'back-btn',
-								iconMask: true,
-								itemId: 'backBtn',
-								handler: function () {
-									this.up('#xBrandView').fireEvent('backButtonCommandBrand', this);
-								}
-							},
-							{ xtype: 'spacer' },
-							{
-								xtype: 'button',
-								iconCls: 'menu-btn',
-								iconMask: true,
-								ui: 'plain',
-								text: '',
-								itemId: 'menuBtn',
-								listeners:
-                                {
-                                	tap: function () {
-                                		if (Ext.getCmp('brand_menu').getHidden() == false) {
-                                			Ext.getCmp('brand_menu').hide({ type: 'slide', direction: 'top', duration: 300 });
-                                		}
-                                		else {
-                                			Ext.getCmp('brand_menu').show({ type: 'slide', direction: 'left', duration: 300 });
-                                		}
-                                	},
-
-                                },
-							}
-                		]
-                	},
+                	
                     {
                     	xtype: 'spacer',
                     	height: '14px',
@@ -489,199 +442,9 @@ Ext.define('smiley360.view.Brand', {
                     		],
                     	},//end vbox container
 
-                    {
-                    	xtype: 'panel',
-                    	layout: 'vbox',
-                    	flex: 0.3,
-                    	items:
-                            [
-                                {
-                                	xtype: 'container', layout: 'vbox',
-                                	style: 'font-family: franklin; text-align: right;',
-                                	items:
-                                        [
-                                            {
-                                            	xtype: 'container', layout: 'vbox',
-                                            	//padding: '0px 20px',
-                                            	style: 'color: #333132; text-align: right; min-height: 60px; background-color:white;border-style: solid; border-color: white; border-radius: 3px; border-width: 2px;',
-                                            	margin: '0px 20px 0px 20px',
-                                            	cls: 'has-shadow',
-                                            	docked: 'top',
-                                            	items:
-                                                    [
-                                                            {
-                                                            	xtype: 'image',
-                                                            	style: ' min-height: 60px; background-color:white;',
-
-                                                            }, {
-                                                            	xtype: 'label',
-                                                            	style: 'padding-top: 10px;',
-                                                            	html: 'Noel Zahra',
-                                                            	style: 'font-size:1.4em; margin-bottom: -8px;text-align: right;',
-                                                            },
-                                                            {
-                                                            	xtype: 'label',
-                                                            	html: 'Austin, TX',
-                                                            	//padding: '-8px 0px 0px 0px',
-                                                            	style: 'padding-bottom: 10px;',
-                                                            	style: 'font-size: 0.8em; margin-bottom: 8px; margin-left: 2px; text-align: right;',
-                                                            },
-                                                    ],
-                                            },
-                                            {
-                                            	xtype: 'container', layout: 'vbox',
-                                            	//padding: '0px 20px',
-                                            	docked: 'right',
-                                            	style: 'color: white; font-family: franklin; font-size:1.4em; text-align: right;',
-                                            	padding: '30px 10px',
-                                            	items:
-                                                    [
-
-                                            {
-                                            	xtype: 'button',
-                                            	html: 'Edit Profile',
-                                            	margin: '20px 0px 0px 0px',
-                                            	//padding: '0px 20px 0px 0px',
-                                            	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                            	cls: 'listmenuitem',
-                                            	ui: 'plain',
-                                            	itemId: 'gotoeditprofileBtn',
-                                            },
-                                            {
-                                            	xtype: 'button',
-                                            	text: 'Refer Friends',
-                                            	margin: '20px 0px 0px 0px',
-                                            	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                            	cls: 'listmenuitem',
-                                            	ui: 'plain',
-                                            },
-                                             {
-                                             	xtype: 'button',
-                                             	text: 'Terms of Use',
-                                             	margin: '20px 0px 0px 0px',
-                                             	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                             	cls: 'listmenuitem',
-                                             	ui: 'plain',
-                                             },
-                                             {
-                                             	xtype: 'button',
-                                             	text: 'Tutorial',
-                                             	margin: '20px 0px 0px 0px',
-                                             	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                             	cls: 'listmenuitem',
-                                             	ui: 'plain',
-                                             },
-                                              {
-                                              	xtype: 'button',
-                                              	text: 'Contact Us',
-                                              	margin: '20px 0px 0px 0px',
-                                              	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                              	cls: 'listmenuitem',
-                                              	ui: 'plain',
-                                              },
-                                               {
-                                               	xtype: 'button',
-                                               	text: 'Log Out',
-                                               	margin: '20px 0px 0px 0px',
-                                               	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                               	cls: 'listmenuitem',
-                                               	ui: 'plain',
-                                               },
-                                                    ],
-                                            },
-
-                                        ],
-                                },///end add
-
-
-                            ],
-                    	id: 'brand_menu',
-                    	listeners:
-                            {
-                            	initialize: function () {
-                            		this.hide();
-                            	},
-                            	painted: function () {
-                            	},
-                            },
-                    },//end panel added
+                    
                     	]
                     }//ens strange container
-            	]
-            },
-            {
-            	title: 'MISSIONS',
-            	iconCls: 'mission-img',
-            	styleHtmlContent: true,
-            	scrollable: true,
-            },
-            {
-            	title: 'SHARE',
-            	iconCls: 'share-img',
-            	styleHtmlContent: true,
-            	scrollable: true,
-
-            },
-            {
-            	title: 'OFFERS',
-            	iconCls: 'offers-img',
-
-            	items: [
-                    {
-                    	xtype: 'toolbar',
-                    	title: 'SIGN UP',
-                    	docked: 'top',
-                    	ui: 'light',
-                    	items: [
-							{
-								xtype: 'button',
-								text: '',
-								ui: 'plain',
-								iconCls: 'cust-back',
-								itemId: 'backBtn'
-							},
-							{ xtype: 'spacer' },
-							{
-								xtype: 'button',
-								iconCls: 'cust-menu',
-								ui: 'plain',
-								text: '',
-								itemId: 'menuBtn'
-							}
-                    	]
-                    },
-            	]
-            },
-            {
-            	title: 'CONNECT',
-            	iconCls: 'connect-img',
-
-            	items: [
-                    {
-                    	xtype: 'toolbar',
-                    	title: 'SIGN UP',
-                    	docked: 'top',
-                    	ui: 'light',
-                    	items: [
-							{
-								xtype: 'button',
-								text: '',
-								ui: 'plain',
-								iconCls: 'cust-back',
-								itemId: 'backBtn'
-							},
-							{ xtype: 'spacer' },
-							{
-								xtype: 'button',
-								iconCls: 'cust-menu',
-								ui: 'plain',
-								text: '',
-								itemId: 'menuBtn'
-							}
-                    	]
-                    },
-            	]
-            }
 		],
 		listeners: {
 			show: function () {

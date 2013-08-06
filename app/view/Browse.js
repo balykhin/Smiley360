@@ -1,66 +1,16 @@
 ﻿var hide_panel, first_time, dock_panel, id_arr_browse = [];
 Ext.define('smiley360.view.Browse', {
-	extend: 'Ext.tab.Panel',
+	extend: 'Ext.Panel',
 	alias: 'widget.browseview',
 	requires: [
         'Ext.TitleBar',
         'Ext.Video'
 	],
 	config: {
-		cls: 'normal-page-bg',
+		title:'BROWSE',
 		id: 'xBrowse',
-		tabBarPosition: 'bottom',
-		cls: 'cust-tabbar',
 		items: [
-            {
-            	title: 'HOME',
-            	iconCls: 'home-img',
-            	styleHtmlContent: true,
-            	scrollable: true,
-            	items: [
-                	{
-                		xtype: 'toolbar',
-                		title: 'CONNECT/browse',
-                		cls: 'home-title',
-                		docked: 'top',
-                		ui: 'light',
-                		items: [
-							{
-								xtype: 'button',
-								text: '',
-								ui: 'plain',
-								iconCls: 'back-btn',
-								iconMask: true,
-								itemId: 'backBtn',
-								listeners: {
-									tap: function () {
-										this.up('#xBrowse').fireEvent('backButtonCommandBrowse', this);
-									}
-								}
-							},
-							{ xtype: 'spacer' },
-							{
-								xtype: 'button',
-								iconCls: 'menu-btn',
-								iconMask: true,
-								ui: 'plain',
-								text: '',
-								itemId: 'menuBtn',
-								listeners:
-                                {
-                                	tap: function () {
-                                		if (Ext.getCmp('browse_menu').getHidden() == false) {
-                                			Ext.getCmp('browse_menu').hide({ type: 'slide', direction: 'top', duration: 300 });
-                                		}
-                                		else {
-                                			Ext.getCmp('browse_menu').show({ type: 'slide', direction: 'left', duration: 300 });
-                                		}
-                                	},
-
-                                },
-							}
-                		]
-                	},
+                	
                     {
                     	xtype: 'spacer',
                     	height: '14px',
@@ -122,6 +72,7 @@ Ext.define('smiley360.view.Browse', {
                                         	items: [{
                                         		xtype: 'container',
                                         		layout: 'hbox',
+                                        		id: 'xMyHot',
                                         		style: 'background-color: #efecea;',
                                         		cls: 'has-shadow',
                                         		padding: 20,
@@ -264,7 +215,7 @@ Ext.define('smiley360.view.Browse', {
                                     	items: [{
                                     		xtype: 'container',
                                     		layout: 'hbox',
-											id: 'xMyFavorited',
+                                    		id: 'xMyFavorited',
                                     		style: 'background-color: #efecea;',
                                     		cls: 'has-shadow',
                                     		padding: 20,
@@ -408,7 +359,7 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
-												id: 'Auto',
+                                            	id: 'Auto',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
@@ -441,7 +392,7 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
-												id: 'Baby',
+                                            	id: 'Baby',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
@@ -472,7 +423,7 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
-												id: 'Clothes',
+                                            	id: 'Clothes',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
@@ -511,7 +462,7 @@ Ext.define('smiley360.view.Browse', {
 									 	style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
 									 	listeners: {
 									 		initialize: function () {
-									 			var arr = ['Cars', 'Trucks', 'Motorcycles','Boats'];
+									 			var arr = ['Cars', 'Trucks', 'Motorcycles', 'Boats'];
 									 			Ext.getCmp('xBrowse').doCreateItems(arr, this.id, 'left');
 									 			this.hide();
 									 		}
@@ -557,7 +508,7 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
-												id: 'Computer',
+                                            	id: 'Computer',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
@@ -618,7 +569,7 @@ Ext.define('smiley360.view.Browse', {
                                             },//2nd item carousel
                                             {
                                             	xtype: 'container',
-												id: 'Edu',
+                                            	id: 'Edu',
                                             	layout: 'vbox',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
@@ -701,7 +652,7 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
-												id: 'Mobile',
+                                            	id: 'Mobile',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
@@ -731,7 +682,7 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
-												id: 'Finance',
+                                            	id: 'Finance',
                                             	cls: 'has-shadow browse_container',
                                             	height: 140,
                                             	width: 140,
@@ -973,8 +924,8 @@ Ext.define('smiley360.view.Browse', {
                                     	style: 'background: #f0eceb; border-top: 1px dashed #d7cfcd;border-bottom: 1px dashed #d7cfcd;',
                                     	listeners: {
                                     		initialize: function () {
-                                    			var arr = ['ArtSupplies', 'Artists','Instruments','Musical Gear', 'Performers'];
-                                    			Ext.getCmp('xBrowse').doCreateItems(arr, this.id,'middle');
+                                    			var arr = ['ArtSupplies', 'Artists', 'Instruments', 'Musical Gear', 'Performers'];
+                                    			Ext.getCmp('xBrowse').doCreateItems(arr, this.id, 'middle');
                                     		}
                                     	}
                                     },
@@ -1118,210 +1069,21 @@ Ext.define('smiley360.view.Browse', {
                     		],
                     	},//end vbox container
 
-                    {
-                    	xtype: 'panel',
-                    	layout: 'vbox',
-                    	flex: 0.3,
-                    	items:
-                            [
-                                {
-                                	xtype: 'container', layout: 'vbox',
-                                	style: 'font-family: franklin; text-align: right;',
-                                	items:
-                                        [
-                                            {
-                                            	xtype: 'container', layout: 'vbox',
-                                            	//padding: '0px 20px',
-                                            	style: 'color: #333132; text-align: right; min-height: 60px; background-color:white;border-style: solid; border-color: white; border-radius: 3px; border-width: 2px;',
-                                            	margin: '0px 20px 0px 20px',
-                                            	cls: 'has-shadow',
-                                            	docked: 'top',
-                                            	items:
-                                                    [
-                                                            {
-                                                            	xtype: 'image',
-                                                            	style: ' min-height: 60px; background-color:white;',
-
-                                                            }, {
-                                                            	xtype: 'label',
-                                                            	style: 'padding-top: 10px;',
-                                                            	html: 'Noel Zahra',
-                                                            	style: 'font-size:1.4em; margin-bottom: -8px;text-align: right;',
-                                                            },
-                                                            {
-                                                            	xtype: 'label',
-                                                            	html: 'Austin, TX',
-                                                            	//padding: '-8px 0px 0px 0px',
-                                                            	style: 'padding-bottom: 10px;',
-                                                            	style: 'font-size: 0.8em; margin-bottom: 8px; margin-left: 2px; text-align: right;',
-                                                            },
-                                                    ],
-                                            },
-                                            {
-                                            	xtype: 'container', layout: 'vbox',
-                                            	//padding: '0px 20px',
-                                            	docked: 'right',
-                                            	style: 'color: white; font-family: franklin; font-size:1.4em; text-align: right;',
-                                            	padding: '30px 10px',
-                                            	items:
-                                                    [
-
-                                            {
-                                            	xtype: 'button',
-                                            	html: 'Edit Profile',
-                                            	margin: '20px 0px 0px 0px',
-                                            	//padding: '0px 20px 0px 0px',
-                                            	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                            	cls: 'listmenuitem',
-                                            	ui: 'plain',
-                                            	itemId: 'gotoeditprofileBtn',
-                                            },
-                                            {
-                                            	xtype: 'button',
-                                            	text: 'Refer Friends',
-                                            	margin: '20px 0px 0px 0px',
-                                            	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                            	cls: 'listmenuitem',
-                                            	ui: 'plain',
-                                            },
-                                             {
-                                             	xtype: 'button',
-                                             	text: 'Terms of Use',
-                                             	margin: '20px 0px 0px 0px',
-                                             	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                             	cls: 'listmenuitem',
-                                             	ui: 'plain',
-                                             },
-                                             {
-                                             	xtype: 'button',
-                                             	text: 'Tutorial',
-                                             	margin: '20px 0px 0px 0px',
-                                             	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                             	cls: 'listmenuitem',
-                                             	ui: 'plain',
-                                             },
-                                              {
-                                              	xtype: 'button',
-                                              	text: 'Contact Us',
-                                              	margin: '20px 0px 0px 0px',
-                                              	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                              	cls: 'listmenuitem',
-                                              	ui: 'plain',
-                                              },
-                                               {
-                                               	xtype: 'button',
-                                               	text: 'Log Out',
-                                               	margin: '20px 0px 0px 0px',
-                                               	style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
-                                               	cls: 'listmenuitem',
-                                               	ui: 'plain',
-                                               },
-                                                    ],
-                                            },
-
-                                        ],
-                                },///end add
-
-
-                            ],
-                    	id: 'browse_menu',
-                    	listeners:
-                            {
-                            	initialize: function () {
-                            		this.hide();
-                            		Ext.getCmp('xMusic_panel_browse').hide();
-                            		Ext.getCmp('xMusicPict').setSrc('resources/images/music_c.png');
-                            		Ext.getCmp('xMusicLabel').setCls('browse_text');                            		
-                            	},
-                            	painted: function () {
-                            	},
-                            },
-                    },//end panel added
+                    
                     	]
                     }//ens strange container
-            	]
-            },
-            {
-            	title: 'MISSIONS',
-            	iconCls: 'mission-img',
-            	styleHtmlContent: true,
-            	scrollable: true,
-            },
-            {
-            	title: 'SHARE',
-            	iconCls: 'share-img',
-            	styleHtmlContent: true,
-            	scrollable: true,
-
-            },
-            {
-            	title: 'OFFERS',
-            	iconCls: 'offers-img',
-
-            	items: [
-                    {
-                    	xtype: 'toolbar',
-                    	title: 'SIGN UP',
-                    	docked: 'top',
-                    	ui: 'light',
-                    	items: [
-							{
-								xtype: 'button',
-								text: '',
-								ui: 'plain',
-								iconCls: 'cust-back',
-								itemId: 'backBtn'
-							},
-							{ xtype: 'spacer' },
-							{
-								xtype: 'button',
-								iconCls: 'cust-menu',
-								ui: 'plain',
-								text: '',
-								itemId: 'menuBtn'
-							}
-                    	]
-                    },
-            	]
-            },
-            {
-            	title: 'CONNECT',
-            	iconCls: 'connect-img',
-
-            	items: [
-                    {
-                    	xtype: 'toolbar',
-                    	title: 'SIGN UP',
-                    	docked: 'top',
-                    	ui: 'light',
-                    	items: [
-							{
-								xtype: 'button',
-								text: '',
-								ui: 'plain',
-								iconCls: 'cust-back',
-								itemId: 'backBtn'
-							},
-							{ xtype: 'spacer' },
-							{
-								xtype: 'button',
-								iconCls: 'cust-menu',
-								ui: 'plain',
-								text: '',
-								itemId: 'menuBtn'
-							}
-                    	]
-                    },
-            	]
-            }
 		],
 		listeners: {
-			show: function () {
+			activate: function () {				
+				this.setHot();
+			},
+			painted: function () {	
 				this.setFavorited();
+				
 			}
 		}
 	},
-	setFavorited: function(){
+	setFavorited: function () {
 		Ext.getCmp('xMyFavorited').removeAll(true, true);
 		var FavBrands = smiley360.memberData.UserBrands;
 		for (var key in FavBrands) {
@@ -1330,7 +1092,7 @@ Ext.define('smiley360.view.Browse', {
 				this.setFavoritedItem(oneItem);
 		};
 	},
-	setFavoritedItem: function(oneItem) {
+	setFavoritedItem: function (oneItem) {
 		var FavoritedItem = new Ext.Container({
 			//id: id + 'container',
 			layout: 'vbox',
@@ -1346,26 +1108,80 @@ Ext.define('smiley360.view.Browse', {
 		var Item = ContItem.add(new Ext.Img(
 		{
 			//src: 'resources/images/secret-logo.png',
+			style: 'border-radius: 5px;',
 			src: smiley360.configuration.getResourceDomain() + '/' + oneItem.imageURL,
-			padding: 10,
+			padding: 50,
+			listeners: {
+				tap: function () {
+					this.up('#xBrowse').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, oneItem.smileyconnectID, 0, 10);
+				}
+			}
 		}));
-		
+
 		var NextItem = FavoritedItem.add(new Ext.Label(
 		{
 			//html: 'McDonald\'s',
-			id: 'next_htm',
 			html: oneItem.title,
 			style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-		 
+
 		}));
 
 		Ext.getCmp('xMyFavorited').add(FavoritedItem);
-		//alert(Ext.getCmp('next_htm').getHtml());
-		if (Ext.getCmp('next_htm').getHtml().toString().length > 12) {
-			Ext.getCmp('next_htm').setHtml(Ext.getCmp('next_htm').getHtml().toString().substr(0, 9) + '...');
+		if (NextItem.getHtml().toString().length > 12) {
+			NextItem.setHtml(NextItem.getHtml().toString().substr(0, 9) + '...');
 		};
 	},
-	
+	//////////////
+
+	setHot: function () {
+		Ext.getCmp('xMyHot').removeAll(true, true);
+		var HotBrands = smiley360.HotBrands;
+		for (var key in HotBrands) {
+			var oneItem = HotBrands[key];
+			if (oneItem.title)
+				this.setHotItem(oneItem);
+		};
+		console.log('Hot brands');
+	},
+	setHotItem: function (oneItem) {
+		var HotItem = new Ext.Container({
+			//id: id + 'container',
+			layout: 'vbox',
+			cls: 'has-shadow',
+			style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
+		});
+		var ContItem = HotItem.add(new Ext.Container(
+		{
+			height: 100,
+			width: 100,
+			style: 'border-radius: 5px;',
+		}));
+		var Item = ContItem.add(new Ext.Img(
+		{
+			//src: 'resources/images/secret-logo.png',
+			style: 'border-radius: 5px;',
+			src: smiley360.configuration.getResourceDomain() + '/' + oneItem.imageURL,
+			padding: 50,
+			listeners: {
+				tap: function () {
+					this.up('#xBrowse').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, oneItem.smileyconnectID, 0, 10);
+				}
+			}
+		}));
+
+		var NextItem = HotItem.add(new Ext.Label(
+		{
+			//html: 'McDonald\'s',
+			html: oneItem.title,
+			style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
+
+		}));
+
+		Ext.getCmp('xMyHot').add(HotItem);
+		if (NextItem.getHtml().toString().length > 12) {
+			NextItem.setHtml(NextItem.getHtml().toString().substr(0, 9) + '...');
+		};
+	},
 	doCreateItems: function (items_arr, id, pos) {
 		var lbl_padding = '10px 0px 10px ';
 		if (pos == 'left') { lbl_padding += '20px'; }
@@ -1375,17 +1191,17 @@ Ext.define('smiley360.view.Browse', {
 			Ext.getCmp(id).add(new Ext.Label(
 				{
 					html: items_arr[key].toString(),
-					padding: lbl_padding ,
+					padding: lbl_padding,
 					style: 'max-width: 260px; text-align: left; font-size:1.2em; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
 					listeners: {
 						element: 'element',
 						tap: function () {
-							this.up('#xBrowse').fireEvent('onBrowseInstrumentsTapCommand', this);
+							this.up('#xBrowse').fireEvent('onBrowseResultsByCategoryTapCommand', this, 1, 1, 1, 1);
 						}
 					}
 				}));
 	},
-	doTap: function(id){
+	doTap: function (id) {
 		if (Ext.getCmp(id).getCls() == 'has-shadow browse_container') {
 			Ext.getCmp(id).setCls('has-shadow after_browse_container');
 			Ext.getCmp('x' + id + '_panel_browse').show();

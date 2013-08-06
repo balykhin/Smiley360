@@ -5,20 +5,20 @@ Ext.define('smiley360.view.MissingOffers', {
         modal: true,
         centered: true,
         fullscreen: true,
-        hideOnMaskTap: true,
-        id: 'xView',
+        //hideOnMaskTap: true,
+        id: 'xMOView',
         scrollable: 'vertical',
         cls: 'popup-panel',
         items: [{
             xtype: 'panel',
-            id: 'xRootPanel',
+            id: 'xMORootPanel',
             cls: 'popup-root-panel',
             items: [{
                 xtype: 'image',
                 cls: 'popup-close-button',
                 listeners: {
                     tap: function () {
-                        Ext.getCmp('xView').destroy();
+                        Ext.getCmp('xMOView').destroy();
                     }
                 }
             }, {
@@ -44,11 +44,13 @@ Ext.define('smiley360.view.MissingOffers', {
                 	}, {
                 		xtype: 'label',
                 		style: 'padding-top: 10px;',
+                		id: 'xMOFirstLastName',
                 		html: 'Noel Zahra',
                 		style: 'font-size:0.8em; text-align: right;',
                 	}, {
                 		xtype: 'label',
                 		html: 'Austin, TX',
+                		id: 'xMOCityState',
                 		style: 'padding-bottom: 10px;',
                 		style: 'font-size: 0.6em; text-align: right;',
                 	}],
@@ -58,7 +60,7 @@ Ext.define('smiley360.view.MissingOffers', {
                 cls: 'popup-bottom-panel',
                 items: [{
                     xtype: 'label',
-                    id: 'xMessageText',
+                    id: 'xMOMessageText',
                     cls: 'popup-message-text',
                     //style: 'margin: 10px;',
                     html: 'Complete your personal info now.',
@@ -69,11 +71,10 @@ Ext.define('smiley360.view.MissingOffers', {
                 items: [{
                     xtype: 'button',
                     text: 'EDIT PROFILE',
-                    id: 'xSubmitButton',
+                    id: 'xMOSubmitButton',
                     cls: 'popup-submit-button',
                     listeners: {
                         tap: function () {
-                            //Ext.getCmp('xView').doRemoveOffer();
                         }
                     },
                 }],
@@ -81,70 +82,18 @@ Ext.define('smiley360.view.MissingOffers', {
         }],
         listeners: {
             initialize: function () {
-                this.setHeight(Ext.getCmp('xRootPanel').element.getHeight());
+                this.setHeight(Ext.getCmp('xMORootPanel').element.getHeight());
+            },
+            painted: function() {
+            	this.setMOUser();
             },
             hide: function () {
                 this.destroy();
             }
         },
     },
-
-    doRemoveOffer: function () {
-        var submitView = this;
-        var submitData = {
-            email: Ext.getCmp('xEmailField').getValue()
-        };
-
-        //smiley360.setViewStatus(submitView, smiley360.viewStatus.progress);
-        smiley360.services.restorePassword(submitData, function (response) {
-            smiley360.setResponseStatus(submitView, response);
-        });
+    setMOUser: function () {
+    	Ext.getCmp('xMOFirstLastName').setHtml(smiley360.memberData.Profile.fName + ' ' + smiley360.memberData.Profile.lName);
+    	Ext.getCmp('xMOCityState').setHtml(smiley360.memberData.Profile.city + ', ' + smiley360.memberData.Profile.stateID);
     },
-
-    setStatus: function (status) {
-        var xEmailField = Ext.getCmp('xEmailField');
-        var xTitleImage = Ext.getCmp('xTitleImage');
-        var xMessageText = Ext.getCmp('xMessageText');
-        var xSubmitButton = Ext.getCmp('xSubmitButton');
-        //var xSubmitStatus = Ext.getCmp('xSubmitStatus');
-
-        switch (status) {
-            case smiley360.viewStatus.progress: {
-                xSubmitButton.setText('POSTING...');
-                xSubmitButton.setIcon('resources/images/share-initial.png');
-                xSubmitStatus.setStyle('background-color: #F9A419;');
-
-                var statusAnimation = new Ext.Anim({
-                    autoClear: false,
-                    duration: 2000,
-                    easing: 'ease-in',
-                    from: { width: 0 },
-                    to: { width: this.getWidth() },
-                });
-
-                statusAnimation.run(xSubmitStatus.element, 'slide');
-
-                break;
-            }
-            case smiley360.viewStatus.successful: {
-                xEmailField.hide();
-                xSubmitButton.setHtml('CLOSE')
-                xTitleImage.setSrc('resources/images/smile-successful.png');
-                xMessageText.setHtml('Thankyou, your password reminder was sent');
-                //xSubmitStatus.setStyle('background-color: #5F9E45;');
-
-                break;
-            }
-            case smiley360.viewStatus.unsuccessful: {
-                xTitleImage.setSrc('resources/images/smile-unsuccessful.png');
-                xMessageText.setHtml('Oops, the email address you entered is not found in our member accouns. Try again, or contact us for assistance.');
-                //xSubmitStatus.setStyle('background-color: #ED1C24;');
-
-                break;
-            }
-            default:
-        }
-        // resize container after state has been changed
-        this.setHeight(Ext.getCmp('xRootPanel').element.getHeight());
-    }
 });
