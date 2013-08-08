@@ -145,6 +145,7 @@ Ext.define('smiley360.view.Brand', {
                                                             	id: 'xBrandRating',
                                                             	labelWidth: 'auto',
                                                             	itemsCount: 5,
+																readOnly: true,
                                                             	style: 'padding: 10px 0px 30px 0px;',
                                                             	itemCls: 'x-rating-star',
                                                             	itemHoverCls: 'x-rating-star-hover',
@@ -227,187 +228,6 @@ Ext.define('smiley360.view.Brand', {
 										id: 'xAllCommentsContainer'
 									},
 									{
-										xtype: 'container',
-										id: 'PeterReview',
-										layout: { type: 'hbox' },
-										style: 'padding: 10px 15px; background-color: #efecea;',
-										flex: 1,
-										items: [
-                                            {
-                                            	xtype: 'container',
-                                            	style: 'background-color: #efecea; padding-top: 15px;',
-                                            	layout: {
-                                            		type: 'vbox',
-                                            		align: 'middle',
-                                            	},
-
-                                            	items: [
-                                                        {
-                                                        	xtype: 'image',
-                                                        	style: 'padding: 20px 0px 0px 0px;background-color: #efecea; border-radius: 5px; border-style: solid; border-width:2px; border-color: white;',
-                                                        	cls: 'has-shadow',
-                                                        	width: 100,
-                                                        	height: 100,
-                                                        	src: 'resources/images/lays.png',
-                                                        },
-                                            	],
-
-                                            },
-                                            {
-                                            	xtype: 'container',
-                                            	layout: { type: 'vbox' },
-                                            	flex: 4,
-                                            	style: 'padding-left: 10px;',
-                                            	items: [
-													{
-														xtype: 'container',
-														layout: { type: 'hbox' },
-														items: [
-																{
-																	xtype: 'label',
-																	html: 'PETER SMITHERS',
-																	style: 'font-size:1.1em; padding: 10px 15px 10px 0px; background-color: #efecea; font-family: \'franklin\';',
-
-																}, {
-
-																	xtype: 'label',
-																	html: '03/25/2013',
-																	style: 'color: #7c7a7b; font-size:0.8em; padding: 10px 15px 10px 0px; background-color: #efecea; font-family: \'franklin\';',
-
-																}, ],
-													}, {
-														xtype: 'label',
-														html: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel malesuada odio. Phasellus aliquam dignissim scelerisque. Sed ullamcorper libero nec placerat posuere.',
-														style: 'color: #7c7a7b; font-size:1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea; color:#413f40; font-family: \'franklin\';',
-
-													}, {
-														xtype: 'label',
-														cls: 'rew_comment',
-														style: 'font-size:1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea;font-family: \'franklin\';',
-														html: 'I\'m on the mission!',
-
-													},
-                                            	]
-                                            },
-											{
-												xtype: 'container',
-												style: 'background-color: #efecea; padding-top: 15px;',
-												layout: {
-													type: 'vbox',
-													align: 'middle',
-												},
-
-												items: [
-                                                        {
-                                                        	xtype: 'image',
-                                                        	style: 'padding: 20px 0px 0px 0px;background-color: #efecea; border-radius: 5px; border-style: solid; border-width:2px; border-color: white;',
-                                                        	cls: 'has-shadow',
-                                                        	width: 70,
-                                                        	height: 70,
-                                                        	src: 'resources/images/brands_1.png',
-                                                        	listeners: {
-                                                        		tap: function () {
-                                                        			Ext.widget('brandimageview').show();
-                                                        		}
-                                                        	},
-                                                        },
-												],
-
-											},
-										]
-									},
-									{
-										xtype: 'spacer',
-										height: '2px',
-										style: 'background-color: #efecea; border-bottom: 1px dashed #D7CFCD;'
-									},
-									////////////////
-									{
-										xtype: 'container',
-										id: 'JoannaReview',
-										layout: { type: 'hbox' },
-										style: 'padding: 10px 15px; background-color: #efecea;',
-										flex: 1,
-										items: [
-                                            {
-                                            	xtype: 'container',
-                                            	style: 'background-color: #efecea; padding-top: 15px;',
-                                            	layout: {
-                                            		type: 'vbox',
-                                            		align: 'middle',
-                                            	},
-
-                                            	items: [
-                                                        {
-                                                        	xtype: 'image',
-                                                        	style: 'padding: 20px 0px 0px 0px;background-color: #efecea; border-radius: 5px; border-style: solid; border-width:2px; border-color: white;',
-                                                        	cls: 'has-shadow',
-                                                        	width: 100,
-                                                        	height: 100,
-                                                        	src: 'resources/images/lays.png',
-                                                        },
-                                            	],
-
-                                            },
-                                            {
-                                            	xtype: 'container',
-                                            	layout: { type: 'vbox' },
-                                            	flex: 4,
-                                            	style: 'padding-left: 10px;',
-                                            	items: [
-													{
-														xtype: 'container',
-														layout: { type: 'hbox' },
-														items: [
-																{
-																	xtype: 'label',
-																	html: 'JOANNA SIMPSON',
-																	style: 'font-size:1.1em; padding: 10px 15px 10px 0px; background-color: #efecea; font-family: \'franklin\';',
-
-																}, {
-
-																	xtype: 'label',
-																	html: '03/25/2013',
-																	style: 'color: #7c7a7b; font-size:0.8em; padding: 10px 15px 10px 0px; background-color: #efecea; font-family: \'franklin\';',
-
-																}, ],
-													}, {
-														xtype: 'label',
-														html: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel malesuada odio. Phasellus aliquam dignissim scelerisque. Sed ullamcorper libero nec placerat posuere.',
-														style: 'color: #7c7a7b; font-size:1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea; color:#413f40; font-family: \'franklin\';',
-
-													}, {
-														xtype: 'label',
-														cls: 'rew_comment',
-														style: 'font-size:1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea;font-family: \'franklin\';',
-														html: 'I\'m on the mission!',
-
-													},
-                                            	]
-                                            },
-											{
-												xtype: 'container',
-												style: 'background-color: #efecea; padding-top: 15px;',
-												layout: {
-													type: 'vbox',
-													align: 'middle',
-												},
-
-												items: [
-                                                        {
-                                                        	xtype: 'image',
-                                                        	style: 'padding: 20px 0px 0px 0px;background-color: #efecea; border-radius: 5px; border-style: solid; border-width:2px; border-color: white;',
-                                                        	cls: 'has-shadow',
-                                                        	width: 70,
-                                                        	height: 70,
-                                                        	src: 'resources/images/brands_1.png',
-                                                        },
-												],
-
-											},
-										]
-									},
-									{
 										xtype: 'spacer',
 										height: '7px',
 										style: 'background-color: #efecea;',
@@ -466,10 +286,11 @@ Ext.define('smiley360.view.Brand', {
 			Ext.getCmp('xBrandDescription').setHtml(BrDetails.smileyConnect_description);
 		if (BrDetails.smileyConnect_detailsImage_URL)
 			var str = smiley360.configuration.getResourceDomain() + '/' + BrDetails.smileyConnect_detailsImage_URL;
-		alert(str);
+		
 		Ext.getCmp('xBrandImage').setSrc(str);
-		if (BrDetails.smileyConnect_rating)
+		if (BrDetails.smileyConnect_rating) {
 			Ext.getCmp('xBrandRating').setValue(BrDetails.smileyConnect_rating - 1);
+		}
 
 		if (BrDetails.smileyConnect_isFollowed) {
 			Ext.getCmp('xBrandIsFollow').setCls('has-shadow after-follow-btn');

@@ -56,7 +56,7 @@ Ext.define('smiley360.view.OfferRemove', {
                     cls: 'popup-submit-button',
                     listeners: {
                     	tap: function () {
-                    		Ext.getCmp('xOfferView').fireEvent('declineMissionCommand', this, '1', '1');
+                    		Ext.getCmp('xOfferView').fireEvent('declineMissionCommand', this, smiley360.memberData.UserId, smiley360.missionData.MissionDetails.MissionId);
 
                             //Ext.getCmp('xView').doRemoveOffer();
                         }

@@ -334,7 +334,7 @@ Ext.define('smiley360.view.Offers', {
 				if (xOfferList)
 					//xOfferList.removeAll(true, true);
 				{
-					xOfferList.removeAll(true, true);
+					//xOfferList.removeAll(true, true);
 					xOfferList.add(allContainer);
 					this.down('#xOfferListHeader' + oneItem.mission_categoryID).setCls('heading-text active-sign');
 				}

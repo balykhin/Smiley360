@@ -1,5 +1,5 @@
 Ext.define('smiley360.view.Signup', {
-	extend: 'Ext.form.Panel',
+	extend: 'Ext.Panel',
 	requires: ['Ext.form.FieldSet', 'Ext.data.Validations', 'Ext.form.Password', 'Ext.Label', 'Ext.Img', 'Ext.field.DatePicker', 'Ext.field.Select'],
 	alias: 'widget.signupview',
 	config: {
@@ -11,35 +11,7 @@ Ext.define('smiley360.view.Signup', {
 		scrollable: 'vertical',
 		laytout: { type: 'fit' },
 		items: [
-			{
-				xtype: 'toolbar',
-				title: 'SIGN UP',
-				docked: 'top',
-				ui: 'light',
-				items: [
-					{
-						xtype: 'button',
-						text: '',
-						ui: 'plain',
-						iconCls: 'back-btn',
-						iconMask: true,
-						itemId: 'backBtn',
-						handler: function () {
-							this.up('#Signup').fireEvent('backButtonCommandSignup', this);
-						}
-
-					},
-					{ xtype: 'spacer' },
-					{
-						xtype: 'button',
-						iconCls: 'menu-btn',
-						iconMask: true,
-						ui: 'plain',
-						text: '',
-						itemId: 'menuBtn'
-					}
-				]
-			},
+			
 			{
 				xtype: 'spacer',
 				height: '14px',
@@ -82,7 +54,8 @@ Ext.define('smiley360.view.Signup', {
 						name: 'txtEmail',
 						cls: 'cust-input',
 						id: 'email_signup',
-						required: true
+						required: true,
+						autoCapitalize: false
 					},
 					{ xtype: 'spacer', height: '10px' },
 					{

@@ -10,7 +10,8 @@ Ext.define('smiley360.view.Home', {
 		'Ext.carousel.Carousel',
     ],
     config: {
-        id: 'xHomeView',
+    	id: 'xHomeView',
+		title: 'HOME',
         items: [{
             xtype: 'container',
             id: 'home-left',
@@ -119,7 +120,7 @@ Ext.define('smiley360.view.Home', {
                     layout: { type: 'hbox' },
                     items: [{
                         xtype: 'label',
-                        html: '<p style="font-family: din medium; font-size: 10px; line-height: 2.8em; color: #8f807d; margin-left: 5px;"><span style="border-bottom: 1px solid #faa61b; color: #6d605d;">Refer Friends</span> now and earn Smiles!</p>'
+                        //html: '<p style="font-family: din medium; font-size: 10px; line-height: 2.8em; color: #8f807d; margin-left: 5px;"><span style="border-bottom: 1px solid #faa61b; color: #6d605d;">Refer Friends</span> now and earn Smiles!</p>'
                     },
                     //{
                     //    xtype: 'button',
@@ -249,7 +250,7 @@ Ext.define('smiley360.view.Home', {
                 }));
 
                 var incLabel = leftCont.add(new Ext.Label({
-                    style: 'font-size: 1.1em;background-color: #efecea; color:#413f40; padding-top: 10px; padding-left: 30px; font-family: \'din medium\';',
+                    style: 'font-size: 1.1em;background-color: #efecea; color:#413f40; padding-top: 10px; font-family: \'din medium\';',
                     html: oneItem.desc + i + i + i + i + i + i + i + i + i + i, //'Description goes here lorem ipsum.',
                     listeners: {
                         element: 'element',
@@ -265,7 +266,7 @@ Ext.define('smiley360.view.Home', {
                 var incImg = rightCont.add(new Ext.Img({
                     cls: 'has-shadow',
                     //id: 'xHomeBrandImage',
-                    style: 'border-radius: 5px; border-style: solid; border-width: 1px; border-color: white;',
+                    style: 'padding-left: 10px; border-radius: 5px; border-style: solid; border-width: 1px; border-color: white;',
                     src: smiley360.configuration.getResourceDomain() + '/' + smiley360.memberData.specialOffersBrands.smileyConnect_detailsImage_URL,//'resources/images/offers_logo3.png',
                     width: 80,
                     height: 80

@@ -174,7 +174,7 @@ Ext.define('smiley360.view.BrowseInstruments', {
 						],
 						listeners: {
 							initialize: function () { console.log(this.valueOf()); },
-							show: function () { alert('paintlist'); }
+							
 						},
 						//grouped: false
 					}));

@@ -514,7 +514,8 @@ Ext.define('smiley360.controller.Index', {
 		//================================
 		console.log('ShowSignupViewCommand');
 		//================================
-		Ext.Viewport.animateActiveItem(this.getSignupView(), this.slideLeftTransition);
+		Ext.getCmp('xMainView').showExternalView('signupview');
+		//Ext.Viewport.animateActiveItem(this.getSignupView(), this.slideLeftTransition);
 	},
 
 	getProfileCommand: function () {

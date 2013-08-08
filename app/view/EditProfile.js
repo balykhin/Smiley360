@@ -79,16 +79,18 @@ Ext.define('smiley360.view.EditProfile', {
 					cls: 'cust-input',
 					required: true
 				}, {
-					xtype: 'datepickerfield',
+					//xtype: 'datepickerfield',
+					xtype: 'textfield',
 					cls: 'cust-input cust-input-ddl',
 					name: 'birthday',
 					itemId: 'calDob',
 					id: 'birthdate',
 					name: 'calDob',
 					ui: 'light',
-					picker: {
-						yearFrom: 1900,
-					},
+					readOnly: true,
+					//picker: {
+					//	yearFrom: 1900,
+					//},
 					placeHolder: 'Date of birth',
 					required: true
 				}, {
@@ -98,6 +100,7 @@ Ext.define('smiley360.view.EditProfile', {
 					id: 'gender',
 					cls: 'cust-input cust-input-ddl',
 					placeHolder: 'Gender',
+					readOnly: true,
 					options: [
                         { text: '', value: '' },
 					]
@@ -503,7 +506,7 @@ Ext.define('smiley360.view.EditProfile', {
 					for (var it in smiley360.ProfileDropdowns[item]) {
 						var temp_array = new Array();
 						temp_array["text"] = it;
-						temp_array["value"] = smiley360.ProfileDropdowns[item][it];
+						temp_array["value"] = smiley360.ProfileDropdowns[item][it][0];
 						//alert(temp_array["text"] + ": " + temp_array["value"]);
 						otherOptions.push(temp_array);
 					};

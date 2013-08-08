@@ -125,7 +125,7 @@ Ext.define('smiley360.view.OfferAccept', {
                     listeners: {
                     	tap: function () {
                     		//go accept mission
-                    		//Ext.getCmp('xOfferView').fireEvent('acceptMissionCommand', this, '157207', '1');
+                    		Ext.getCmp('xOfferView').fireEvent('acceptMissionCommand', this, smiley360.memberData.UserId, smiley360.missionData.MissionDetails.MissionId);
                     		//if accepted go to
                     		Ext.getCmp('xOfferView').fireEvent('LoadMissionDetailsCommand', this, smiley360.missionData.MissionDetails.MissionId, smiley360.memberData.UserId);
                     		Ext.widget('offeracceptview').hide();
