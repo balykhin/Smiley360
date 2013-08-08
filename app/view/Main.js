@@ -5,8 +5,8 @@ Ext.define('smiley360.view.Main', {
     extend: 'Ext.Panel',
     alias: 'widget.mainview',
     requires: [
+        'Ext.TabBar',
         'Ext.TitleBar',
-        'Ext.tab.Panel',
     ],
     config: {
         id: 'xMainView',
@@ -50,6 +50,11 @@ Ext.define('smiley360.view.Main', {
             id: 'xTabpanel',
             tabBarPosition: 'bottom',
             cls: 'cust-tabbar normal-page-bg',
+
+            layout: {
+                type : 'card',
+                animation: !Ext.os.is('Android'),
+            },
 
             defaults: {
                 styleHtmlContent: true,
@@ -211,9 +216,10 @@ Ext.define('smiley360.view.Main', {
 
     showExternalView: function (viewAlias) {
         if (!views[viewAlias]) {
-            views[viewAlias] = xTabpanel.getItems().length;
-
-            xTabpanel.insert(views[viewAlias], { xtype: viewAlias, hidden: true });
+            views[viewAlias] = xTabpanel.insert(
+                xTabpanel.getItems().length, {
+                    xtype: viewAlias, hidden: true
+                });
         }
 
         xTabpanel.setActiveItem(views[viewAlias]);

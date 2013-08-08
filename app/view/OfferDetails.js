@@ -295,7 +295,7 @@ Ext.define('smiley360.view.OfferDetails', {
 						listeners: {
 							tap: function () {
 								if (smiley360.missionData.MissionDetails.MissionDetails.mission_shipment_active == '0') {
-									if (smiley360.memberData.Profile.address_status == '2')
+									if (smiley360.memberData.Profile.address_status == '0')
 										Ext.widget('offeracceptview').show()
 									else Ext.widget('offeracceptaddressview').show();
 								}

@@ -71,81 +71,8 @@ Ext.define('smiley360.view.Offers', {
 						xtype: 'container',
 						id: 'xOfferList2',
 						layout: { type: 'vbox', },
-					}, {
-						xtype: 'container',
-						layout: { type: 'hbox' },
-						style: 'padding: 10px 15px; background-color: #efecea;',
-						flex: 1,
-						items: [{
-							xtype: 'container',
-							style: 'background-color: #efecea; padding-top: 15px;',
-							layout: {
-								type: 'vbox',
-								align: 'middle',
-							},
-							items: [{
-								xtype: 'image',
-								style: 'padding: 20px 0px 0px 0px;background-color: #efecea; border-radius: 5px;',
-								cls: 'has-shadow',
-								width: 100,
-								height: 100,
-								src: 'resources/images/lays.png',
-							}]
-						}, {
-							xtype: 'container',
-							layout: { type: 'vbox' },
-							flex: 4,
-							style: 'padding-left: 10px;',
-							items: [{
-								xtype: 'label',
-								html: 'Survey Title',
-								style: 'font-size:1.4em; padding: 10px 15px 10px 0px; background-color: #efecea; color:#413f40; font-family: \'din bold\';',
-
-							}, {
-								xtype: 'label',
-								html: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vel malesuada odio. Phasellus aliquam dignissim scelerisque. Sed ullamcorper libero nec placerat posuere.',
-								style: 'font-size:1.1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea; color:#413f40; font-family: \'din medium\';',
-
-							}]
-						}]
-					}, {
-						xtype: 'container',
-						layout: { type: 'hbox' },
-						style: 'padding: 10px 15px; background-color: #efecea;',
-						flex: 1,
-						items: [{
-							xtype: 'container',
-							style: 'background-color: #efecea; padding-top: 15px;',
-							layout: {
-								type: 'vbox',
-								align: 'middle',
-							},
-							items: [{
-								xtype: 'image',
-								style: 'padding: 20px 0px 0px 0px;background-color: #efecea; border-radius: 5px;',
-								cls: 'has-shadow',
-								width: 100,
-								height: 100,
-								src: 'resources/images/mc_img.png',
-							}]
-						}, {
-							xtype: 'container',
-							layout: { type: 'vbox' },
-							flex: 4,
-							style: 'padding-left: 10px;',
-							items: [{
-								xtype: 'label',
-								html: 'Another Survey title',
-								style: 'font-size:1.4em; padding: 10px 15px 10px 0px; background-color: #efecea; color:#413f40; font-family: \'din bold\';',
-
-							}, {
-								xtype: 'label',
-								html: 'Aliquam erat volutpat. Ut ornare tellus ut malesuada tempor. Fusce blandit tincidunt iaculis. Donec sit amet suscipit mi. Suspendisse dignissim viverra luctus. Etiam venenatis cursus dolor at aliquet.',
-								style: 'font-size:1.1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea; color:#413f40; font-family: \'din medium\';',
-
-							}]
-						}]
-					}, {
+					},
+					{
 						xtype: 'spacer',
 						height: '7px',
 						style: 'background-color: #efecea;',
@@ -211,92 +138,9 @@ Ext.define('smiley360.view.Offers', {
 						xtype: 'container',
 						id: 'xOfferList4',
 						layout: { type: 'vbox', },
-					}, {
-						xtype: 'container',
-						layout: { type: 'hbox' },
-						style: 'padding: 10px 15px; background-color: #efecea;',
-						flex: 1,
-						items: [{
-							xtype: 'container',
-							style: 'background-color: #efecea; padding-top: 15px;',
-							layout: {
-								type: 'vbox',
-								align: 'middle',
-							},
-							items: [{
-								xtype: 'image',
-								style: 'padding: 20px 0px 0px 15px;background-color: #efecea; border-radius: 5px;',
-								cls: 'has-shadow',
-								width: 100,
-								height: 100,
-								src: 'resources/images/offers_logo2.png',
-								listeners: {
-									tap: function () {
-										Ext.getCmp('missionslist-cont').show();
-										Ext.getCmp('offers-cont').hide();
-									}
-								}
-							}]
-						}, {
-							xtype: 'container',
-							layout: { type: 'vbox' },
-							flex: 4,
-							style: 'padding-left: 10px;',
-							items: [{
-								xtype: 'label',
-								html: 'Another Survey Title',
-								style: 'font-size:1.4em; padding: 10px 15px 10px 0px; background-color: #efecea; color:#413f40; font-family: \'din bold\';',
+					},
 
-							}, {
-								xtype: 'label',
-								html: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.',
-								style: 'font-size:1.1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea; color:#413f40; font-family: \'din medium\';',
-
-							}]
-						}]
-					}, {
-						xtype: 'container',
-						layout: { type: 'hbox' },
-						style: 'padding: 10px 15px; background-color: #efecea;',
-						flex: 1,
-						items: [{
-							xtype: 'container',
-							style: 'background-color: #efecea; padding-top: 15px;',
-							layout: {
-								type: 'vbox',
-								align: 'middle',
-							},
-							items: [{
-								xtype: 'image',
-								style: 'padding: 20px 0px 0px 15px;background-color: #efecea; border-radius: 5px;',
-								cls: 'has-shadow',
-								width: 100,
-								height: 100,
-								src: 'resources/images/offers_logo3.png',
-								listeners: {
-									tap: function () {
-										Ext.getCmp('missionslist-cont').show();
-										Ext.getCmp('offers-cont').hide();
-									}
-								}
-							}]
-						}, {
-							xtype: 'container',
-							layout: { type: 'vbox' },
-							flex: 4,
-							style: 'padding-left: 10px;',
-							items: [{
-								xtype: 'label',
-								html: 'Yet, Another Survey Title',
-								style: 'font-size:1.4em; padding: 10px 15px 10px 0px; background-color: #efecea; color:#413f40; font-family: \'din bold\';',
-							}, {
-								xtype: 'label',
-								html: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.',
-								style: 'font-size:1.1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea; color:#413f40; font-family: \'din medium\';',
-
-							}]
-						}]
-					}, {
+					{
 						xtype: 'spacer',
 						height: '7px',
 						style: 'background-color: #f4f3f1; margin: 0px 2px; -webkit-border-radius: 0px 0px 5px 5px;'
@@ -415,6 +259,12 @@ Ext.define('smiley360.view.Offers', {
 	},
 
 	setOffers: function () {
+		//bugfix, need to be rewrited
+		Ext.getCmp('xOfferList1').removeAll(true, true);
+		Ext.getCmp('xOfferList2').removeAll(true, true);
+		Ext.getCmp('xOfferList3').removeAll(true, true);
+		Ext.getCmp('xOfferList4').removeAll(true, true);
+		//end bugfix, need to be rewrited
 		if (smiley360.memberData.isProfileComplete.complete == 'false')
 			for (var key in smiley360.memberData.Offers) {
 				var oneItem = smiley360.memberData.Offers[key];
@@ -489,6 +339,6 @@ Ext.define('smiley360.view.Offers', {
 					this.down('#xOfferListHeader' + oneItem.mission_categoryID).setCls('heading-text active-sign');
 				}
 			}
-		else { Ext.widget('missingoffersview').show(); } 
+		else { Ext.widget('missingoffersview').show(); }
 	},
 });

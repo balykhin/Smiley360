@@ -185,8 +185,7 @@ Ext.define('Ext.field.Text', {
         readOnly: null,
 
         /**
-         * @cfg {Object} component The inner component for this field, which defaults to an input text. You are also
-         * able to use the {@link Ext.field.File} component by using the `file` xtype.
+         * @cfg {Object} component The inner component for this field, which defaults to an input text.
          * @accessor
          */
         component: {
@@ -236,14 +235,14 @@ Ext.define('Ext.field.Text', {
     // @private
     updateValue: function(newValue) {
         var component  = this.getComponent(),
-            // allows newValue to be zero but not undefined or null (other falsey values)
-            valueValid = newValue !== undefined && newValue !== null;
+            // allows newValue to be zero but not undefined, null or an empty string (other falsey values)
+            valueValid = newValue !== undefined && newValue !== null && newValue !== '';
 
         if (component) {
             component.setValue(newValue);
         }
 
-        this[valueValid && this.isDirty() ? 'showClearIcon' : 'hideClearIcon']();
+        this[valueValid ? 'showClearIcon' : 'hideClearIcon']();
 
         this.syncEmptyCls();
     },
@@ -350,8 +349,8 @@ Ext.define('Ext.field.Text', {
     showClearIcon: function() {
         var me         = this,
             value      = me.getValue(),
-            // allows value to be zero but not undefined or null (other falsey values)
-            valueValid = value !== undefined && value !== null;
+            // allows value to be zero but not undefined, null or an empty string (other falsey values)
+            valueValid = value !== undefined && value !== null && value !== '';
 
         if (me.getClearIcon() && !me.getDisabled() && !me.getReadOnly() && valueValid) {
             me.element.addCls(Ext.baseCSSPrefix + 'field-clearable');
@@ -378,10 +377,10 @@ Ext.define('Ext.field.Text', {
     doKeyUp: function(me, e) {
         // getValue to ensure that we are in sync with the dom
         var value      = me.getValue(),
-            // allows value to be zero but not undefined or null (other falsey values)
-            valueValid = value !== undefined && value !== null;
+            // allows value to be zero but not undefined, null or an empty string (other falsey values)
+            valueValid = value !== undefined && value !== null && value !== '';
 
-        this[valueValid && value !== this.originalValue ? 'showClearIcon' : 'hideClearIcon']();
+        this[valueValid ? 'showClearIcon' : 'hideClearIcon']();
 
         if (e.browserEvent.keyCode === 13) {
             me.fireAction('action', [me, e], 'doAction');
@@ -409,7 +408,6 @@ Ext.define('Ext.field.Text', {
     },
 
     onFocus: function(e) {
-        this.addCls(Ext.baseCSSPrefix + 'field-focused');
         this.isFocused = true;
         this.fireEvent('focus', this, e);
     },
@@ -417,7 +415,6 @@ Ext.define('Ext.field.Text', {
     onBlur: function(e) {
         var me = this;
 
-        this.removeCls(Ext.baseCSSPrefix + 'field-focused');
         this.isFocused = false;
 
         me.fireEvent('blur', me, e);
@@ -462,22 +459,13 @@ Ext.define('Ext.field.Text', {
         return this;
     },
 
-    resetOriginalValue: function() {
-        this.callParent();
-        var component = this.getComponent();
-        if(component && component.hasOwnProperty("originalValue")) {
-            this.getComponent().originalValue = this.originalValue;
-        }
-        this.reset();
-    },
-
     reset: function() {
         this.getComponent().reset();
 
         //we need to call this to sync the input with this field
         this.getValue();
 
-        this[this.isDirty() ? 'showClearIcon' : 'hideClearIcon']();
+        this[this._value ? 'showClearIcon' : 'hideClearIcon']();
     },
 
     isDirty: function() {

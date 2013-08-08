@@ -33,11 +33,15 @@ Ext.define('Ext.fx.layout.Card', {
         config.elementBox = false;
 
         if (type) {
-            if (Ext.browser.is.AndroidStock2) {
+
+            if (Ext.os.is.Android2) {
                 // In Android 2 we only support scroll and fade. Otherwise force it to slide.
                 if (type != 'fade') {
                     type = 'scroll';
                 }
+            }
+            else if (type === 'slide' && Ext.browser.is.ChromeMobile) {
+                type = 'scroll';
             }
 
             defaultClass = Ext.ClassManager.getByAlias('fx.layout.card.' + type);

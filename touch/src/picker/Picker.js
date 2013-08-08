@@ -114,7 +114,7 @@ Ext.define('Ext.picker.Picker', {
          * @cfg
          * @inheritdoc
          */
-        baseCls: Ext.baseCSSPrefix + 'picker',
+        cls: Ext.baseCSSPrefix + 'picker',
 
         /**
          * @cfg {String/Mixed} doneButton
@@ -207,8 +207,6 @@ Ext.define('Ext.picker.Picker', {
         // @private
         defaultType: 'pickerslot',
 
-        toolbarPosition: 'top',
-
         /**
          * @cfg {Ext.TitleBar/Ext.Toolbar/Object} toolbar
          * The toolbar which contains the {@link #doneButton} and {@link #cancelButton} buttons.
@@ -250,35 +248,12 @@ Ext.define('Ext.picker.Picker', {
          *
          * @accessor
          */
-        toolbar: {
-            xtype: 'titlebar'
-        }
+        toolbar: true
     },
 
-    platformConfig: [{
-        theme: ['Windows'],
-        height: '100%',
-        toolbarPosition: 'bottom',
-        toolbar: {
-            xtype: 'toolbar',
-            layout: {
-                type: 'hbox',
-                pack: 'center'
-            }
-        },
-        doneButton: {
-            iconCls: 'check2',
-            ui: 'round',
-            text: ''
-        },
-        cancelButton: {
-            iconCls: 'delete',
-            ui: 'round',
-            text: ''
-        }
-    }],
+    initElement: function() {
+        this.callParent(arguments);
 
-    initialize: function() {
         var me = this,
             clsPrefix = Ext.baseCSSPrefix,
             innerElement = this.innerElement;
@@ -298,7 +273,10 @@ Ext.define('Ext.picker.Picker', {
             slotpick: 'onSlotPick'
         });
 
-        me.inputBlocker = new Ext.util.InputBlocker();
+        me.on({
+            scope: this,
+            show: 'onShow'
+        });
     },
 
     /**
@@ -310,7 +288,7 @@ Ext.define('Ext.picker.Picker', {
         }
 
         Ext.applyIf(config, {
-            docked: this.getToolbarPosition()
+            docked: 'top'
         });
 
         return Ext.factory(config, 'Ext.TitleBar', this.getToolbar());
@@ -480,7 +458,6 @@ Ext.define('Ext.picker.Picker', {
         }
 
         this.hide();
-        this.inputBlocker.unblockInputs();
     },
 
     /**
@@ -490,7 +467,6 @@ Ext.define('Ext.picker.Picker', {
     onCancelButtonTap: function() {
         this.fireEvent('cancel', this);
         this.hide();
-        this.inputBlocker.unblockInputs();
     },
 
     /**
@@ -501,17 +477,10 @@ Ext.define('Ext.picker.Picker', {
         this.fireEvent('pick', this, this.getValue(true), slot);
     },
 
-    show: function() {
-        if (this.getParent() === undefined) {
-            Ext.Viewport.add(this);
-        }
-
-        this.callParent(arguments);
-
+    onShow: function() {
         if (!this.isHidden()) {
             this.setValue(this._value);
         }
-        this.inputBlocker.blockInputs();
     },
 
     /**

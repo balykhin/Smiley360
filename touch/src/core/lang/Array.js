@@ -656,37 +656,40 @@
         intersect: function() {
             var intersect = [],
                 arrays = slice.call(arguments),
-                item, minArray, itemIndex, arrayIndex;
+                i, j, k, minArray, array, x, y, ln, arraysLn, arrayLn;
 
             if (!arrays.length) {
                 return intersect;
             }
 
-            //Find the Smallest Array
-            arrays = arrays.sort(function(a, b) {
-                if (a.length > b.length) {
-                    return 1;
-                } else if (a.length < b.length) {
-                    return -1;
-                } else {
-                    return 0;
+            // Find the smallest array
+            for (i = x = 0,ln = arrays.length; i < ln,array = arrays[i]; i++) {
+                if (!minArray || array.length < minArray.length) {
+                    minArray = array;
+                    x = i;
                 }
-            });
+            }
 
-            //Remove duplicates from smallest array
-            minArray = ExtArray.unique(arrays[0]);
+            minArray = ExtArray.unique(minArray);
+            erase(arrays, x, 1);
 
-            //Populate intersecting values
-            for (itemIndex = 0; itemIndex < minArray.length; itemIndex++) {
-                item = minArray[itemIndex];
-                for (arrayIndex = 1; arrayIndex < arrays.length; arrayIndex++) {
-                    if (arrays[arrayIndex].indexOf(item) === -1) {
-                        break;
+            // Use the smallest unique'd array as the anchor loop. If the other array(s) do contain
+            // an item in the small array, we're likely to find it before reaching the end
+            // of the inner loop and can terminate the search early.
+            for (i = 0,ln = minArray.length; i < ln,x = minArray[i]; i++) {
+                var count = 0;
+
+                for (j = 0,arraysLn = arrays.length; j < arraysLn,array = arrays[j]; j++) {
+                    for (k = 0,arrayLn = array.length; k < arrayLn,y = array[k]; k++) {
+                        if (x === y) {
+                            count++;
+                            break;
+                        }
                     }
+                }
 
-                    if (arrayIndex == (arrays.length - 1)) {
-                        intersect.push(item);
-                    }
+                if (count === arraysLn) {
+                    intersect.push(x);
                 }
             }
 

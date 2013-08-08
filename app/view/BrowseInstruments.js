@@ -4,13 +4,16 @@ Ext.define('smiley360.view.BrowseInstruments', {
 	alias: 'widget.browseinstrumentsview',
 	requires: [
         'Ext.TitleBar',
-        'Ext.Video'
+        'Ext.Video',
+		'Ext.List',
+		'Ext.dataview.List',
+
 	],
 	config: {
 		id: 'xBrowseInstruments',
 		title: 'CONNECT/browse',
 		items: [
-                	
+
                     {
                     	xtype: 'spacer',
                     	height: '14px',
@@ -40,6 +43,7 @@ Ext.define('smiley360.view.BrowseInstruments', {
                     		items: [
                                 {
                                 	xtype: 'container',
+                                	id: 'addtest',
                                 	laytout: { type: 'vbox' },
                                 	cls: 'has-shadow',
                                 	items: [
@@ -57,443 +61,7 @@ Ext.define('smiley360.view.BrowseInstruments', {
                                                 },
                                         	]
                                         },
-                                       {
-                                       	xtype: 'container',
-                                       	layout: 'vbox',
-                                       	items:[{
-                                       		xtype: 'container',
-                                       		layout: 'hbox',
-                                       		style: 'background-color: #efecea;',
-                                       		padding: 20,
-                                       		items: [
 
-												{
-													xtype: 'container',
-													layout: 'vbox',
-													cls: 'has-shadow',
-													style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-													items: [
-														{
-															xtype: 'container',
-															height: 100,
-															width: 100,
-															style: 'background: white;border-radius: 5px;',
-															items: [{
-																xtype: 'image',
-																src: 'resources/images/city-live.png',
-																style: 'padding: 40px; margin: 10px;',
-															}],
-														}, {
-															xtype: 'label',
-															html: 'McDonald\'s',
-															style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-														},
-													]
-												},//1st item
-												{
-													xtype: 'container',
-													layout: 'vbox',
-													cls: 'has-shadow',
-													style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-													items: [
-
-														{
-															xtype: 'container',
-															height: 100,
-															width: 100,
-															style: 'background: white;border-radius: 5px;',
-															items: [{
-																xtype: 'image',
-																src: 'resources/images/gibson.png',
-																style: 'padding: 25px; margin: 10px;',
-															}],
-														},
-														 {
-														 	xtype: 'label',
-														 	html: 'Secrete',
-														 	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-														 },
-													]
-												},//2nd item 
-												{
-													xtype: 'container',
-													layout: 'vbox',
-													cls: 'has-shadow',
-													style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-													width: 100,
-													items: [
-
-														{
-															xtype: 'container',
-															height: 100,
-															width: 100,
-															style: 'background: white;border-radius: 5px;',
-															items: [{
-																xtype: 'image',
-																src: 'resources/images/pandora.png',
-																style: 'padding: 40px; margin: 10px;',
-															}],
-														},
-														 {
-														 	xtype: 'label',
-														 	html: 'Campbell\'s Go',
-														 	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-word; color:#413f40; font-family: \'din medium\';',
-														 },
-													]
-												},//3rd item 
-												{
-													xtype: 'container',
-													layout: 'vbox',
-													cls: 'has-shadow',
-													style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-													items: [
-
-														{
-															xtype: 'container',
-															height: 100,
-															width: 100,
-															style: 'background: white;border-radius: 5px;',
-															items: [{
-																xtype: 'image',
-																src: 'resources/images/folk-art.png',
-																style: 'padding: 30px; margin: 10px;',
-															}],
-														},
-														 {
-														 	xtype: 'label',
-														 	html: 'Brand X',
-														 	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-														 },
-													]
-												},//4th item
-                                       		],//1st row items
-                                       	},//1st row end
-                                        	{
-                                        		xtype: 'container',
-                                        		layout: 'hbox',
-                                        		style: 'background-color: #efecea;',
-                                        		padding: 20,
-                                        		items: [
-
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	items: [
-															{
-																xtype: 'container',
-																height: 100,
-																width: 100,
-																style: 'background: white;border-radius: 5px;',
-																items: [{
-																	xtype: 'image',
-																	src: 'resources/images/m-audio.png',
-																	style: 'padding: 40px; margin: 10px;',
-																}],
-															}, {
-																xtype: 'label',
-																html: 'McDonald\'s',
-																style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-															},
-                                                    	]
-                                                    },//1st item
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	items: [
-
-                                                            {
-                                                            	xtype: 'container',
-                                                            	height: 100,
-                                                            	width: 100,
-                                                            	style: 'background: white;border-radius: 5px;',
-                                                            	items: [{
-                                                            		xtype: 'image',
-                                                            		src: 'resources/images/d-shirt.png',
-                                                            		style: 'padding: 25px; margin: 10px;',
-                                                            	}],
-                                                            },
-                                                             {
-                                                             	xtype: 'label',
-                                                             	html: 'Secrete',
-                                                             	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                                             },
-                                                    	]
-                                                    },//2nd item 
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	width: 100,
-                                                    	items: [
-
-                                                            {
-                                                            	xtype: 'container',
-                                                            	height: 100,
-                                                            	width: 100,
-                                                            	style: 'background: white;border-radius: 5px;',
-                                                            	items: [{
-                                                            		xtype: 'image',
-                                                            		src: 'resources/images/fender.png',
-                                                            		style: 'padding: 40px; margin: 10px;',
-                                                            	}],
-                                                            },
-                                                             {
-                                                             	xtype: 'label',
-                                                             	html: 'Campbell\'s Go',
-                                                             	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-word; color:#413f40; font-family: \'din medium\';',
-                                                             },
-                                                    	]
-                                                    },//3rd item 
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	items: [
-
-                                                            {
-                                                            	xtype: 'container',
-                                                            	height: 100,
-                                                            	width: 100,
-                                                            	style: 'background: white;border-radius: 5px;',
-                                                            	items: [{
-                                                            		xtype: 'image',
-                                                            		src: 'resources/images/city-live.png',
-                                                            		style: 'padding: 20px; margin: 10px;',
-                                                            	}],
-                                                            },
-                                                             {
-                                                             	xtype: 'label',
-                                                             	html: 'Brand X',
-                                                             	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                                             },
-                                                    	]
-                                                    },//4th item
-                                        		],//1st row items
-                                        	},//2nd row end
-											{
-												xtype: 'container',
-												layout: 'hbox',
-												style: 'background-color: #efecea;',
-												padding: 20,
-												items: [
-
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	items: [
-															{
-																xtype: 'container',
-																height: 100,
-																width: 100,
-																style: 'background: white;border-radius: 5px;',
-																items: [{
-																	xtype: 'image',
-																	src: 'resources/images/fender.png',
-																	style: 'padding: 40px; margin: 10px;',
-																}],
-															}, {
-																xtype: 'label',
-																html: 'McDonald\'s',
-																style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-															},
-                                                    	]
-                                                    },//1st item
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	items: [
-
-                                                            {
-                                                            	xtype: 'container',
-                                                            	height: 100,
-                                                            	width: 100,
-                                                            	style: 'background: white;border-radius: 5px;',
-                                                            	items: [{
-                                                            		xtype: 'image',
-                                                            		src: 'resources/images/pandora.png',
-                                                            		style: 'padding: 40px; margin: 10px;',
-                                                            	}],
-                                                            },
-                                                             {
-                                                             	xtype: 'label',
-                                                             	html: 'Secrete',
-                                                             	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                                             },
-                                                    	]
-                                                    },//2nd item 
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	width: 100,
-                                                    	items: [
-
-                                                            {
-                                                            	xtype: 'container',
-                                                            	height: 100,
-                                                            	width: 100,
-                                                            	style: 'background: white;border-radius: 5px;',
-                                                            	items: [{
-                                                            		xtype: 'image',
-                                                            		src: 'resources/images/fractal.png',
-                                                            		style: 'padding: 30px; margin: 10px;',
-                                                            	}],
-                                                            },
-                                                             {
-                                                             	xtype: 'label',
-                                                             	html: 'Campbell\'s Go',
-                                                             	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-word; color:#413f40; font-family: \'din medium\';',
-                                                             },
-                                                    	]
-                                                    },//3rd item 
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	items: [
-
-                                                            {
-                                                            	xtype: 'container',
-                                                            	height: 100,
-                                                            	width: 100,
-                                                            	style: 'background: white;border-radius: 5px;',
-                                                            	items: [{
-                                                            		xtype: 'image',
-                                                            		src: 'resources/images/gibson.png',
-                                                            		style: 'padding: 25px; margin: 10px;',
-                                                            	}],
-                                                            },
-                                                             {
-                                                             	xtype: 'label',
-                                                             	html: 'Brand X',
-                                                             	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                                             },
-                                                    	]
-                                                    },//4th item
-												],//1st row items
-											},//3rd row end
-											{
-												xtype: 'container',
-												layout: 'hbox',
-												style: 'background-color: #efecea;',
-												padding: 20,
-												items: [
-
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	items: [
-															{
-																xtype: 'container',
-																height: 100,
-																width: 100,
-																style: 'background: white;border-radius: 5px;',
-																items: [{
-																	xtype: 'image',
-																	src: 'resources/images/fender.png',
-																	style: 'padding: 40px; margin: 10px;',
-																}],
-															}, {
-																xtype: 'label',
-																html: 'McDonald\'s',
-																style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-															},
-                                                    	]
-                                                    },//1st item
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	items: [
-
-                                                            {
-                                                            	xtype: 'container',
-                                                            	height: 100,
-                                                            	width: 100,
-                                                            	style: 'background: white;border-radius: 5px;',
-                                                            	items: [{
-                                                            		xtype: 'image',
-                                                            		src: 'resources/images/pandora.png',
-                                                            		style: 'padding: 40px; margin: 10px;',
-                                                            	}],
-                                                            },
-                                                             {
-                                                             	xtype: 'label',
-                                                             	html: 'Secrete',
-                                                             	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                                             },
-                                                    	]
-                                                    },//2nd item 
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	width: 100,
-                                                    	items: [
-
-                                                            {
-                                                            	xtype: 'container',
-                                                            	height: 100,
-                                                            	width: 100,
-                                                            	style: 'background: white;border-radius: 5px;',
-                                                            	items: [{
-                                                            		xtype: 'image',
-                                                            		src: 'resources/images/fractal.png',
-                                                            		style: 'padding: 30px; margin: 10px;',
-                                                            	}],
-                                                            },
-                                                             {
-                                                             	xtype: 'label',
-                                                             	html: 'Campbell\'s Go',
-                                                             	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-word; color:#413f40; font-family: \'din medium\';',
-                                                             },
-                                                    	]
-                                                    },//3rd item 
-                                                    {
-                                                    	xtype: 'container',
-                                                    	layout: 'vbox',
-                                                    	cls: 'has-shadow',
-                                                    	style: 'background: #f7f5f6; border-radius: 5px;margin-right: 20px;',
-                                                    	items: [
-
-                                                            {
-                                                            	xtype: 'container',
-                                                            	height: 100,
-                                                            	width: 100,
-                                                            	style: 'background: white;border-radius: 5px;',
-                                                            	items: [{
-                                                            		xtype: 'image',
-                                                            		src: 'resources/images/gibson.png',
-                                                            		style: 'padding: 25px; margin: 10px;',
-                                                            	}],
-                                                            },
-                                                             {
-                                                             	xtype: 'label',
-                                                             	html: 'Brand X',
-                                                             	style: 'text-align: center; font-size:1.1em; padding: 10px; word-wrap: break-all; color:#413f40; font-family: \'din medium\';',
-                                                             },
-                                                    	]
-                                                    },//4th item
-												],//1st row items
-											},//4th row end
-                                       	],
-                                       },//all container's end
                                         {
                                         	xtype: 'spacer',
                                         	height: '14px',
@@ -505,86 +73,114 @@ Ext.define('smiley360.view.BrowseInstruments', {
                     		],
                     	},//end vbox container
 
-                    {
-                    	xtype: 'panel',
-                    	layout: 'vbox',
-                    	flex: 0.3,
-                    	items:
-                            [
-                                {
-                                	xtype: 'container', layout: 'vbox',
-                                	style: 'font-family: franklin; text-align: right;',
-                                	items:
-                                        [
-                                            {
-                                            	xtype: 'container', layout: 'vbox',
-                                            	//padding: '0px 20px',
-                                            	style: 'color: #333132; text-align: right; min-height: 60px; background-color:white;border-style: solid; border-color: white; border-radius: 3px; border-width: 2px;',
-                                            	margin: '0px 20px 0px 20px',
-                                            	cls: 'has-shadow',
-                                            	docked: 'top',
-                                            	items:
-                                                    [
-                                                            {
-                                                            	xtype: 'image',
-                                                            	style: ' min-height: 60px; background-color:white;',
-
-                                                            }, {
-                                                            	xtype: 'label',
-                                                            	style: 'padding-top: 10px;',
-                                                            	html: 'Noel Zahra',
-                                                            	style: 'font-size:1.4em; margin-bottom: -8px;text-align: right;',
-                                                            },
-                                                            {
-                                                            	xtype: 'label',
-                                                            	html: 'Austin, TX',
-                                                            	//padding: '-8px 0px 0px 0px',
-                                                            	style: 'padding-bottom: 10px;',
-                                                            	style: 'font-size: 0.8em; margin-bottom: 8px; margin-left: 2px; text-align: right;',
-                                                            },
-                                                    ],
-                                            },                                           
-
-                                        ],
-                                },///end add
-
-
-                            ],
-                    	id: 'browseinst_menu',
-                    	listeners:
-                            {
-                            	initialize: function () {
-                            		this.hide();
-                            		Ext.getCmp('xMusic_panel_browse').hide();
-                            		Ext.getCmp('xMusicPict').setSrc('resources/images/music_c.png');
-                            		Ext.getCmp('xMusicLabel').setCls('browse_text');
-                            	},
-                            	painted: function () {
-                            	},
-                            },
-                    },//end panel added
                     	]
                     }//ens strange container
 		],
-		listeners: [
-			{
-				delegate: "#backBtn",
-				event: "tap",
-				fn: "onBackButtonTap"
-			},
-            //{
-            //    delegate: '#editprofileLabel',
-            //    fn: 'oneditLabel',
-            //    element: 'element',
-            //    event: 'painted',
-            //},
-            {
-            	delegate: "#gotoeditprofileBtn",
-            	event: "tap",
-            	fn: "onGoToProfileTap",
-            },
+		listeners: {
+			painted: function () {
+				//create an array with data for list
 
-		]
+
+				//for (var i = 0; i < 19; i++) {
+
+				//	var members = Ext.getStore('Countries');
+
+				//	members.add({ name: 'Tommy' + i + i});
+				//	members.sync();
+				//}
+
+
+				Ext.define('Contact', {
+					extend: 'Ext.data.Model',
+					config: {
+						fields: ['firstName', 'lastName'],
+					}
+
+				});
+
+				var store = Ext.create('Ext.data.Store', {
+					model: 'Contact',
+					//sorters: 'lastName',
+					pageSize: 4,
+					listeners: {
+						load: function () {
+							alert('trynewload');
+							/*take another 36*/
+						}//console.log(this.valueOf()); }
+					},
+					data: [
+						{ firstName: 'Tommy', lastName: 'Maintz' },
+						{ firstName: 'Rob', lastName: 'Dougan' },
+						{ firstName: 'Ed', lastName: 'Spencer' },
+						{ firstName: 'Jamie', lastName: 'Avins' },
+						{ firstName: 'Aaron', lastName: 'Conran' },
+						{ firstName: 'Dave', lastName: 'Kaneda' },
+						{ firstName: 'Jacky', lastName: 'Nguyen' },
+						{ firstName: 'Abraham', lastName: 'Elias' },
+						{ firstName: 'Jay', lastName: 'Robinson' },
+						{ firstName: 'Nigel', lastName: 'White' },
+						{ firstName: 'Don', lastName: 'Griffin' },
+						{ firstName: 'Nico', lastName: 'Ferrero' },
+						{ firstName: 'Jason', lastName: 'Johnston' },
+
+					]
+				});
+
+				var myTpl = new Ext.XTemplate(
+					'<tpl for="data">',
+						'<p>{firstName}</p>',
+						'<p>{lastName}</p>',
+					'</tpl>'
+				);
+				var template = '<table><tr><td valign="top"><img src="{firstName}"' +
+				' width=20px height=22px />' +
+				'&nbsp;&nbsp;</td><td><span><b>{lastName}</b></span> <br/>';
+
+				
+				//if (store != null) {
+				//	store.each(function (record) {
+				//		if (record.get('field')) {
+				//			template += '<span class="label">Domain Name:</span>' +
+				//				' {field} <br/>';
+				//		}
+				//	}
+
+				Ext.getCmp('addtest').add(Ext.create(
+					'Ext.List', {
+
+						//give it an xtype of list for the list component
+
+
+						inline: { wrap: false },
+						//scrollable: {
+						//	direction: 'horizontal',
+						//	directionLock: true
+						//},
+
+						width: 400,
+						height: 100,
+						background: 'white',
+						//fullscreen: true,
+						itemTpl: '<div ><div id="left" style="width: 25%; float:left; font-size: 20px; "><p>{firstName}</p><p>{firstName}</p></div><div id="center" style="width: 25%; float:left; font-size: 20px; ">{firstName}</div><div id="semi-center" style="width: 25%; float:left; font-size: 20px; ">{lastName}</div><div id="right" style="width: 25%; float:left; font-size: 20px; ">{lastName}</div></div>',
+						//itemTpl: '<div>{title}<br />verified star<br />" "</div>"
+						//itemTpl: myTpl,
+
+						store: store,
+						plugins: [
+									{
+										xclass: 'Ext.plugin.ListPaging',
+										autoPaging: true
+									}
+						],
+						listeners: {
+							initialize: function () { console.log(this.valueOf()); },
+							show: function () { alert('paintlist'); }
+						},
+						//grouped: false
+					}));
+
+			}
+		}
 	},
 	onBackButtonTap: function () {
 		console.log('back button tapped');

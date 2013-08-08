@@ -40,123 +40,9 @@ Ext.define('smiley360.view.Missions', {
 						xtype: 'container',
 						id: 'xMissionList',
 						layout: 'vbox',
-					}, {
-						xtype: 'container',
-						layout: 'hbox',
-						style: 'padding: 10px 15px; border-bottom: 1px dashed #d7cfcd; background-color: #efecea;',
-						flex: 1,
-						items: [{
-							xtype: 'container',
-							style: 'background-color: #efecea; padding-top: 15px;',
-							layout: {
-								type: 'vbox',
-								align: 'middle',
-							},
-							items: [{
-								xtype: 'image',
-								style: 'padding: 20px 0px 0px 15px;background-color: #efecea; border-radius: 5px;',
-								cls: 'has-shadow',
-								width: 100,
-								height: 100,
-								src: 'resources/images/smile-missions.png',
-								listeners: {
-									tap: function () {
-										Ext.getCmp('missionslist-cont').show();
-										Ext.getCmp('missions-cont').hide();
-									}
-								}
-							}],
-						}, {
-							xtype: 'container',
-							layout: { type: 'vbox' },
-							flex: 4,
-							style: 'padding-left: 10px;',
-							items: [{
-								xtype: 'label',
-								html: 'I Just Joined Smiley360',
-								style: 'font-size:1.4em; padding: 10px 15px 10px 0px; background-color: #efecea; color:#413f40; font-family: \'din bold\';',
-							}, {
-								xtype: 'label',
-								html: 'Participate in this digital mission and spread the word about Smiley to your friends, followers, readers and more. Give them a chance to join this exiting community, too! You will be handsomely rewarded. This is the first step to quality foe products and brand experiences from our partners.',
-								style: 'font-size:1.1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea; color:#413f40; font-family: \'din medium\';',
+					},
 
-							}],
-						}],
-					}, {
-						xtype: 'container',
-						layout: 'hbox',
-						style: 'padding: 10px 15px; border-bottom: 1px dashed #d7cfcd; background-color: #efecea;',
-						flex: 1,
-						items: [{
-							xtype: 'container',
-							style: 'background-color: #efecea; padding-top: 15px;',
-							layout: {
-								type: 'vbox',
-								align: 'middle',
-							},
-							items: [{
-								xtype: 'image',
-								style: 'padding: 20px 0px 0px 0px;background-color: #efecea; border-radius: 5px;',
-								cls: 'has-shadow',
-								width: 100,
-								height: 100,
-								src: 'resources/images/lays.png',
-							}],
-						}, {
-							xtype: 'container',
-							layout: { type: 'vbox' },
-							flex: 4,
-							style: 'padding-left: 10px;',
-							items: [{
-								xtype: 'label',
-								html: 'Classic Taste',
-								style: 'font-size:1.4em; padding: 10px 15px 10px 0px; background-color: #efecea; color:#413f40; font-family: \'din bold\';',
-
-							}, {
-								xtype: 'label',
-								html: 'Give them a chance to join this exciting community, too!',
-								style: 'font-size:1.1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea; color:#413f40; font-family: \'din medium\';',
-
-							}],
-						}],
-					}, {
-						xtype: 'container',
-						layout: 'hbox',
-						style: 'padding: 10px 15px; border-bottom: 1px dashed #d7cfcd; background-color: #efecea;',
-						flex: 1,
-						items: [{
-							xtype: 'container',
-							style: 'background-color: #efecea; padding-top: 15px;',
-							layout: {
-								type: 'vbox',
-								align: 'middle',
-							},
-							items: [{
-								xtype: 'image',
-								style: 'padding: 20px 0px 0px 0px;background-color: #efecea; border-radius: 5px;',
-								cls: 'has-shadow',
-								width: 100,
-								height: 100,
-								src: 'resources/images/secret-logo.png',
-							}],
-						}, {
-							xtype: 'container',
-							layout: { type: 'vbox' },
-							flex: 4,
-							style: 'padding-left: 10px;',
-							items: [{
-								xtype: 'label',
-								html: 'Classic Taste',
-								style: 'font-size:1.4em; padding: 10px 15px 10px 0px; background-color: #efecea; color:#413f40; font-family: \'din bold\';',
-
-							}, {
-								xtype: 'label',
-								html: 'Give them a chance to join this exciting community, too!',
-								style: 'font-size:1.1em; margin-top: -10px; padding: 0px 15px 10px 0px; word-wrap: break-all; background-color: #efecea; color:#413f40; font-family: \'din medium\';',
-
-							}],
-						}],
-					}, {
+					{
 						xtype: 'spacer',
 						height: '7px',
 						style: 'background-color: #efecea;',
@@ -171,7 +57,8 @@ Ext.define('smiley360.view.Missions', {
 						height: '10px',
 						style: 'background: transparent;'
 					}]
-				}],
+				}
+				],
 			}],//end panel added
 		}],//ens strange container
 		listeners: {

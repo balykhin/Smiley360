@@ -6,16 +6,16 @@ Ext.define('Ext.device.device.PhoneGap', {
 
     constructor: function() {
         // We can't get the device details until the device is ready, so lets wait.
-        if (Ext.isReady) {
+        if (Ext.Viewport.isReady) {
             this.onReady();
         } else {
-            Ext.onReady(this.onReady, this, {single: true});
+            Ext.Viewport.on('ready', this.onReady, this, {single: true});
         }
     },
 
     onReady: function() {
         this.name = device.name;
         this.uuid = device.uuid;
-        this.platform = device.platform || Ext.os.name;
+        this.platform = device.platformName || Ext.os.name;
     }
 });

@@ -67,8 +67,6 @@ Ext.define('Ext.mixin.Observable', {
 
     listenerOptionsRegex: /^(?:delegate|single|delay|buffer|args|prepend)$/,
 
-    eventFiringSuspended : false,
-
     config: {
         /**
          * @cfg {Object} listeners
@@ -208,7 +206,7 @@ Ext.define('Ext.mixin.Observable', {
      *
      * @param {String} eventName The name of the event to fire.
      * @param {Object...} args Variable number of parameters are passed to handlers.
-     * @return {Boolean} Returns `false` if any of the handlers return `false`.
+     * @return {Boolean} Returns `false` if any of the handlers return `false`, otherwise it returns `true`.
      */
     fireEvent: function(eventName) {
         var args = Array.prototype.slice.call(arguments, 1);
@@ -248,25 +246,22 @@ Ext.define('Ext.mixin.Observable', {
     },
 
     doFireEvent: function(eventName, args, action, connectedController) {
-        var me = this,
-            ret = true,
-            eventQueue;
-
-        if (me.eventFiringSuspended) {
-            eventQueue = me.eventQueue;
-            if (!eventQueue) {
-                me.eventQueue = eventQueue = [];
-            }
-            eventQueue.push([eventName, args, action, connectedController]);
-        } else {
-            ret = me.getEventDispatcher().dispatchEvent(me.observableType, me.getObservableId(), eventName, args, action, connectedController);
+        if (this.eventFiringSuspended) {
+            return;
         }
 
-        return ret;
+        var id = this.getObservableId(),
+            dispatcher = this.getEventDispatcher();
+
+        return dispatcher.dispatchEvent(this.observableType, id, eventName, args, action, connectedController);
     },
 
     /**
      * @private
+     * @param name
+     * @param fn
+     * @param scope
+     * @param options
      * @return {Boolean}
      */
     doAddListener: function(name, fn, scope, options, order) {
@@ -404,6 +399,13 @@ Ext.define('Ext.mixin.Observable', {
 
     /**
      * @private
+     * @param operation
+     * @param eventName
+     * @param fn
+     * @param scope
+     * @param options
+     * @param order
+     * @return {Object}
      */
     changeListener: function(actionFn, eventName, fn, scope, options, order) {
         var eventNames,
@@ -516,7 +518,7 @@ Ext.define('Ext.mixin.Observable', {
      *
      * @param {String/String[]/Object} eventName The name of the event to listen for. May also be an object who's property names are
      * event names.
-     * @param {Function/String} fn The method the event invokes.  Will be called with arguments given to
+     * @param {Function} fn The method the event invokes.  Will be called with arguments given to
      * {@link #fireEvent} plus the `options` parameter described below.
      * @param {Object} [scope] The scope (`this` reference) in which the handler function is executed. **If
      * omitted, defaults to the object which fired the event.**
@@ -593,7 +595,7 @@ Ext.define('Ext.mixin.Observable', {
      * Same as {@link #addListener} with `order` set to `'before'`.
      *
      * @param {String/String[]/Object} eventName The name of the event to listen for.
-     * @param {Function/String} fn The method the event invokes.
+     * @param {Function} fn The method the event invokes.
      * @param {Object} [scope] The scope for `fn`.
      * @param {Object} [options] An object containing handler configuration.
      */
@@ -607,7 +609,7 @@ Ext.define('Ext.mixin.Observable', {
      * Same as {@link #addListener} with `order` set to `'after'`.
      *
      * @param {String/String[]/Object} eventName The name of the event to listen for.
-     * @param {Function/String} fn The method the event invokes.
+     * @param {Function} fn The method the event invokes.
      * @param {Object} [scope] The scope for `fn`.
      * @param {Object} [options] An object containing handler configuration.
      */
@@ -619,7 +621,7 @@ Ext.define('Ext.mixin.Observable', {
      * Removes an event handler.
      *
      * @param {String/String[]/Object} eventName The type of event the handler was associated with.
-     * @param {Function/String} fn The handler to remove. **This must be a reference to the function passed into the
+     * @param {Function} fn The handler to remove. **This must be a reference to the function passed into the
      * {@link #addListener} call.**
      * @param {Object} [scope] The scope originally specified for the handler. It must be the same as the
      * scope argument specified in the original call to {@link #addListener} or the listener will not be removed.
@@ -637,7 +639,7 @@ Ext.define('Ext.mixin.Observable', {
      * Same as {@link #removeListener} with `order` set to `'before'`.
      *
      * @param {String/String[]/Object} eventName The name of the event the handler was associated with.
-     * @param {Function/String} fn The handler to remove.
+     * @param {Function} fn The handler to remove.
      * @param {Object} [scope] The scope originally specified for `fn`.
      * @param {Object} [options] Extra options object.
      */
@@ -651,7 +653,7 @@ Ext.define('Ext.mixin.Observable', {
      * Same as {@link #removeListener} with `order` set to `'after'`.
      *
      * @param {String/String[]/Object} eventName The name of the event the handler was associated with.
-     * @param {Function/String} fn The handler to remove.
+     * @param {Function} fn The handler to remove.
      * @param {Object} [scope] The scope originally specified for `fn`.
      * @param {Object} [options] Extra options object.
      */
@@ -685,37 +687,23 @@ Ext.define('Ext.mixin.Observable', {
     },
 
     /**
-     * Suspends the firing of all events.
+     * Suspends the firing of all events. (see {@link #resumeEvents})
      *
-     * All events will be queued but you can discard the queued events by passing false in
-     * the {@link #resumeEvents} call
+     * @param {Boolean} queueSuspended Pass as true to queue up suspended events to be fired
+     * after the {@link #resumeEvents} call instead of discarding all suspended events.
      */
-    suspendEvents: function() {
+    suspendEvents: function(queueSuspended) {
         this.eventFiringSuspended = true;
     },
 
     /**
      * Resumes firing events (see {@link #suspendEvents}).
      *
-     * @param {Boolean} discardQueuedEvents Pass as true to discard any queued events.
+     * If events were suspended using the `queueSuspended` parameter, then all events fired
+     * during event suspension will be sent to any listeners now.
      */
-    resumeEvents: function(discardQueuedEvents) {
-        var me = this,
-            eventQueue = me.eventQueue || [],
-            i, ln;
-
-        //resume the events
-        me.eventFiringSuspended = false;
-
-        //don't loop over the queue if specified to discard the queue
-        if (!discardQueuedEvents) {
-            for (i = 0, ln = eventQueue.length; i < ln; i++) {
-                me.doFireEvent.apply(me, eventQueue[i]);
-            }
-        }
-
-        //clear the queue
-        me.eventQueue = [];
+    resumeEvents: function() {
+        this.eventFiringSuspended = false;
     },
 
     /**
@@ -757,6 +745,8 @@ Ext.define('Ext.mixin.Observable', {
 
     /**
      * @private
+     * @param args
+     * @param fn
      */
     relayEvent: function(args, fn, scope, options, order) {
         var fnType = typeof fn,

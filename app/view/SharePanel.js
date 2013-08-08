@@ -5,98 +5,78 @@
     config: {
         cls: 'share-panel',
         layout: 'fit',
-        items: [{
-            xtype: 'container',
-            layout: 'hbox',
-            cls: 'share-panel-row',
-            items: [{
-                xtype: 'sharebutton',
-                cls: 'share-fb-btn',
-                smilesDone: 1,
-                smilesTotal: 10,
-                smilesCurrent: 5,
-                listeners: {
-                    tap: function () {
-                        Ext.widget('sharetofacebookview').show();
+        html: '<div id="xShareButtons" align="center"></div>',
+        listeners: {
+            painted: function () {
+                var xShareButtons = Ext.get('xShareButtons');
+                var smilesArray = smiley360.missionData.MissionDetails.MissionPoints.sharingToolScore;
+                var pointsArray = smiley360.missionData.MissionDetails.MissionPoints;
+
+                // clear existed buttons
+                xShareButtons.setHtml('');
+
+                for (var key in smilesArray) {
+                    var oneItem = smilesArray[key];
+                    var oneButton = undefined;
+
+                    switch (oneItem.sharingTool_typeID) {
+                        case smiley360.sharingType.facebook:
+                            oneButton = this.createShareButton(oneItem, 'share-fb-btn', 'sharetofacebookview');
+                            break;
+                        case smiley360.sharingType.twitter:
+                            oneButton = this.createShareButton(oneItem, 'share-tw-btn', 'sharetotwitterview');
+                            break;
+                        case smiley360.sharingType.shareLink:
+                            oneButton = this.createShareButton(oneItem, 'share-link-btn', 'sharelinkview');
+                            break;
+                        case smiley360.sharingType.face2face:
+                            oneButton = this.createShareButton(oneItem, 'share-f2f-btn', 'sharetoface2faceview');
+                            break;
+                        case smiley360.sharingType.smileyConnect:
+                            oneButton = this.createShareButton(oneItem, 'share-sm_conn-btn', 'smileyconnectview');
+                            break;
+                        case smiley360.sharingType.uploadPhoto:
+                            oneButton = this.createShareButton(oneItem, 'share-photo-btn', 'uploadphotoview');
+                            break;
+                        case smiley360.sharingType.blog:
+                            oneButton = this.createShareButton(oneItem, 'share-blog-btn', 'sharetoblogview');
+                            break;
+                        case smiley360.sharingType.youtube:
+                            oneButton = this.createShareButton(oneItem, 'share-yt-btn', 'sharetoyoutubeview');
+                            break;
+                        case smiley360.sharingType.pinterest:
+                            oneButton = this.createShareButton(oneItem, 'share-pin-btn', 'sharetopinterestview');
+                            break;
+                        default:
+                            console.log('SharePanel -> undefined sharing type detected: ', oneItem.sharingTool_typeID);
                     }
+
+                    var divTag = document.createElement("div");
+                    divTag.style.width = '140px';
+                    divTag.style.height = '140px';
+                    divTag.style.padding = '5px';
+                    divTag.style.display = 'inline-block';
+                    divTag.setAttribute("align", "left");
+
+                    oneButton.renderTo(divTag);
+                    xShareButtons.appendChild(divTag);
                 }
-            }, {
-                xtype: 'sharebutton',
-                cls: 'share-tw-btn',
-                listeners: {
-                    tap: function () {
-                        Ext.widget('sharetotwitterview').show();
-                    }
-                }
-            }, {
-                xtype: 'sharebutton',
-                cls: 'share-pin-btn',
-                listeners: {
-                    tap: function () {
-                        alert('coming soon');
-                        //Ext.widget('sharetofacebookview').show();
-                    }
-                }
-            }],
-        }, {
-            xtype: 'container',
-            layout: 'hbox',
-            cls: 'share-panel-row',
-            items: [{
-                xtype: 'sharebutton',
-                cls: 'share-yt-btn',
-                listeners: {
-                    tap: function () {
-                        Ext.widget('sharetoyoutubeview').show();
-                    }
-                }
-            }, {
-                xtype: 'sharebutton',
-                cls: 'share-f2f-btn',
-                listeners: {
-                    tap: function () {
-                        Ext.widget('sharetoface2faceview').show();
-                    }
-                }
-            }, {
-                xtype: 'sharebutton',
-                cls: 'share-photo-btn',
-                listeners: {
-                    tap: function () {
-                        Ext.widget('uploadphotoview').show();
-                    }
-                }
-            }],
-        }, {
-            xtype: 'container',
-            layout: 'hbox',
-            cls: 'share-panel-row',
-            items: [{
-                xtype: 'sharebutton',
-                cls: 'share-link-btn',
-                listeners: {
-                    tap: function () {
-                        Ext.widget('sharelinkview').show();
-                    }
-                }
-            }, {
-                xtype: 'sharebutton',
-                cls: 'share-blog-btn',
-                listeners: {
-                    tap: function () {
-                        Ext.widget('sharetoblogview').show();
-                    }
-                }
-            }, {
-                xtype: 'sharebutton',
-                cls: 'share-sm_conn-btn',
-                listeners: {
-                    tap: function () {
-                        alert('coming soon');
-                        //Ext.widget('sharetofacebookview').show();
-                    }
-                }
-            }],
-        }],
+            }
+        }
     },
+
+    createShareButton: function (shareItem, buttonCls, shareViewAlias) {
+        return new Ext.ux.ShareButton(
+            {
+                cls: buttonCls,
+                smilesDone: shareItem.sharingTool_current_smiles,
+                smilesTotal: shareItem.sharingTool_max_smiles,
+                smilesCurrent: shareItem.sharingTool_perShare_smiles,
+                listeners: {
+                    tap: function () {
+                        Ext.widget(shareViewAlias).show();
+                    }
+                }
+            });
+    }
 });

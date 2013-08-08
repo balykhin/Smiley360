@@ -33,11 +33,6 @@ Ext.application({
     stores: ['Members'],
     models: ['Member'],
     controllers: ['Index'],
-    viewport: {
-        layout: {
-            type: 'card'
-        }
-    },
     views: [
         'Login',
         'Main',
@@ -72,6 +67,7 @@ Ext.application({
 		'MissionCompleted',
 		'MissingOffers',
         'SideMenu',
+		'BrowseSearch'
     ],
     icon: {
         '36': 'resources/icons/Icon_Android36.png',

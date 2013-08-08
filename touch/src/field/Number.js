@@ -111,25 +111,15 @@ Ext.define('Ext.field.Number', {
         stepValue: null
     },
 
-    doInitValue : function() {
-        var value = this.getInitialConfig().value;
-
-        if (value) {
-            value = this.applyValue(value);
-        }
-
-        this.originalValue = value;
-    },
-
     applyValue: function(value) {
         var minValue = this.getMinValue(),
             maxValue = this.getMaxValue();
 
-        if (Ext.isNumber(minValue) && Ext.isNumber(value)) {
+        if (Ext.isNumber(minValue)) {
             value = Math.max(value, minValue);
         }
 
-        if (Ext.isNumber(maxValue) && Ext.isNumber(value)) {
+        if (Ext.isNumber(maxValue)) {
             value = Math.min(value, maxValue);
         }
 
