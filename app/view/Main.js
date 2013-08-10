@@ -105,13 +105,13 @@ Ext.define('smiley360.view.Main', {
                         xMainView.hideSidePanel(oldValue.element);
                     }
 
-                    if (isBackNow == false) {
-                        history.push(oldValue);
-                        xBackButton.show();
-                    }
-                    else if (history.length == 0) {
-                        xBackButton.hide();
-                    }
+                    //if (isBackNow == false) {
+                    //    history.push(oldValue);
+                    //    xBackButton.show();
+                    //}
+                    //else if (history.length == 0) {
+                    //    xBackButton.hide();
+                    //}
                 }
             },
         }],
