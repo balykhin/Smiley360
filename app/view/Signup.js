@@ -6,10 +6,10 @@ Ext.define('smiley360.view.Signup', {
 		standardSubmit: false,
 		id: 'Signup',
 		title: 'Signup',
-		cls: 'signup-bg',
-		style: 'background-color: #363639;',
-		scrollable: 'vertical',
-		laytout: { type: 'fit' },
+		//cls: 'signup-bg',
+		//style: 'background-color: #363639;',
+		//scrollable: 'vertical',
+		//layout: { type: 'fit' },
 		items: [
 			
 			{
@@ -189,6 +189,7 @@ Ext.define('smiley360.view.Signup', {
 		listeners: {
 			show: function () {
 				console.log('SignUp view showed!');
+
 			},
 
 			activate: function () {

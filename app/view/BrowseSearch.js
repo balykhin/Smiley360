@@ -7,13 +7,12 @@ Ext.define('smiley360.view.BrowseSearch', {
         'Ext.Video',
 		'Ext.List',
 		'Ext.dataview.List',
-
+		'Ext.ux.ShareButton',
 	],
 	config: {
 		id: 'xBrowseSearch',
 		title: 'CONNECT/search',
 		items: [
-
                     {
                     	xtype: 'spacer',
                     	height: '14px',
@@ -54,25 +53,31 @@ Ext.define('smiley360.view.BrowseSearch', {
                                         	items: [
                                                 {
                                                 	xtype: 'label',
+                                                	id:'xBrowseSearchstring',
                                                 	html: 'searchstring',
                                                 	cls: 'heading-text active-sign',
                                                 	style: 'padding-left: 15px;',
                                                 	flex: 1
                                                 },
-                                        	]
+                                        	],
+                                        	listeners: {
+                                        		painted: function () { Ext.getCmp('xBrowseSearchstring').setHtml(smiley360.SearchStr);}
+                                        	}
                                         },
-
+										{
+											xtype: 'container',
+											//html: '<div id="xSearchResults" align="center"></div>',
+										},
                                         {
                                         	xtype: 'spacer',
                                         	height: '14px',
-                                        	style: 'background-color: #efecea; margin: 0px 2px;',
+                                        	style: 'background-color: #efecea; margin: 0px -2px;',
                                         }, ],
                                 }, ],
                     	}, ]
                     }],
 		listeners: {
 			painted: function () {
-				
 
 				Ext.define('SearchRes', {
 					extend: 'Ext.data.Model',
@@ -81,35 +86,7 @@ Ext.define('smiley360.view.BrowseSearch', {
 					}
 				});
 
-				var store = Ext.create('Ext.data.Store', {
-					model: 'SearchRes',
-					pageSize: 4,
-					listeners: {
-						load: function () {
-							alert('trynewload');
-							/*take another 36*/
-						}//console.log(this.valueOf()); }
-					},
-					data: [
-						{ title: 'Tommy', img_src: 'Maintz', brand_id:1},
-						{ title: 'Rob', img_src: 'Dougan', brand_id: 2 },
-						{ title: 'Ed', img_src: 'Spencer', brand_id: 3 },
-						{ title: 'Jamie', img_src: 'Avins', brand_id: 4 },
-						{ title: 'Aaron', img_src: 'Conran', brand_id: 5 },
-						{ title: 'Dave', img_src: 'Kaneda', brand_id: 6 },
-						{ title: 'Jacky', img_src: 'Nguyen', brand_id: 7 },
-						{ title: 'Abraham', img_src: 'Elias', brand_id: 8 },
-						{ title: 'Jay', img_src: 'Robinson', brand_id: 9 },
-						{ title: 'Nigel', img_src: 'White', brand_id: 10 },
-						{ title: 'Don', img_src: 'Griffin', brand_id: 11 },
-						{ title: 'Nico', img_src: 'Ferrero', brand_id: 12 },
-						{ title: 'Jason', img_src: 'Johnston', brand_id: 13 },
-					]
-				});
-
-				//for (var item in smiley360.SearchResults)
-				//var itemInside = smiley360.SearchResults[item]
-				//title = itemInside.title, img_src....
+				//title = itemInside.sc_brandname, img_src....
 
 				//function(title,img_src, brand_id)
 				//{ var tempstore = Ext.getStore(store);
@@ -128,27 +105,65 @@ Ext.define('smiley360.view.BrowseSearch', {
 				//	}
 				//create an array with data for list
 				//for (var i = 0; i < 36; i++) {
+				var i = -1;
+				var store = Ext.create('Ext.data.Store', {
+					model: 'SearchRes',
+					pageSize: 1,
+					autoLoad: true,
+					storeId: 'MyStore',
+					listeners: {
+						load: function () {
+							//alert('trynewload');
+							i++;
+							for (var j = 0; j < 4; j++) {
+								var itemInside = smiley360.SearchResults[i + j]
+								if (itemInside)
+								Ext.getCmp('xBrowseSearch').AddFunction(itemInside.sc_brand_name.toString().substr(0,12), smiley360.configuration.getResourceDomain() + '/' + itemInside.smileyConnect_summaryImage_URL, itemInside.sc_brandID);
+								i += j;
+							}
+						},
+						refresh:
+							function () {
+								//alert('reload');
+								i++;
+								for (var j = 0; j < 4; j++) {
+									var itemInside = smiley360.SearchResults[i + j]
+									if (itemInside)
+									Ext.getCmp('xBrowseSearch').AddFunction(itemInside.sc_brand_name.toString().substr(0, 12), smiley360.configuration.getResourceDomain() + '/' + itemInside.smileyConnect_summaryImage_URL, itemInside.sc_brandID);
+									i += j;
+								}
+								//this.load();
+							}
+						//store.sync(); }
+						/*take another 36*/
+						//console.log(this.valueOf()); }
+					},
+					data: [
+	//			{ title: 'Maintz', img_src: 'resources/images/pin_share.png', brand_id: 1 },
+	//	{ title: 'Dougan', img_src: 'resources/images/pin_share.png', brand_id: 2 },
+	//{ title: 'Spencer', img_src: 'resources/images/pin_share.png', brand_id: 3 },
+					],
+					clearOnPageLoad: true
+				});
 
-				var myTpl = new Ext.XTemplate(
-					'<tpl for="data">',
-						'<p>{title}</p>',
-						'<p>{img_src}</p>',
-					'</tpl>'
-				);
 				var template = '<table><tr><td valign="top"><img src="{title}"' +
-				' width=20px height=22px />' +
+				' width=80px height=80px />' +
 				'&nbsp;&nbsp;</td><td><span><b>{img_src}</b></span> <br/>';
 
 
-				
+
 
 				Ext.getCmp('addtest').add(Ext.create(
 						'Ext.List', {
-							inline: { wrap: false },
-
-							width: 400,
-							height: 200,
-							itemTpl: '<div ><div id="left" style="width: 25%; float:left; font-size: 20px; "><p>{title}</p><p>{title}</p></div><div id="center" style="width: 25%; float:left; font-size: 20px; ">{title}</div><div id="semi-center" style="width: 25%; float:left; font-size: 20px; ">{img_src}</div><div id="right" style="width: 25%; float:left; font-size: 20px; ">{img_src}</div></div>',
+							inline: { wrap: true },
+							width: 105,
+							height: 400,
+							margin: '-2px 0px',
+							//itemTpl: '<div id="xSearchResults" style="height: 60px;" ><img src="{title}"' +
+							//' width=20px height=22px /></div>',
+							itemTpl: '<div id="xSearchResults" style="height: 100px; background: white; border-radius: 5px;" ><img style="border-radius: 5px;"src="{img_src}"' +
+							' width=80px height=80px /><p style="margin-top:-10px; font-size: 1.1em; color: rgb(65, 63, 64); font-family: din medium;" >{title}</p></div>',
+							//itemTpl: '<div ><div id="left" style="width: 25%; float:left; font-size: 20px; "><p>{title}</p><p>{title}</p></div><div id="center" style="width: 25%; float:left; font-size: 20px; ">{title}</div><div id="semi-center" style="width: 25%; float:left; font-size: 20px; ">{img_src}</div><div id="right" style="width: 25%; float:left; font-size: 20px; ">{img_src}</div></div>',
 							//itemTpl: '<div>{title}<br />verified star<br />" "</div>"
 							//itemTpl: myTpl,
 
@@ -156,15 +171,60 @@ Ext.define('smiley360.view.BrowseSearch', {
 							plugins: [
 										{
 											xclass: 'Ext.plugin.ListPaging',
-											autoPaging: true
+											autoPaging: true,
 										}
 							],
 							listeners: {
 								initialize: function () { console.log(this.valueOf()); },
-								
+								itemtap: function () { store.setData(newdata); alert('resetdata'); },
+								//updatedata: function () { store.load() }
 							},
 						}));
+				var xSearchResults = Ext.get('xSearchResults');
+				//var smilesArray = smiley360.missionData.MissionDetails.MissionPoints.sharingToolScore;
+				//var pointsArray = smiley360.missionData.MissionDetails.MissionPoints;
+
+				// clear existed buttons
+				////xSearchResults.setHtml('');
+
+				//for (var key in smilesArray) {
+				//	var oneItem = smilesArray[key];
+				//	var oneButton = this.createShareButton('share-yt-btn', 'sharetofacebookview');
+				//}
+
+				//var divTag = document.createElement("div");
+				//divTag.style.width = '40px';
+				//divTag.style.height = '40px';
+				//divTag.style.margin = '5px 20px 5px 20px';
+				//divTag.style.display = 'inline-block';
+				//divTag.setAttribute("align", "left");
+
+				//oneButton.renderTo(divTag);
+
+				//xSearchResults.appendChild(divTag);
+				//alert('child' + divTag);
+
 			}
 		}
 	},
+	AddFunction: function (title_, img_src_, brand_id_) {
+		Ext.getStore('MyStore').add({ title: title_, img_src: img_src_, brand_id: brand_id_ });
+		//alert('store+1');
+	},
+	createShareButton: function (buttonCls, shareViewAlias) {
+		return new Ext.Button(
+			{
+				icon: 'resources/images/pin_share.png',
+				//cls: buttonCls,
+				height: 70,
+				width: 70,
+				text: 'New',
+				cls: 'customtxt',
+				listeners: {
+					tap: function () {
+						Ext.widget(shareViewAlias).show();
+					}
+				}
+			});
+	}
 });

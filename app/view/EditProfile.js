@@ -43,7 +43,7 @@ Ext.define('smiley360.view.EditProfile', {
 					style: 'background-color: #efecea; padding-bottom: 5px;',
 					items: [{
 						xtype: 'image',
-						//src: '',
+						id: 'userProfileImage',
 						style: 'min-width: 60px;border-style: solid; border-color: white; border-radius: 3px; border-width: 2px;',
 						flex: 1,
 						cls: 'has-shadow',
@@ -71,12 +71,13 @@ Ext.define('smiley360.view.EditProfile', {
 						}]
 					}],
 				}, {
-					xtype: 'textfield',
+					xtype: 'emailfield',
 					placeHolder: 'Email',
 					itemId: 'txtEmail',
 					id: 'email',
 					name: 'txtEmail',
 					cls: 'cust-input',
+					autoCapitalize: false,
 					required: true
 				}, {
 					//xtype: 'datepickerfield',
@@ -253,6 +254,7 @@ Ext.define('smiley360.view.EditProfile', {
 							//first_time = false;//check if custom variable has been set to false
 							if (newValue == 1) {
 								Ext.getCmp('howmanychildren').show();
+								//Ext.getCmp('howmanychildren').setValue(smiley360.memberData.Profile.howmanychildren);
 							}
 							if (newValue != 1) {
 								Ext.getCmp('howmanychildren').hide();
@@ -379,8 +381,8 @@ Ext.define('smiley360.view.EditProfile', {
 									s_hide.hide();
 									//Ext.Msg.alert('dfvgd');
 									make_hide = false;
-									field_about.setValue('');
-									field_url.setValue('');
+									field_about.setValue(smiley360.memberData.Profile.aboutself);
+									field_url.setValue(smiley360.memberData.Profile.blogURL);
 									field_about.setReadOnly(false);
 									field_url.setReadOnly(false);
 									field_about.setPadding('0px 0px');
@@ -463,15 +465,17 @@ Ext.define('smiley360.view.EditProfile', {
 				var profile = smiley360.memberData.Profile;
 
 				for (var field in profile) {
+
 					var element = (field == 'address')
                         ? Ext.getCmp(field + '1')
                         : Ext.getCmp(field);
 
 					if (element) {
+
 						element.setValue(profile[field]);
 					}
 				}
-
+				Ext.getCmp('userProfileImage').setSrc(smiley360.userProfileImage);
 				console.log(smiley360.ProfileDropdowns.raceEthnicity_options.valueOf());
 
 			},
@@ -505,8 +509,9 @@ Ext.define('smiley360.view.EditProfile', {
 				if (item == 'howmanychildren') {
 					for (var it in smiley360.ProfileDropdowns[item]) {
 						var temp_array = new Array();
-						temp_array["text"] = it;
-						temp_array["value"] = smiley360.ProfileDropdowns[item][it][0];
+						temp_array["text"] = smiley360.ProfileDropdowns[item][it];
+						//alert(it); console.log(it.valueOf());
+						temp_array["value"] = parseInt(it);
 						//alert(temp_array["text"] + ": " + temp_array["value"]);
 						otherOptions.push(temp_array);
 					};
@@ -525,9 +530,10 @@ Ext.define('smiley360.view.EditProfile', {
 				if (Ext.getCmp(item)) {
 					me.setAnyOptions(Ext.getCmp(item), otherOptions);
 				};
+			}
+			else {
+
 			};
-
-
 	},
 
 	setAddress: function () {
@@ -535,7 +541,6 @@ Ext.define('smiley360.view.EditProfile', {
 		Ext.getCmp('city').setValue(smiley360.memberData.Profile.city);
 	},
 	setDropdownRace: function () {
-
 		//race
 		this.setOrder(smiley360.ProfileDropdowns.raceEthnicity_options, function (key, value) {
 			//alert(key + ": " + value);

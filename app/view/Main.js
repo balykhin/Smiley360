@@ -52,8 +52,8 @@ Ext.define('smiley360.view.Main', {
             cls: 'cust-tabbar normal-page-bg',
 
             layout: {
-                type : 'card',
-                animation: !Ext.os.is('Android'),
+                type: 'card',
+                animation: { type: 'slide', direction: 'left' },//!Ext.os.is('Android'),
             },
 
             defaults: {
@@ -141,7 +141,7 @@ Ext.define('smiley360.view.Main', {
         }
     },
 
-    setTitle: function(title){
+    setTitle: function (title) {
         xTitlebar.setTitle(title);
     },
 
@@ -157,6 +157,10 @@ Ext.define('smiley360.view.Main', {
     },
 
     showSidePanel: function (currentTab) {
+        if (!currentTab) {
+            currentTab = xTabpanel.getActiveItem().element;
+        }
+
         var currentTabWidth = currentTab.getWidth();
         var panelWidth = currentTabWidth * 0.4;
 
@@ -186,6 +190,10 @@ Ext.define('smiley360.view.Main', {
     },
 
     hideSidePanel: function (currentTab) {
+        if (!currentTab) {
+            currentTab = xTabpanel.getActiveItem().element;
+        }
+
         var currentTabWidth = currentTab.getWidth();
         var panelWidth = currentTabWidth * 0.4;
 

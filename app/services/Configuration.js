@@ -6,6 +6,10 @@ smiley360.configuration.isDebugMode = function () {
     return false;
 }
 
+smiley360.configuration.getServerDomain = function () {
+    return "http://smileys.ekonx.net.ua/";
+}
+
 smiley360.configuration.getServerUrl = function () {
     return "http://smileys.ekonx.net.ua/index.php/";
 }

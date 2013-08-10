@@ -16,6 +16,7 @@
 			docked: 'top',
 			items: [{
 				xtype: 'image',
+				id: 'xProfileImage',
 				style: ' min-height: 60px; min-width: 80px;background-color:white;',
 			}, {
 				xtype: 'label',
@@ -75,14 +76,13 @@
 			}, {
 				xtype: 'button',
 				text: 'Tutorial',
-				disabled: true,
 				margin: '20px 0px 0px 0px',
 				style: 'color: white; font-family: franklin; font-weight: normal; text-align: right;',
 				cls: 'listmenuitem',
 				ui: 'plain',
 				listeners: {
 					tap: function () {
-						alert('Tutorial!');//Ext.widget('contactusview').show();//this.up('#xHomeView').fireEvent('getProfileHomeCommand', this);
+					    smiley360.animateViewLeft('tutorialiew');
 					}
 				}
 			}, {
@@ -94,7 +94,7 @@
 				ui: 'plain',
 				listeners: {
 					tap: function () {
-						Ext.widget('contactusview').show();//this.up('#xHomeView').fireEvent('getProfileHomeCommand', this);
+						Ext.widget('contactusview').show();
 					}
 				}
 			}, {

@@ -315,6 +315,22 @@ smiley360.services.getHotBrands = function (onCompleted) {
 		);
 }
 
+/*********************** Create Methods *************/
+
+smiley360.services.createComment = function (commentData, onCompleted) {
+    smiley360.services.ajax(
+        "create_smileyConnect_comment",
+        {
+            memberID: commentData.memberID,
+            brandID: commentData.brandID,
+            text: commentData.text,
+            rating: commentData.rating,
+            pageSize: commentData.pageSize,
+            photoData: commentData.photoData,
+        },
+        onCompleted);
+}
+
 /*********************** Util for EditProfile dropdowns *************/
 
 smiley360.services.getLocation = function (zip, onCompleted) {
@@ -440,7 +456,7 @@ smiley360.services.acceptMission = function (memberID, missionID, onCompleted) {
 		);
 }
 
-/*****************ContactUs Method*****************/
+/***************** ContactUs Methods *****************/
 
 smiley360.services.contactUs = function (memberID, name, email, category, comment, onCompleted) {
     smiley360.services.ajax(
@@ -456,7 +472,7 @@ smiley360.services.contactUs = function (memberID, name, email, category, commen
 		);
 }
 
-/*****************Address Methods******************/
+/***************** Address Methods ******************/
 
 smiley360.services.getMemberAddress = function (memberID, onCompleted) {
     smiley360.services.ajax(
@@ -579,7 +595,7 @@ smiley360.services.postToUploadPhoto = function (postData, onCompleted) {
             missionID: postData.missionID,
             memberID: postData.memberID,
             text: postData.text,
-            postOptionIDs: postOptionIDs,
+            postOptionIDs: postData.postOptionIDs,
         },
         onCompleted);
 }

@@ -67,7 +67,8 @@ Ext.application({
 		'MissionCompleted',
 		'MissingOffers',
         'SideMenu',
-		'BrowseSearch'
+		'BrowseSearch',
+        'Tutorial',
     ],
     icon: {
         '36': 'resources/icons/Icon_Android36.png',

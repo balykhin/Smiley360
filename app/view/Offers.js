@@ -265,7 +265,7 @@ Ext.define('smiley360.view.Offers', {
 		Ext.getCmp('xOfferList3').removeAll(true, true);
 		Ext.getCmp('xOfferList4').removeAll(true, true);
 		//end bugfix, need to be rewrited
-		if (smiley360.memberData.isProfileComplete.complete == 'false')
+		if (smiley360.memberData.isProfileComplete.complete == 'true')
 			for (var key in smiley360.memberData.Offers) {
 				var oneItem = smiley360.memberData.Offers[key];
 				var allContainer = new Ext.Container({

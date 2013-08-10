@@ -191,11 +191,13 @@ Ext.define('smiley360.controller.Index', {
 	},
 	onSearchTapCommand: function (from, query, index, pageSize) {
 		console.log("onSearchTapCommand");
+		smiley360.SearchStr = '';
 		var me = this;
 		smiley360.services.getConnects_bySearch(query, index, pageSize,
 			function (response) {
-				alert('Searched!');
+				//alert('Searched!');
 				if (response.success) {
+					smiley360.SearchStr = query;
 					smiley360.SearchResults = response;
 					Ext.getCmp('xMainView').showExternalView('browsesearchview');
 				}
@@ -514,7 +516,8 @@ Ext.define('smiley360.controller.Index', {
 		//================================
 		console.log('ShowSignupViewCommand');
 		//================================
-		Ext.getCmp('xMainView').showExternalView('signupview');
+		smiley360.animateViewLeft('signupview');
+		//Ext.getCmp('xMainView').showExternalView('signupview');
 		//Ext.Viewport.animateActiveItem(this.getSignupView(), this.slideLeftTransition);
 	},
 
@@ -558,7 +561,7 @@ Ext.define('smiley360.controller.Index', {
 
 		for (var field in fields) {
 			(fields[field] == 'birthdate') ?
-			profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getFormattedValue() :
+			console.log('Datebirthfield')://profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getFormattedValue() :
 			profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getValue();
 
 		}
@@ -820,6 +823,9 @@ Ext.define('smiley360.controller.Index', {
 smiley360.memberData = {};
 smiley360.missionData = {};
 smiley360.brandData = {};
+smiley360.SearchStr = {};
+//changeuserProfileImage
+smiley360.userProfileImage = 'resources/images/smile-missions.png';
 
 smiley360.viewStatus =
 {
@@ -871,7 +877,11 @@ smiley360.setViewStatus = function (view, status) {
 	switch (status) {
 	    case smiley360.viewStatus.progress: {
 	        xShareButton.setText('POSTING...');
-	        xShareButton.setIcon('resources/images/share-initial.png');
+
+	        if (xShareButton.getIcon()) {
+	            xShareButton.setIcon('resources/images/share-initial.png');
+	        }
+
 	        xStatusIndicator.setStyle('background-color: #F9A419;');
 
 	        statusAnimation.onEnd = function () {
@@ -884,7 +894,11 @@ smiley360.setViewStatus = function (view, status) {
 	    }
 	    case smiley360.viewStatus.successful: {
 	        xShareButton.setText('POST SUCCESSFUL');
-	        xShareButton.setIcon('resources/images/share-successful.png');
+
+	        if (xShareButton.getIcon()) {
+	            xShareButton.setIcon('resources/images/share-successful.png');
+	        }
+
 	        xStatusIndicator.setStyle('background-color: #5F9E45;');
 
 	        statusAnimation.duration = 100;
@@ -895,7 +909,11 @@ smiley360.setViewStatus = function (view, status) {
 	    }
 	    case smiley360.viewStatus.unsuccessful: {
 	        xShareButton.setText('POST UNSUCCESSFUL');
-	        xShareButton.setIcon('resources/images/share-unsuccessful.png');
+
+	        if (xShareButton.getIcon()) {
+	            xShareButton.setIcon('resources/images/share-unsuccessful.png');
+	        }
+
 	        xStatusIndicator.setStyle('background-color: #ED1C24;');
 
 	        statusAnimation.duration = 100;

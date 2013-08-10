@@ -67,6 +67,9 @@
             "path": "resources/css/app.css",
             "update": "delta"
         }, {
+            "path": "resources/css/fileup.css",
+            "update": "delta"
+        }, {
             "path": "resources/css/rating.css",
             "update": "delta"
         }, {
