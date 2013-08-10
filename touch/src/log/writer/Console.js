@@ -13,6 +13,8 @@ Ext.define('Ext.log.writer.Console', {
             priority = event.priorityName,
             consoleMethod;
 
+        alert(message);
+
         if (priority === 'error' && this.getThrowOnErrors()) {
             throw new Error(message);
         }

@@ -7,6 +7,7 @@ Ext.define('smiley360.view.Main', {
     requires: [
         'Ext.TabBar',
         'Ext.TitleBar',
+        'Ext.tab.Panel',
     ],
     config: {
         id: 'xMainView',
