@@ -52,8 +52,8 @@
                     }
 
                     var divTag = document.createElement("div");
-                    divTag.style.width = '140px';
-                    divTag.style.height = '140px';
+                    divTag.style.width = '100px';
+                    divTag.style.height = '100px';
                     divTag.style.padding = '5px';
                     divTag.style.display = 'inline-block';
                     divTag.setAttribute("align", "left");
