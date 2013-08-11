@@ -278,7 +278,7 @@ Ext.define('smiley360.view.Offers', {
 						tap: function () {
 							console.log('Offers -> Offer Container tap listener: ', oneItem.valueOf());
 
-							if (oneItem.mission_categoryID == "2") {
+							if (oneItem.mission_categoryID == "1") {
 								this.up('#xOfferView').fireEvent('LoadOfferDetailsCommand', this, this.getId().substr(12))
 							}
 							else {

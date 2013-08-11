@@ -928,6 +928,18 @@ smiley360.setViewStatus = function (view, status) {
 	Ext.Animator.run(statusAnimation);
 }
 
+smiley360.adjustPopupSize = function (view) {
+    var contentHeight = view.down('#xRootPanel').element.getHeight();
+    var containerHeight = Ext.Viewport.element.getHeight() * 0.9;
+
+    if (containerHeight > contentHeight) {
+        view.setHeight(contentHeight);
+    }
+    else {
+        view.setHeight(containerHeight);
+    }
+}
+
 smiley360.animateViewLeft = function (viewAlias) {
 	var view = smiley360.getOrCreateView(viewAlias);
 

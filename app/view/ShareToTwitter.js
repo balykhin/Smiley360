@@ -115,7 +115,7 @@
         }],
         listeners: {
             initialize: function () {
-                this.setHeight(this.down('#xRootPanel').element.getHeight());
+                smiley360.adjustPopupSize(this);
             },
             hide: function () {
                 this.destroy();

@@ -182,7 +182,7 @@ Ext.define('smiley360.view.OfferAcceptAddress', {
 		}],
 		listeners: {
 			initialize: function () {
-				this.setHeight(Ext.getCmp('xRootPanel').element.getHeight());
+				smiley360.adjustPopupSize(this);
 			},
 			painted: function () {
 				if (smiley360.memberData.Profile.address_status == '2') {
@@ -301,6 +301,6 @@ Ext.define('smiley360.view.OfferAcceptAddress', {
 			default:
 		}
 		// resize container after state has been changed
-		this.setHeight(Ext.getCmp('xRootPanel').element.getHeight());
+		smiley360.adjustPopupSize(this);
 	}
 });

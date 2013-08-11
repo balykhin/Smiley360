@@ -281,7 +281,7 @@ Ext.define('smiley360.view.ReviewForFender', {
         }],
         listeners: {
             initialize: function () {
-                this.setHeight(this.down('#xRootPanel').element.getHeight());
+                smiley360.adjustPopupSize(this);
             },
             hide: function () {
                 this.destroy();
@@ -320,7 +320,7 @@ Ext.define('smiley360.view.ReviewForFender', {
         this.down('#xTitleLabel').setHtml('Add your Review for Fender')
         this.down('#xShareButton').setText('ADD REVIEW');
 
-        this.setHeight(this.down('#xRootPanel').element.getHeight());
+        smiley360.adjustPopupSize(this);
     },
 
     showGuidelines: function () {
@@ -331,6 +331,6 @@ Ext.define('smiley360.view.ReviewForFender', {
         this.down('#xTitleLabel').setHtml('Review Guidelines')
         this.down('#xShareButton').setText('GO BACK TO YOUR REVIEW');
 
-        this.setHeight(this.down('#xRootPanel').element.getHeight());
+        smiley360.adjustPopupSize(this);
     },
 });
