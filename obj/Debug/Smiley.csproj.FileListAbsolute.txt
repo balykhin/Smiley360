@@ -1,5 +1,0 @@
-F:\Job\Anton\Smiley\Sources\trunk\Smiley\bin\Smiley.dll
-F:\Job\Anton\Smiley\Sources\trunk\Smiley\bin\Smiley.pdb
-F:\Job\Anton\Smiley\Sources\trunk\Smiley\obj\Debug\Smiley.csprojResolveAssemblyReference.cache
-F:\Job\Anton\Smiley\Sources\trunk\Smiley\obj\Debug\Smiley.dll
-F:\Job\Anton\Smiley\Sources\trunk\Smiley\obj\Debug\Smiley.pdb
