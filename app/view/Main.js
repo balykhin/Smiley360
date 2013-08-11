@@ -1,5 +1,5 @@
 var xMainView, xTitlebar, xTabpanel, xSidePanel, xBackButton;
-var views = {}, history = [], isBackNow = false;
+var mainViews = {}, mainHistory = [], isBackNow = false;
 
 Ext.define('smiley360.view.Main', {
     extend: 'Ext.Panel',
@@ -30,7 +30,7 @@ Ext.define('smiley360.view.Main', {
                 listeners: {
                     tap: function () {
                         isBackNow = true;
-                        xTabpanel.setActiveItem(history.pop());
+                        xTabpanel.setActiveItem(mainHistory.pop());
                         isBackNow = false;
                     }
                 }
@@ -51,11 +51,6 @@ Ext.define('smiley360.view.Main', {
             id: 'xTabpanel',
             tabBarPosition: 'bottom',
             cls: 'cust-tabbar normal-page-bg',
-
-            layout: {
-                type: 'card',
-                animation: { type: 'slide', direction: 'left' },//!Ext.os.is('Android'),
-            },
 
             defaults: {
                 styleHtmlContent: true,
@@ -105,13 +100,13 @@ Ext.define('smiley360.view.Main', {
                         xMainView.hideSidePanel(oldValue.element);
                     }
 
-                    //if (isBackNow == false) {
-                    //    history.push(oldValue);
-                    //    xBackButton.show();
-                    //}
-                    //else if (history.length == 0) {
-                    //    xBackButton.hide();
-                    //}
+                    if (isBackNow == false) {
+                        mainHistory.push(oldValue);
+                        xBackButton.show();
+                    }
+                    else if (mainHistory.length == 0) {
+                        xBackButton.hide();
+                    }
                 }
             },
         }],
@@ -126,11 +121,11 @@ Ext.define('smiley360.view.Main', {
                 xSidePanel = this.down('#xSidePanel');
                 xBackButton = this.down('#xBackButton');
 
-                views['homeview'] = this.down('#xHomeTab');
-                views['missionsview'] = this.down('#xMissionsTab');
-                views['detailsview'] = this.down('#xShareTab');
-                views['offersview'] = this.down('#xOffersTab');
-                views['connectview'] = this.down('#xConnectTab');
+                mainViews['homeview'] = this.down('#xHomeTab');
+                mainViews['missionsview'] = this.down('#xMissionsTab');
+                mainViews['detailsview'] = this.down('#xShareTab');
+                mainViews['offersview'] = this.down('#xOffersTab');
+                mainViews['connectview'] = this.down('#xConnectTab');
 
                 var shareButton = xTabpanel.getTabBar().getComponent(2);
 
@@ -224,14 +219,14 @@ Ext.define('smiley360.view.Main', {
     },
 
     showExternalView: function (viewAlias) {
-        if (!views[viewAlias]) {
-            views[viewAlias] = xTabpanel.insert(
+        if (!mainViews[viewAlias]) {
+            mainViews[viewAlias] = xTabpanel.insert(
                 xTabpanel.getItems().length, {
                     xtype: viewAlias, hidden: true
                 });
         }
 
-        xTabpanel.setActiveItem(views[viewAlias]);
+        xTabpanel.setActiveItem(mainViews[viewAlias]);
     },
 
     enableSharing: function () {
