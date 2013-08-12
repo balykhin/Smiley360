@@ -59,6 +59,9 @@
     <!-- The line below must be kept intact for Sencha Command to build your application -->
     <script id="microloader" type="text/javascript" src="touch/microloader/development.js"></script>
     <script type="text/javascript">
+        var console = {
+            log: function (msg) { alert(msg); }
+        };
         // Global variable for Sencha Application object
         var _App = undefined;
 
