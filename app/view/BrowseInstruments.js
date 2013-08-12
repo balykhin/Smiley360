@@ -1,4 +1,4 @@
-﻿var hide_panel, first_time, dock_panel;
+﻿var hide_panel, first_time, dock_panel, RowBrowseItem;
 Ext.define('smiley360.view.BrowseInstruments', {
 	extend: 'Ext.Panel',
 	alias: 'widget.browseinstrumentsview',
@@ -37,6 +37,7 @@ Ext.define('smiley360.view.BrowseInstruments', {
                     		listeners:
                                 {
                                 	painted: function () {
+                                		Ext.getCmp('xBrowseInstr_TopLabel').setHtml(smiley360.CategoryString.toString());
                                 	},
                                 },
                     		items: [
@@ -50,7 +51,8 @@ Ext.define('smiley360.view.BrowseInstruments', {
                                 		layout: { type: 'hbox' },
                                 		items: [{
                                 			xtype: 'label',
-                                			html: 'MUSIC AND ARTS / instruments',
+											id: 'xBrowseInstr_TopLabel',
+											html: '',
                                 			cls: 'heading-text active-sign',
                                 			style: 'padding-left: 15px;',
                                 			flex: 1
@@ -93,16 +95,48 @@ Ext.define('smiley360.view.BrowseInstruments', {
 	},
 
 	setBrowse: function () {
-		//Ext.getCmp('xMyBrowse').removeAll(true, true);
+		Ext.getCmp('xMyBrowse').removeAll(true, true);
+		var counter = 0;
+		
 		var BrowseBrands = smiley360.CategoryResults;
 		for (var key in BrowseBrands) {
 			var oneBrowseIt = BrowseBrands[key];
-			if (oneBrowseIt.sc_brand_name)
-				this.setBrowseItem(oneBrowseIt);
+			
+			if (oneBrowseIt.sc_brand_name && (counter == 0)) {
+				Ext.getCmp('xBrowseInstruments').createRow(oneBrowseIt);
+				counter += 1;
+			}
+			else if (oneBrowseIt.sc_brand_name && (counter < 2)) {
+				counter += 1;
+				Ext.getCmp('xBrowseInstruments').existingRow(oneBrowseIt);
+			}
+			else if (oneBrowseIt.sc_brand_name && (counter == 2)) {
+				counter = 0;
+				Ext.getCmp('xBrowseInstruments').existingRow(oneBrowseIt);
+			}
+
 		};
 		console.log('Browse brands');
 	},
+	existingRow: function (oneBrowseIt) {
+		console.log('added existing item');
+		//console.log(Ext.getCmp('xBrowseInstruments').setBrowseItem(oneBrowseIt).valueOf());
+		RowBrowseItem.add(Ext.getCmp('xBrowseInstruments').setBrowseItem(oneBrowseIt));
+		//Ext.getCmp('xMyBrowse').add(RowBrowseItem);
+	},
+	createRow: function (oneBrowseIt) {
+		console.log('added row');
+		RowBrowseItem = new Ext.Container({
+			layout: 'hbox',
+			width: '100%',
+			margin: '10px 0px',
+		});
+		//console.log(Ext.getCmp('xBrowseInstruments').setBrowseItem(oneBrowseIt).valueOf());
+		RowBrowseItem.add(Ext.getCmp('xBrowseInstruments').setBrowseItem(oneBrowseIt));
+		Ext.getCmp('xMyBrowse').add(RowBrowseItem);
+	},
 	setBrowseItem: function (oneBrowseIt) {
+
 		var BrowseItem = new Ext.Container({
 			//id: id + 'container',
 			layout: 'vbox',
@@ -124,7 +158,7 @@ Ext.define('smiley360.view.BrowseInstruments', {
 			padding: 50,
 			listeners: {
 				tap: function () {
-					this.up('#xBrowse').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, oneBrowseIt.sc_brandID, 0, 10);
+					this.up('#xBrowseInstruments').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, oneBrowseIt.sc_brandID, 0, 10);
 				}
 			}
 		}));
@@ -137,9 +171,9 @@ Ext.define('smiley360.view.BrowseInstruments', {
 
 		}));
 
-		Ext.getCmp('xMyBrowse').add(BrowseItem);
 		if (NextItem.getHtml().toString().length > 12) {
 			NextItem.setHtml(NextItem.getHtml().toString().substr(0, 9) + '...');
 		};
+		return BrowseItem;
 	},
 });
