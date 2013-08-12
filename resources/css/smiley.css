@@ -1004,3 +1004,9 @@
 	text-overflow: ellipsis;
 	text-align: left;
 }
+.searchlist .x-list-item-body {
+	min-height: 46px;
+	padding: 0.65em 0.8em;
+	background: #e2ddda;
+	height: 280px;
+}

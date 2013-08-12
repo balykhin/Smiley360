@@ -106,19 +106,7 @@ Ext.define('smiley360.view.Login', {
                 xtype: 'panel',
                 layout: 'hbox',
                 items: [ ],
-            }, {
-                xtype: 'panel',
-                layout: 'hbox',
-                items: [					
-				{
-				    xtype: 'button',
-				    itemId: 'xShare',
-				    text: 'Sh',
-				    width: '70px',
-				    ui: 'confirm',
-				    tap: 'onxShare'
-				}, ],
-            }],
+            }, ],
         }],
         listeners: [{
             delegate: "#xShare",

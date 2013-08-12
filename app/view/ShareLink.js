@@ -48,6 +48,7 @@
                     html: 'Copy the following link',
                 }, {
                     xtype: 'textfield',
+                    id: 'xLinkField',
                     disabled: true,
                     cls: 'cust-input',
                     value: 'http://smiley360.com/768768768',
@@ -57,15 +58,11 @@
                 cls: 'popup-button-panel',
                 items: [{
                     xtype: 'button',
-                    text: 'COPY',
-                    icon: 'resources/images/share-copy.png',
-                    iconAlign: 'right',
-                    iconCls: 'popup-post-icon',
-                    id: 'xCopyButton',
-                    cls: 'popup-post-button',
+                    text: 'DONE',
+                    cls: 'popup-submit-button',
                     listeners: {
                         tap: function () {
-                            Ext.getCmp('xView').doCopy();
+                            Ext.getCmp('xView').hide();
                         }
                     },
                 }],
@@ -74,13 +71,15 @@
         listeners: {
             initialize: function () {
                 smiley360.adjustPopupSize(this);
+
+                var xLinkField = this.down('#xLinkField');
+
+                xLinkField.focus();
+                xLinkField.select();
             },
             hide: function () {
                 this.destroy();
             }
         },
-    },
-
-    doCopy: function () {
     },
 });

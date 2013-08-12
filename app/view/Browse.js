@@ -1315,7 +1315,7 @@ Ext.define('smiley360.view.Browse', {
 					listeners: {
 						element: 'element',
 						tap: function () {
-							this.up('#xBrowse').fireEvent('onBrowseResultsByCategoryTapCommand', this, 1, 1, 1, 1);
+							this.up('#xBrowse').fireEvent('onBrowseResultsByCategoryTapCommand', this, 1, 1, 10, 10);
 						}
 					}
 				}));

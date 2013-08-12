@@ -43,6 +43,7 @@ Ext.define('smiley360.view.BrowseSearch', {
                                 {
                                 	xtype: 'container',
                                 	id: 'addtest',
+                                	style: 'background: #e2ddda;',
                                 	laytout: { type: 'vbox' },
                                 	cls: 'has-shadow',
                                 	items: [
@@ -155,14 +156,22 @@ Ext.define('smiley360.view.BrowseSearch', {
 
 				Ext.getCmp('addtest').add(Ext.create(
 						'Ext.List', {
-							inline: { wrap: true },
-							width: 105,
+							cls: 'searchlist',
+							style: 'background: #e2ddda;',
+							inline: { wrap: false },
+							width: 400,
 							height: 400,
-							margin: '-2px 0px',
+							//margin: '-2px 0px',
 							//itemTpl: '<div id="xSearchResults" style="height: 60px;" ><img src="{title}"' +
 							//' width=20px height=22px /></div>',
-							itemTpl: '<div id="xSearchResults" style="height: 100px; background: white; border-radius: 5px;" ><img style="border-radius: 5px;"src="{img_src}"' +
-							' width=80px height=80px /><p style="margin-top:-10px; font-size: 1.1em; color: rgb(65, 63, 64); font-family: din medium;" >{title}</p></div>',
+							itemTpl: '<div id="xSearchResults" style="margin: 10px 20px; float: left; background: white; border-radius: 5px;" ><img style="border-radius: 5px;"src="{img_src}"' +
+							' width=auto height=auto /><p style="text-align: center; margin-top:-10px; font-size: 0.9em; color: rgb(65, 63, 64); font-family: din medium;" >{title}</p></div>' + 
+							 '<div id="xSearchResults" style="margin: 10px 20px; float: left; background: white; border-radius: 5px;" ><img style="border-radius: 5px;"src="{img_src}"' +
+							' width=auto height=auto /><p style="text-align: center; margin-top:-10px; font-size: 0.9em; color: rgb(65, 63, 64); font-family: din medium;" >{title}</p></div>' +
+							 '<div id="xSearchResults" style="margin: 10px 20px; float: left; background: white; border-radius: 5px;" ><img style="border-radius: 5px;"src="{img_src}"' +
+							' width=auto height=auto /><p style="text-align: center; margin-top:-10px; font-size: 0.9em; color: rgb(65, 63, 64); font-family: din medium;" >{title}</p></div>' +
+							 '<div id="xSearchResults" style="margin: 10px 20px; float: left; background: white; border-radius: 5px;" ><img style="border-radius: 5px;"src="{img_src}"' +
+							' width=auto height=auto /><p style="text-align: center; margin-top:-10px; font-size: 0.9em; color: rgb(65, 63, 64); font-family: din medium;" >{title}</p></div>',
 							//itemTpl: '<div ><div id="left" style="width: 25%; float:left; font-size: 20px; "><p>{title}</p><p>{title}</p></div><div id="center" style="width: 25%; float:left; font-size: 20px; ">{title}</div><div id="semi-center" style="width: 25%; float:left; font-size: 20px; ">{img_src}</div><div id="right" style="width: 25%; float:left; font-size: 20px; ">{img_src}</div></div>',
 							//itemTpl: '<div>{title}<br />verified star<br />" "</div>"
 							//itemTpl: myTpl,

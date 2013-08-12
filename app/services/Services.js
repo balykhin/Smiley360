@@ -408,7 +408,7 @@ smiley360.services.getProfileDropdowns = function (onCompleted) {
 														    if (!response.success) { onCompleted(response) }
 														    else { delete response.success; }
 
-														    dropdownValues.raceEthnicity_options = response;
+														    dropdownValues.race = response;
 														    smiley360.services.ajax(
 																"get_state_options",
 																{

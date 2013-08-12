@@ -370,8 +370,8 @@ Ext.define('smiley360.view.EditProfile', {
 								if (make_hide == false) {
 									s_hide.show();
 									make_hide = true;
-									field_about.setValue(' ');
-									field_url.setValue(' ');
+									field_about.setValue(smiley360.memberData.Profile.aboutself);
+									field_url.setValue(smiley360.memberData.Profile.blogURL);
 									field_about.setReadOnly(true);
 									field_url.setReadOnly(true);
 									field_about.setPadding('0px 20px');
@@ -432,6 +432,7 @@ Ext.define('smiley360.view.EditProfile', {
 				items: [{
 					xtype: 'button',
 					itemId: 'btnSavechanges',
+					style: 'z-index: 0;',
 					cls: 'cust-btn signup-btn save-changes-btn',
 					text: 'SAVE CHANGES',
 					listeners: {
@@ -470,13 +471,43 @@ Ext.define('smiley360.view.EditProfile', {
                         ? Ext.getCmp(field + '1')
                         : Ext.getCmp(field);
 
-					if (element) {
-
+					if (element && (field != 'race')) {
 						element.setValue(profile[field]);
 					}
-				}
+					else if (field == 'race') {
+						Ext.getCmp('race_etn').setReadOnly(true);
+						if (profile.race) {
+							Ext.getCmp('race_etn').setValue('Race / Ethnicity');
+							for (var raceID_key in profile.race) {
+								switch (profile.race[raceID_key]) {
+									case '1':
+										Ext.getCmp('raceCheckbox1').check();
+										break;
+									case '2':
+										Ext.getCmp('raceCheckbox2').check();
+										break;
+									case '3':
+										Ext.getCmp('raceCheckbox3').check();
+										break;
+									case '4':
+										Ext.getCmp('raceCheckbox4').check();
+										break;
+									case '5':
+										Ext.getCmp('raceCheckbox5').check();
+										break;
+									case '6':
+										Ext.getCmp('raceCheckbox6').check();
+										break;
+									default:
+								};
+							};
+						}
+						else {
+						};
+					};
+				};
 				Ext.getCmp('userProfileImage').setSrc(smiley360.userProfileImage);
-				console.log(smiley360.ProfileDropdowns.raceEthnicity_options.valueOf());
+				//console.log(smiley360.ProfileDropdowns.race.valueOf());
 
 			},
 
@@ -504,15 +535,13 @@ Ext.define('smiley360.view.EditProfile', {
 		var me = this;
 		var otherOptions = [];
 		for (var item in smiley360.ProfileDropdowns)
-			if (item != 'raceEthnicity_options') {
+			if (item != 'race') {
 				otherOptions = [];
 				if (item == 'howmanychildren') {
 					for (var it in smiley360.ProfileDropdowns[item]) {
 						var temp_array = new Array();
 						temp_array["text"] = smiley360.ProfileDropdowns[item][it];
-						//alert(it); console.log(it.valueOf());
 						temp_array["value"] = parseInt(it);
-						//alert(temp_array["text"] + ": " + temp_array["value"]);
 						otherOptions.push(temp_array);
 					};
 				}
@@ -542,7 +571,7 @@ Ext.define('smiley360.view.EditProfile', {
 	},
 	setDropdownRace: function () {
 		//race
-		this.setOrder(smiley360.ProfileDropdowns.raceEthnicity_options, function (key, value) {
+		this.setOrder(smiley360.ProfileDropdowns.race, function (key, value) {
 			//alert(key + ": " + value);
 			var allContainer = new Ext.Container({
 				id: value.toString() + 'check-panel',
@@ -551,7 +580,7 @@ Ext.define('smiley360.view.EditProfile', {
 				padding: 5,
 			});
 			allContainer.add(new Ext.field.Checkbox({
-
+				id: 'raceCheckbox' + value.toString(),
 				cls: 'popup-checkbox',
 				height: 23,
 				width: 23,

@@ -555,15 +555,32 @@ Ext.define('smiley360.controller.Index', {
 			'marital',
 			'children',
 			'howmanychildren',
-			'income');
+			'income',
+			'race');
 
 		var profArray = {};
 
 		for (var field in fields) {
-			(fields[field] == 'birthdate') ?
-			console.log('Datebirthfield')://profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getFormattedValue() :
+			(fields[field] == 'birthdate' || fields[field] == 'race') ?
+			console.log('Datebirthfield or Race') ://profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getFormattedValue() :
 			profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getValue();
-
+			if (fields[field] == 'race') {
+				profArray[fields[field]] = '';
+				var chbArray = Ext.ComponentQuery.query('#ddlCheckboxes checkboxfield');
+				for (var chbItem in chbArray)
+					if (chbArray[chbItem].isChecked()) {
+						if (profArray[fields[field]] == '')
+							profArray[fields[field]] += chbArray[chbItem].getId().toString().substr(chbArray[chbItem].getId().toString().length - 1, chbArray[chbItem].getId().toString().length - 1)
+						else profArray[fields[field]] += ',' + chbArray[chbItem].getId().toString().substr(chbArray[chbItem].getId().toString().length - 1, chbArray[chbItem].getId().toString().length - 1)
+					}
+				//alert(profArray[fields[field]]);
+				if (!Ext.getCmp('ddlCheckboxes').isHidden())
+				{
+					profArray['aboutself'] = smiley360.memberData.Profile.aboutself;
+					profArray['blogURL'] = smiley360.memberData.Profile.blogURL;
+				}
+			}
+			
 		}
 
 		smiley360.services.setProfile(smiley360.memberData.UserId, profArray,
@@ -837,15 +854,15 @@ smiley360.viewStatus =
 
 smiley360.sharingType =
 {
-    facebook: '2',
-    twitter: '3',
-    shareLink: '4',
-    face2face: '5',
-    smileyConnect: '6',
-    uploadPhoto: '9',
-    blog: '10',
-    youtube: '11',
-    pinterest: '12',
+	facebook: '2',
+	twitter: '3',
+	shareLink: '4',
+	face2face: '5',
+	smileyConnect: '6',
+	uploadPhoto: '9',
+	blog: '10',
+	youtube: '11',
+	pinterest: '12',
 }
 
 smiley360.setResponseStatus = function (view, response) {
@@ -866,78 +883,78 @@ smiley360.setViewStatus = function (view, status) {
 	var xShareButton = view.down('#xShareButton');
 	var xStatusIndicator = view.down('#xStatusIndicator');
 	var statusAnimation = {
-	    element: xStatusIndicator.element,
-	    easing: 'ease-out',
-	    duration: 2000,
-	    preserveEndState: true,
-	    from: { width: 0 },
-	    to: { width: view.getWidth() },
+		element: xStatusIndicator.element,
+		easing: 'ease-out',
+		duration: 2000,
+		preserveEndState: true,
+		from: { width: 0 },
+		to: { width: view.getWidth() },
 	};
 
 	switch (status) {
-	    case smiley360.viewStatus.progress: {
-	        xShareButton.setText('POSTING...');
+		case smiley360.viewStatus.progress: {
+			xShareButton.setText('POSTING...');
 
-	        if (xShareButton.getIcon()) {
-	            xShareButton.setIcon('resources/images/share-initial.png');
-	        }
+			if (xShareButton.getIcon()) {
+				xShareButton.setIcon('resources/images/share-initial.png');
+			}
 
-	        xStatusIndicator.setStyle('background-color: #F9A419;');
+			xStatusIndicator.setStyle('background-color: #F9A419;');
 
-	        statusAnimation.onEnd = function () {
-	            if (xShareButton.getText() == 'POSTING...') {
-	                Ext.Animator.run(statusAnimation);
-	            }
-	        };
+			statusAnimation.onEnd = function () {
+				if (xShareButton.getText() == 'POSTING...') {
+					Ext.Animator.run(statusAnimation);
+				}
+			};
 
-	        break;
-	    }
-	    case smiley360.viewStatus.successful: {
-	        xShareButton.setText('POST SUCCESSFUL');
+			break;
+		}
+		case smiley360.viewStatus.successful: {
+			xShareButton.setText('POST SUCCESSFUL');
 
-	        if (xShareButton.getIcon()) {
-	            xShareButton.setIcon('resources/images/share-successful.png');
-	        }
+			if (xShareButton.getIcon()) {
+				xShareButton.setIcon('resources/images/share-successful.png');
+			}
 
-	        xStatusIndicator.setStyle('background-color: #5F9E45;');
+			xStatusIndicator.setStyle('background-color: #5F9E45;');
 
-	        statusAnimation.duration = 100;
-	        statusAnimation.easing = 'ease-in',
+			statusAnimation.duration = 100;
+			statusAnimation.easing = 'ease-in',
             statusAnimation.from = { width: xStatusIndicator.getWidth() };
 
-	        break;
-	    }
-	    case smiley360.viewStatus.unsuccessful: {
-	        xShareButton.setText('POST UNSUCCESSFUL');
+			break;
+		}
+		case smiley360.viewStatus.unsuccessful: {
+			xShareButton.setText('POST UNSUCCESSFUL');
 
-	        if (xShareButton.getIcon()) {
-	            xShareButton.setIcon('resources/images/share-unsuccessful.png');
-	        }
+			if (xShareButton.getIcon()) {
+				xShareButton.setIcon('resources/images/share-unsuccessful.png');
+			}
 
-	        xStatusIndicator.setStyle('background-color: #ED1C24;');
+			xStatusIndicator.setStyle('background-color: #ED1C24;');
 
-	        statusAnimation.duration = 100;
-	        statusAnimation.easing = 'ease-in',
+			statusAnimation.duration = 100;
+			statusAnimation.easing = 'ease-in',
             statusAnimation.from = { width: xStatusIndicator.getWidth() };
 
-	        break;
-	    }
-	    default:
+			break;
+		}
+		default:
 	}
 
 	Ext.Animator.run(statusAnimation);
 }
 
 smiley360.adjustPopupSize = function (view) {
-    var contentHeight = view.down('#xRootPanel').element.getHeight();
-    var containerHeight = Ext.Viewport.element.getHeight() * 0.9;
+	var contentHeight = view.down('#xRootPanel').element.getHeight();
+	var containerHeight = Ext.Viewport.element.getHeight() * 0.9;
 
-    if (containerHeight > contentHeight) {
-        view.setHeight(contentHeight);
-    }
-    else {
-        view.setHeight(containerHeight);
-    }
+	if (containerHeight > contentHeight) {
+		view.setHeight(contentHeight);
+	}
+	else {
+		view.setHeight(containerHeight);
+	}
 }
 
 smiley360.animateViewLeft = function (viewAlias) {
