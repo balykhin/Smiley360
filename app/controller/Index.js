@@ -561,18 +561,30 @@ Ext.define('smiley360.controller.Index', {
 		var profArray = {};
 
 		for (var field in fields) {
-			(fields[field] == 'birthdate' || fields[field] == 'race') ?
-			console.log('Datebirthfield or Race') ://profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getFormattedValue() :
-			profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getValue();
+		    if (fields[field] == 'birthdate' || fields[field] == 'race') {
+		        console.log('Datebirthfield or Race')
+		    }
+		    else {
+		        profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getValue();
+		    }
+
 			if (fields[field] == 'race') {
-				profArray[fields[field]] = '';
-				var chbArray = Ext.ComponentQuery.query('#ddlCheckboxes checkboxfield');
-				for (var chbItem in chbArray)
-					if (chbArray[chbItem].isChecked()) {
-						if (profArray[fields[field]] == '')
-							profArray[fields[field]] += chbArray[chbItem].getId().toString().substr(chbArray[chbItem].getId().toString().length - 1, chbArray[chbItem].getId().toString().length - 1)
-						else profArray[fields[field]] += ',' + chbArray[chbItem].getId().toString().substr(chbArray[chbItem].getId().toString().length - 1, chbArray[chbItem].getId().toString().length - 1)
-					}
+			    profArray[fields[field]] = '';
+
+			    var chbArray = Ext.ComponentQuery.query('#ddlCheckboxes checkboxfield');
+
+			    for (var chbItem in chbArray) {
+			        if (chbArray[chbItem].isChecked()) {
+			            var chbItemString = chbArray[chbItem].getId().toString();
+
+			            if (profArray[fields[field]] == '') {
+			                profArray[fields[field]] += chbItemString.substr(chbItemString.length - 1, chbItemString.length - 1);
+			            }
+			            else {
+			                profArray[fields[field]] += ',' + chbItemString.substr(chbItemString.length - 1, chbItemString.length - 1);
+			            }
+			        }
+			    }
 				//alert(profArray[fields[field]]);
 				if (!Ext.getCmp('ddlCheckboxes').isHidden())
 				{
@@ -580,7 +592,6 @@ Ext.define('smiley360.controller.Index', {
 					profArray['blogURL'] = smiley360.memberData.Profile.blogURL;
 				}
 			}
-			
 		}
 
 		smiley360.services.setProfile(smiley360.memberData.UserId, profArray,

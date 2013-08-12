@@ -19,7 +19,7 @@
                 cls: 'popup-close-button',
                 listeners: {
                     tap: function () {
-                        Ext.getCmp('xView').destroy();
+                        this.up('#xView').destroy();
                     }
                 }
             }, {
@@ -49,7 +49,6 @@
                 }, {
                     xtype: 'textfield',
                     id: 'xLinkField',
-                    disabled: true,
                     cls: 'cust-input',
                     value: 'http://smiley360.com/768768768',
                 }]
@@ -62,7 +61,7 @@
                     cls: 'popup-submit-button',
                     listeners: {
                         tap: function () {
-                            Ext.getCmp('xView').hide();
+                            this.up('#xView').hide();
                         }
                     },
                 }],
