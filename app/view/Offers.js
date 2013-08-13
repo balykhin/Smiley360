@@ -276,10 +276,11 @@ Ext.define('smiley360.view.Offers', {
 					listeners: {
 						element: 'element',
 						tap: function () {
-							console.log('Offers -> Offer Container tap listener: ', oneItem.valueOf());
+							console.log('Offers -> Offer Container tap listener: ', oneItem.valueOf());//last mission in list
 
-							if (oneItem.mission_categoryID == "1") {
-								this.up('#xOfferView').fireEvent('LoadOfferDetailsCommand', this, this.getId().substr(12))
+							if (this.parent.valueOf().getId().substr(10) == '1') {
+								this.up('#xOfferView').fireEvent('LoadOfferDetailsCommand', this, this.getId().substr(12));
+								
 							}
 							else {
 								this.up('#xOfferView').fireEvent('LoadOfferSurveyCommand', this, this.getId().substr(12));

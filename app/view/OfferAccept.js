@@ -81,7 +81,6 @@ Ext.define('smiley360.view.OfferAccept', {
                     style: 'margin-top: 10px;',
                     items: [{
                         xtype: 'label',
-                        width: 150,
                         cls: 'popup-address-comment',
                         html: 'This address is VERIFIED!',
                     }, {

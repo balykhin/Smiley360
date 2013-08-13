@@ -1,5 +1,5 @@
 Ext.define('smiley360.view.Signup', {
-    extend: 'Ext.Panel',
+	extend: 'Ext.form.Panel',
     requires: [
         'Ext.Img',
         'Ext.Label',

@@ -225,7 +225,7 @@ Ext.define('smiley360.controller.Index', {
 		smiley360.services.getConnects_byCategory(category, subcategory, index, pageSize,
 			function (response) {
 				if (response.success) {
-					smiley360.CategoryResults = response;					
+					smiley360.CategoryResults = response;
 					smiley360.CategoryString = cat_name + ' / ' + subcat_name;
 					Ext.getCmp('xMainView').showExternalView('browseinstrumentsview');
 				}
@@ -606,33 +606,32 @@ Ext.define('smiley360.controller.Index', {
 		var profArray = {};
 
 		for (var field in fields) {
-		    if (fields[field] == 'birthdate' || fields[field] == 'race') {
-		        console.log('Datebirthfield or Race')
-		    }
-		    else {
-		        profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getValue();
-		    }
+			if (fields[field] == 'birthdate' || fields[field] == 'race') {
+				console.log('Datebirthfield or Race')
+			}
+			else {
+				profArray[fields[field]] = Ext.ComponentQuery.query('#' + fields[field])[0].getValue();
+			}
 
 			if (fields[field] == 'race') {
-			    profArray[fields[field]] = '';
+				profArray[fields[field]] = '';
 
-			    var chbArray = Ext.ComponentQuery.query('#ddlCheckboxes checkboxfield');
+				var chbArray = Ext.ComponentQuery.query('#ddlCheckboxes checkboxfield');
 
-			    for (var chbItem in chbArray) {
-			        if (chbArray[chbItem].isChecked()) {
-			            var chbItemString = chbArray[chbItem].getId().toString();
+				for (var chbItem in chbArray) {
+					if (chbArray[chbItem].isChecked()) {
+						var chbItemString = chbArray[chbItem].getId().toString();
 
-			            if (profArray[fields[field]] == '') {
-			                profArray[fields[field]] += chbItemString.substr(chbItemString.length - 1, chbItemString.length - 1);
-			            }
-			            else {
-			                profArray[fields[field]] += ',' + chbItemString.substr(chbItemString.length - 1, chbItemString.length - 1);
-			            }
-			        }
-			    }
+						if (profArray[fields[field]] == '') {
+							profArray[fields[field]] += chbItemString.substr(chbItemString.length - 1, chbItemString.length - 1);
+						}
+						else {
+							profArray[fields[field]] += ',' + chbItemString.substr(chbItemString.length - 1, chbItemString.length - 1);
+						}
+					}
+				}
 				//alert(profArray[fields[field]]);
-				if (!Ext.getCmp('ddlCheckboxes').isHidden())
-				{
+				if (!Ext.getCmp('ddlCheckboxes').isHidden()) {
 					profArray['aboutself'] = smiley360.memberData.Profile.aboutself;
 					profArray['blogURL'] = smiley360.memberData.Profile.blogURL;
 				}
@@ -657,7 +656,7 @@ Ext.define('smiley360.controller.Index', {
 		console.log('ShowSurveyViewCommand -> offerId: ', missionID);
 		//=========================================================
 		if (isLogined) {
-			var surveyView = this.getSurveyView();
+			var surveyView = Ext.getCmp('xMainView').showExternalView('surveyview');
 			var surveyFrame = Ext.get('xSurveyFrame');
 			var surveyFrameUrl = 'http://smileys.ekonx.net.ua/survey.html?deviceId=' + getCookie('deviceId') + '&offerId=' + missionID;
 
@@ -854,7 +853,7 @@ smiley360.memberData = {};
 smiley360.missionData = {};
 smiley360.brandData = {};
 smiley360.SearchStr = {};
-smiley360.CategoryString = {},
+smiley360.CategoryString = {};
 //changeuserProfileImage
 smiley360.userProfileImage = 'resources/images/smile-missions.png';
 
@@ -896,71 +895,75 @@ smiley360.setViewStatus = function (view, status) {
 
 	var xShareButton = view.down('#xShareButton');
 	var xStatusIndicator = view.down('#xStatusIndicator');
-	var statusAnimation = {
-		element: xStatusIndicator.element,
-		easing: 'ease-out',
-		duration: 2000,
-		preserveEndState: true,
-		from: { width: 0 },
-		to: { width: view.getWidth() },
-	};
+	if (xStatusIndicator)
+		var statusAnimation = {
+			element: xStatusIndicator.element,
+			easing: 'ease-out',
+			duration: 2000,
+			preserveEndState: true,
+			from: { width: 0 },
+			to: { width: view.getWidth() },
+		};
+	if (view != Ext.getCmp('xForgetPasswordView')) {
+		switch (status) {
+			case smiley360.viewStatus.progress: {
+				xShareButton.setText('POSTING...');
 
-	switch (status) {
-		case smiley360.viewStatus.progress: {
-			xShareButton.setText('POSTING...');
-
-			if (xShareButton.getIcon()) {
-				xShareButton.setIcon('resources/images/share-initial.png');
-			}
-
-			xStatusIndicator.setStyle('background-color: #F9A419;');
-
-			statusAnimation.onEnd = function () {
-				if (xShareButton.getText() == 'POSTING...') {
-					Ext.Animator.run(statusAnimation);
+				if (xShareButton.getIcon()) {
+					xShareButton.setIcon('resources/images/share-initial.png');
 				}
-			};
 
-			break;
-		}
-		case smiley360.viewStatus.successful: {
-			xShareButton.setText('POST SUCCESSFUL');
+				xStatusIndicator.setStyle('background-color: #F9A419;');
 
-			if (xShareButton.getIcon()) {
-				xShareButton.setIcon('resources/images/share-successful.png');
+				statusAnimation.onEnd = function () {
+					if (xShareButton.getText() == 'POSTING...') {
+						Ext.Animator.run(statusAnimation);
+					}
+				};
+
+				break;
 			}
+			case smiley360.viewStatus.successful: {
+				xShareButton.setText('POST SUCCESSFUL');
 
-			xStatusIndicator.setStyle('background-color: #5F9E45;');
+				if (xShareButton.getIcon()) {
+					xShareButton.setIcon('resources/images/share-successful.png');
+				}
 
-			statusAnimation.duration = 100;
-			statusAnimation.easing = 'ease-in',
-            statusAnimation.from = { width: xStatusIndicator.getWidth() };
+				xStatusIndicator.setStyle('background-color: #5F9E45;');
 
-			break;
-		}
-		case smiley360.viewStatus.unsuccessful: {
-			xShareButton.setText('POST UNSUCCESSFUL');
+				statusAnimation.duration = 100;
+				statusAnimation.easing = 'ease-in',
+				statusAnimation.from = { width: xStatusIndicator.getWidth() };
 
-			if (xShareButton.getIcon()) {
-				xShareButton.setIcon('resources/images/share-unsuccessful.png');
+				break;
 			}
+			case smiley360.viewStatus.unsuccessful: {
+				xShareButton.setText('POST UNSUCCESSFUL');
 
-			xStatusIndicator.setStyle('background-color: #ED1C24;');
+				if (xShareButton.getIcon()) {
+					xShareButton.setIcon('resources/images/share-unsuccessful.png');
+				}
 
-			statusAnimation.duration = 100;
-			statusAnimation.easing = 'ease-in',
-            statusAnimation.from = { width: xStatusIndicator.getWidth() };
+				xStatusIndicator.setStyle('background-color: #ED1C24;');
 
-			break;
+				statusAnimation.duration = 100;
+				statusAnimation.easing = 'ease-in',
+				statusAnimation.from = { width: xStatusIndicator.getWidth() };
+
+				break;
+			}
+			default:
 		}
-		default:
+		Ext.Animator.run(statusAnimation);
 	}
-
-	Ext.Animator.run(statusAnimation);
+	else {
+		Ext.getCmp('xForgetPasswordView').setStatus(status);
+	};
 }
 
-smiley360.adjustPopupSize = function (view) {
-	var contentHeight = view.down('#xRootPanel').element.getHeight();
+smiley360.adjustPopupSize = function (view, extraSize) {
+	var contentHeight = view.down('#xRootPanel').element.getHeight() + (extraSize | 0);
 	var containerHeight = Ext.Viewport.element.getHeight() * 0.9;
 
 	if (containerHeight > contentHeight) {
