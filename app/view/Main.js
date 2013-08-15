@@ -93,6 +93,8 @@ Ext.define('smiley360.view.Main', {
 
             listeners: {
                 activeitemchange: function (tabbar, value, oldValue, eOpts) {
+                    if (!value.tab) return;
+
                     xMainView.setTitle(value.tab.getTitle());
 
                     if (!xSidePanel.getHidden()) {

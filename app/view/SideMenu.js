@@ -106,15 +106,15 @@
 				cls: 'listmenuitem',
 				ui: 'plain',
 				listeners: {
-					tap: function () {
+				    tap: function () {
+				        Ext.getCmp('xMainView').hideSidePanel();
+
 					    var members = Ext.getStore('Members');
 
 					    members.removeAll();
 					    members.sync();
 
 					    smiley360.animateViewLeft('loginview');
-
-					    Ext.getCmp('xMainView').destroy();
 					}
 				}
 			}],
