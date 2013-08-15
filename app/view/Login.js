@@ -71,28 +71,28 @@ Ext.define('smiley360.view.Login', {
                 height: '27px'
             }, {
                 xtype: 'button',
+                id: 'xFacebookLoginButton',
                 text: 'LOG IN WITH FACEBOOK',
                 ui: 'action',
-                listeners: {
-                    tap: function () {
-                        window.location = 'http://smileys.ekonx.net.ua/oauth/Facebook.html?deviceId=' + getCookie('deviceId');
-                    }
-                }
             }, {
                 xtype: 'button',
+                id: 'xTwitterLoginButton',
                 text: 'LOG IN WITH TWITTER',
                 ui: 'action',
-                listeners: {
-                    tap: function () {
-                        window.location = 'http://smileys.ekonx.net.ua/oauth/Twitter.html?deviceId=' + getCookie('deviceId');
-                    }
-                }
             }],
         }],
 
         listeners: [{
             delegate: "#xLogin",
             fn: "onLoginTap",
+            event: "tap",
+        }, {
+            delegate: "#xFacebookLoginButton",
+            fn: "onFacebookLoginTap",
+            event: "tap",
+        }, {
+            delegate: "#xTwitterLoginButton",
+            fn: "onTwitterLoginTap",
             event: "tap",
         }, {
             delegate: 'div#xSignup',
@@ -110,6 +110,18 @@ Ext.define('smiley360.view.Login', {
     onLoginTap: function () {
         Ext.getCmp('login_btn').setDisabled(true);
         this.fireEvent('AuthentificateCommand', this, this.down("#txtLogin").getValue(), this.down("#txtPassword").getValue());
+    },
+
+    onFacebookLoginTap: function(){
+        window.location =
+            smiley360.configuration.getServerDomain() +
+            'oauth/Facebook.html?deviceId=' + getCookie('deviceId');
+    },
+
+    onTwitterLoginTap: function(){
+        window.location =
+            smiley360.configuration.getServerDomain() +
+            'oauth/Twitter.html?deviceId=' + getCookie('deviceId');
     },
 
     onSignupTap: function () {
