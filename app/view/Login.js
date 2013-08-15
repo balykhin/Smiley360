@@ -115,13 +115,13 @@ Ext.define('smiley360.view.Login', {
     onFacebookLoginTap: function(){
         window.location =
             smiley360.configuration.getServerDomain() +
-            'oauth/Facebook.html?deviceId=' + getCookie('deviceId');
+            'oauth/Facebook.html?deviceId=' + window.localStorage.getItem('deviceId');
     },
 
     onTwitterLoginTap: function(){
         window.location =
             smiley360.configuration.getServerDomain() +
-            'oauth/Twitter.html?deviceId=' + getCookie('deviceId');
+            'oauth/Twitter.html?deviceId=' + window.localStorage.getItem('deviceId');
     },
 
     onSignupTap: function () {

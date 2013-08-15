@@ -536,7 +536,7 @@ Ext.define('smiley360.controller.Index', {
         if (isLogined) {
             var surveyView = Ext.getCmp('xMainView').showExternalView('surveyview');
             var surveyFrame = Ext.get('xSurveyFrame');
-            var surveyFrameUrl = 'http://smileys.ekonx.net.ua/survey.html?deviceId=' + getCookie('deviceId') + '&offerId=' + missionID;
+            var surveyFrameUrl = 'http://smileys.ekonx.net.ua/survey.html?deviceId=' + window.localStorage.getItem('deviceId') + '&offerId=' + missionID;
 
             surveyFrame.dom.src = surveyFrameUrl;
 
@@ -662,7 +662,7 @@ Ext.define('smiley360.controller.Index', {
         }
         else {
             var me = this;
-            var deviceId = getCookie('deviceId');
+            var deviceId = window.localStorage.getItem('deviceId');
 
             console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
 

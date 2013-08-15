@@ -106,5 +106,15 @@ Ext.application({
                 }
             }
         );
+    },
+
+    onReady: function () {
+        var deviceId = window.localStorage.getItem('deviceId');
+        alert('Index.html -> deviceId from localStorage: ' + deviceId)
+        if (deviceId == null) {
+            window.localStorage.setItem("deviceId", guid());
+            deviceId = window.localStorage.getItem('deviceId');
+            alert('Index.html -> deviceId added to localStorage: ' + deviceId)
+        }
     }
 });

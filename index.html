@@ -62,13 +62,6 @@
         // Global variable for Sencha Application object
         var _App = undefined;
 
-        var deviceId = getCookie('deviceId');
-        alert('Index.html -> deviceId from cookie: ' + deviceId)
-        if (deviceId == null) {
-            setCookie('deviceId', guid());
-            alert('Index.html -> deviceId added to cookie: ' + getCookie('deviceId'))
-        }
-
         // Create IE + others compatible event handler
         var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
         var eventer = window[eventMethod];
@@ -83,34 +76,6 @@
                 _App.getController('Index').onShowOffersView(true);
             }
         }, false);
-
-        function setCookie(name, value, expires, path, domain, secure) {
-            document.cookie = name + "=" + escape(value) +
-              ((expires) ? "; expires=" + expires : "") +
-              ((path) ? "; path=" + path : "") +
-              ((domain) ? "; domain=" + domain : "") +
-              ((secure) ? "; secure" : "");
-        }
-
-        function getCookie(name) {
-            var cookie = " " + document.cookie;
-            var search = " " + name + "=";
-            var setStr = null;
-            var offset = 0;
-            var end = 0;
-            if (cookie.length > 0) {
-                offset = cookie.indexOf(search);
-                if (offset != -1) {
-                    offset += search.length;
-                    end = cookie.indexOf(";", offset)
-                    if (end == -1) {
-                        end = cookie.length;
-                    }
-                    setStr = unescape(cookie.substring(offset, end));
-                }
-            }
-            return (setStr);
-        }
 
         function guid() {
             return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
