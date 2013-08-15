@@ -608,9 +608,14 @@ Ext.define('smiley360.controller.Index', {
 
     updateMemberId: function (memberId) {
         var members = Ext.getStore('Members');
+        var deviceId = undefined;
+
+        if (members.getCount() > 0) {
+            deviceId = members.getAt(0).data.deviceId;
+        }
 
         members.removeAll();
-        members.add({ memberId: memberId });
+        members.add({ memberId: memberId, deviceId: deviceId });
         members.sync();
     },
 
@@ -647,44 +652,65 @@ Ext.define('smiley360.controller.Index', {
 			});
     },
 
-    tryLoginUser: function () {
+    generateDeviceId: function () {
         var members = Ext.getStore('Members');
 
+        members.removeAll();
+        members.add({ deviceId: guid() });
+        members.sync();
+
+        alert('Index -> generateDeviceId: ' + members.getAt(0).data.deviceId)
+    },
+
+    tryLoginUser: function () {
+        var members = Ext.getStore('Members');
         if (members.getCount() > 0) {
             var memberId = members.getAt(0).data.memberId;
+            var deviceId = members.getAt(0).data.deviceId;
 
-            console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
+            if (memberId) {
+                console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
 
-            this.loadMemberData(memberId, function () {
-                smiley360.animateViewLeft('mainview');
-                smiley360.destroySplash();
-            });
+                this.loadMemberData(memberId, function () {
+                    smiley360.animateViewLeft('mainview');
+                    smiley360.destroySplash();
+                });
+
+                return;
+            }
+            else if (deviceId) {
+                var me = this;
+
+                console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
+
+                smiley360.services.getMemberIdByDeviceId(deviceId,
+                    function (response) {
+                        if (response.success) {
+                            console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
+
+                            me.updateMemberId(response.ID);
+                            me.loadMemberData(response.ID, function () {
+                                smiley360.animateViewLeft('mainview');
+                                smiley360.destroySplash();
+                            });
+                        }
+                        else {
+                            console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
+
+                            Ext.Viewport.add({ xtype: 'loginview' });
+                            smiley360.destroySplash();
+                        }
+                    });
+
+                return;
+            }
         }
-        else {
-            var me = this;
-            var deviceId = window.localStorage.getItem('deviceId');
 
-            console.log('Index -> [tryLoginUser] with cached deviceId:' + deviceId);
+        // if no data stored generate device id and show login view
+        this.generateDeviceId();
 
-            smiley360.services.getMemberIdByDeviceId(deviceId,
-				function (response) {
-				    if (response.success) {
-				        console.log('Index -> [tryLoginUser] with received memberId:' + response.ID);
-
-				        me.updateMemberId(response.ID);
-				        me.loadMemberData(response.ID, function () {
-				            smiley360.animateViewLeft('mainview');
-				            smiley360.destroySplash();
-				        });
-				    }
-				    else {
-				        console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
-
-				        Ext.Viewport.add({ xtype: 'loginview' });
-				        smiley360.destroySplash();
-				    }
-				});
-        }
+        Ext.Viewport.add({ xtype: 'loginview' });
+        smiley360.destroySplash();
     },
 });
 

@@ -32,15 +32,7 @@ Ext.define('smiley360.view.Connect', {
 						cls: 'heading-text active-sign',
 						style: 'padding-left: 15px;',
 						flex: 2,
-					},
-					//{
-                    //    xtype: 'label',
-                    //    html: '13/92',
-                    //    cls: 'heading-text',
-                    //    style: 'padding-left: 15px; padding-right: 10px;',
-                    //    flex: 0.2,
-					//}
-					],
+					},],
 				}, {
 					xtype: 'container',
 					style: 'background-color: #efecea',
@@ -53,7 +45,7 @@ Ext.define('smiley360.view.Connect', {
 						dragable: false,
 						indicator: false,
 						width: '100%',
-						height: 100,
+						height: 120,
 						defaults: {
 							styleHtmlContent: true
 						},
@@ -67,8 +59,6 @@ Ext.define('smiley360.view.Connect', {
 									else {
 										me.next();
 									}
-									//console.log(me.pageTurner.valueOf());
-									//me.pageTurner.delay(3000); //comment this to avoid js-bug
 								}, carousel);
 
 								carousel.pageTurner.delay(3000);
@@ -84,7 +74,6 @@ Ext.define('smiley360.view.Connect', {
 					},
 					{
 						xtype: 'container',
-						//margin: '20px 25px',
 						style: 'background-color: #F4F3F1; padding: 40px 25px;',
 						layout: 'vbox',
 						items: [{
@@ -242,7 +231,8 @@ Ext.define('smiley360.view.Connect', {
 				//id: 'xHomeBrandImage',
 				style: 'background-color: white; margin-left: 10px; border-radius: 5px; border-style: solid; border-width: 1px; border-color: white;',
 				src: smiley360.configuration.getResourceDomain() + '/' + oneItem.imageURL,//'resources/images/offers_logo3.png',
-				width: '40%',
+				width: 100,
+			    height: 100,
 				listeners: {
 					tap: function () {
 						this.up('#xConnectView').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, oneItem.smileyconnectID, 0, 10);

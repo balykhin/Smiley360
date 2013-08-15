@@ -318,7 +318,7 @@ Ext.define('smiley360.view.Offers', {
 			{
 				html: oneItem.title,
 				//html: 'Survey Title',
-				style: 'font-size:1.4em; padding: 10px 15px 10px 0px; background-color: #efecea; color:#413f40; font-family: \'din bold\';',
+				style: 'font-size:1.3em; padding: 10px 15px 10px 0px; background-color: #efecea; color:#413f40; font-family: \'din bold\';',
 			}));
 
 			includeContainerLabels.add(new Ext.Label(
