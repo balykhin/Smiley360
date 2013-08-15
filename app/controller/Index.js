@@ -856,7 +856,7 @@ Ext.define('smiley360.controller.Index', {
 						console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
 
 						smiley360.destroySplash();
-						smiley360.animateViewLeft('loginview');
+						Ext.Viewport.add({ xtype: 'loginview' });
 					}
 				});
 		}
