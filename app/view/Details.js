@@ -155,6 +155,7 @@ Ext.define('smiley360.view.Details', {
 							style: 'margin-top: 8px;',
 							items: [{
 								xtype: 'image',
+								style: 'margin-right: 10px;',
 								src: 'resources/images/missions-box.png',
 								padding: 14,
 							}],
@@ -225,6 +226,7 @@ Ext.define('smiley360.view.Details', {
 							style: 'margin-top: 8px;',
 							items: [{
 								xtype: 'image',
+								style: 'margin-right: 10px;',
 								src: 'resources/images/code.png',
 								padding: '14px 14px',
 							}],

@@ -4189,6 +4189,10 @@ input {
             margin-top: 4px;
         }
 
+        .x-toolbar-dark.x-docked-bottom .x-tab#ext-tab-3 span.x-button-icon, .x-toolbar-dark.x-docked-bottom .x-tab#ext-tab-3 .x-hasbadge span.x-badge, .x-hasbadge .x-toolbar-dark.x-docked-bottom .x-tab#ext-tab-3 span.x-badge, .x-tabbar-dark.x-docked-bottom .x-tab#ext-tab-3 span.x-button-icon, .x-tabbar-dark.x-docked-bottom .x-tab#ext-tab-3 .x-hasbadge span.x-badge, .x-hasbadge .x-tabbar-dark.x-docked-bottom .x-tab#ext-tab-3 span.x-badge {
+            background-color: #FFF;
+        }
+
     .x-toolbar-dark.x-docked-bottom .x-tab, .x-tabbar-dark.x-docked-bottom .x-tab {
         min-width: 3.5em;
     }

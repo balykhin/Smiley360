@@ -113,7 +113,7 @@ Ext.define('smiley360.view.Login', {
     },
 
     onFacebookLoginTap: function () {
-        var deviceId = Ext.getStore('Members').getAt(0).data.deviceId;
+        var deviceId = Ext.getStore('membersStore').getAt(0).data.deviceId;
 
         console.log('Login -> login to Facebook with deviceId: ', deviceId);
 
@@ -123,7 +123,7 @@ Ext.define('smiley360.view.Login', {
     },
 
     onTwitterLoginTap: function () {
-        var deviceId = Ext.getStore('Members').getAt(0).data.deviceId;
+        var deviceId = Ext.getStore('membersStore').getAt(0).data.deviceId;
 
         console.log('Login -> login to Twitter with deviceId: ', deviceId);
 

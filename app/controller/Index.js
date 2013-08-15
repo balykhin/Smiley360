@@ -607,16 +607,12 @@ Ext.define('smiley360.controller.Index', {
     },
 
     updateMemberId: function (memberId) {
-        var members = Ext.getStore('Members');
-        var deviceId = undefined;
+        var members = Ext.getStore('membersStore');
 
         if (members.getCount() > 0) {
-            deviceId = members.getAt(0).data.deviceId;
+            members.getAt(0).data.memberId = memberId;
+            members.sync();
         }
-
-        members.removeAll();
-        members.add({ memberId: memberId, deviceId: deviceId });
-        members.sync();
     },
 
     doJavascriptLoad: function (jsPath, callback) {
@@ -653,7 +649,7 @@ Ext.define('smiley360.controller.Index', {
     },
 
     generateDeviceId: function () {
-        var members = Ext.getStore('Members');
+        var members = Ext.getStore('membersStore');
 
         members.removeAll();
         members.add({ deviceId: guid() });
@@ -663,7 +659,7 @@ Ext.define('smiley360.controller.Index', {
     },
 
     tryLoginUser: function () {
-        var members = Ext.getStore('Members');
+        var members = Ext.getStore('membersStore');
         if (members.getCount() > 0) {
             var memberId = members.getAt(0).data.memberId;
             var deviceId = members.getAt(0).data.deviceId;
@@ -698,7 +694,6 @@ Ext.define('smiley360.controller.Index', {
                             console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
 
                             smiley360.animateViewLeft('loginview');
-                            smiley360.animateViewLeft('loginview');
                             smiley360.destroySplash();
                         }
                     });
@@ -710,7 +705,6 @@ Ext.define('smiley360.controller.Index', {
         // if no data stored generate device id and show login view
         this.generateDeviceId();
 
-        smiley360.animateViewLeft('loginview');
         smiley360.animateViewLeft('loginview');
         smiley360.destroySplash();
     },
@@ -724,7 +718,7 @@ smiley360.brandData = {};
 smiley360.SearchStr = {};
 smiley360.CategoryString = {};
 //changeuserProfileImage
-smiley360.userProfileImage = 'resources/images/smile-missions.png';
+smiley360.userProfileImage = 'http://uat.smiley360.com/images/default-profile.jpg';
 
 smiley360.viewStatus =
 {
@@ -850,7 +844,7 @@ smiley360.animateViewLeft = function (viewAlias) {
 
     console.log('Global -> opened [' + viewAlias + ']');
 
-    Ext.Viewport.animateActiveItem(view, { type: 'slide', direction: 'left' });
+    Ext.Viewport.animateActiveItem(view, { type: 'slide', direction: 'left' }).show();
 }
 
 smiley360.getOrCreateView = function (viewAlias) {

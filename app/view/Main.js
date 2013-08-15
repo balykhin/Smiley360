@@ -154,7 +154,7 @@ Ext.define('smiley360.view.Main', {
                     }
                 });
 
-                if (!Object.keys(smiley360.memberData.MissionList).length) {
+                if (smiley360.memberData.MissionList[0] == null) {
                     shareButton.disable();
                 }
             },

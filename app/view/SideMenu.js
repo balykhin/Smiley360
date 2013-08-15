@@ -109,7 +109,7 @@
 				    tap: function () {
 				        Ext.getCmp('xMainView').hideSidePanel();
 
-				        var members = Ext.getStore('Members');
+				        var members = Ext.getStore('membersStore');
 				        if (members.getCount() > 0) {
 				            members.getAt(0).data.memberId = null;
 				            members.sync();
