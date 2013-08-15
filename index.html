@@ -63,8 +63,10 @@
         var _App = undefined;
 
         var deviceId = getCookie('deviceId');
+        alert('Index.html -> deviceId from cookie: ' + deviceId)
         if (deviceId == null) {
             setCookie('deviceId', guid());
+            alert('Index.html -> deviceId added to cookie: ' + getCookie('deviceId'))
         }
 
         // Create IE + others compatible event handler
@@ -89,7 +91,6 @@
               ((domain) ? "; domain=" + domain : "") +
               ((secure) ? "; secure" : "");
         }
-
 
         function getCookie(name) {
             var cookie = " " + document.cookie;

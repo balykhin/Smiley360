@@ -440,10 +440,6 @@ Ext.define('smiley360.view.OfferDetails', {
 			},
 		},
 	},
-	onBackButtonTap: function () {
-		console.log('back button tapped');
-		this.fireEvent('backButtonCommandOfferDetails', this);
-	},
 	onGoToProfileTap: function () {
 		console.log('GoToProfile button tapped');
 		this.fireEvent('GoToProfileCommand', this);

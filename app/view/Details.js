@@ -393,11 +393,6 @@ Ext.define('smiley360.view.Details', {
 		this.up('#xMainView').setTitle('MISSIONS');
 	},
 
-	onBackButtonTap: function () {
-		console.log('back button tapped');
-		this.fireEvent('backButtonCommandDetails', this);
-	},
-
 	onGoToProfileTap: function () {
 		console.log('GoToProfile button tapped');
 		this.fireEvent('GoToProfileCommand', this);

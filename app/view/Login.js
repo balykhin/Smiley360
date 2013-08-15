@@ -68,7 +68,7 @@ Ext.define('smiley360.view.Login', {
             }, {
                 xtype: 'spacer',
                 cls: 'clear',
-                height: '27px'
+                height: '27px',
             }, {
                 xtype: 'button',
                 id: 'xFacebookLoginButton',
