@@ -84,7 +84,8 @@ Ext.define('smiley360.controller.Index', {
 				setAddressCommand: 'setAddressCommand',
 				verifyAddressCommand: 'verifyAddressCommand',
 				LoadMissionDetailsCommand: 'LoadMissionDetailsCommand',
-				getLocationCommand: 'getLocationCommand'
+				getLocationCommand: 'getLocationCommand',
+				LoadContactUsCommand: 'LoadContactUsCommand'
 			},
 			offerDetailsView: {
 				backButtonCommandOfferDetails: 'backButtonCommandOfferDetails',
@@ -452,6 +453,21 @@ Ext.define('smiley360.controller.Index', {
 			});
 	},
 
+	LoadContactUsCommand: function () {
+		var me = this;
+		smiley360.services.getContactUs(
+			function (response) {
+				if (response.success) {
+					delete response.success;
+					smiley360.ContactUs = response;
+
+					Ext.widget('contactusview').show();
+				}
+				else {
+					console.log('ContactUs is corrupted!');//show error on view
+				}
+			});
+	},
 	LoadOfferDetailsCommand: function (image, missionID, memberID) {
 		var me = this;
 		smiley360.services.getMissionDetails(missionID, memberID,
@@ -478,10 +494,10 @@ Ext.define('smiley360.controller.Index', {
 						if (smiley360.missionData.MissionDetails == null) {
 							//alert('new mission setting');
 							smiley360.missionData.MissionDetails = response;
-							if (smiley360.missionData.MissionDetails.MissionDetails.mission_full == true) {
+							//if (smiley360.missionData.MissionDetails.MissionDetails.mission_full == true) {
 								Ext.getCmp('xMainView').showExternalView('detailsview');
 								Ext.getCmp('xDetailsView').setMissionDetails();
-							};
+							//};
 							Ext.getCmp('xDetailsView').hideSharePanel();
 						}
 					}
@@ -551,7 +567,7 @@ Ext.define('smiley360.controller.Index', {
 				}
 				else {
 					console.log('Login unsuccessful!');
-
+					Ext.Msg.alert('Wrong login or password!<br>Try again!<br>');
 					Ext.getCmp('login_btn').enable();//show error on view
 				};
 			});

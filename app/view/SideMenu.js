@@ -49,7 +49,7 @@
 						this.up('#xMainView').showExternalView('editprofileview');
 					}
 				}
-			}, {
+			}, /*{
 				xtype: 'button',
 				text: 'Refer Friends',
 				margin: '20px 0px 0px 0px',
@@ -61,7 +61,7 @@
 						alert('refer a friend is not avaliable now');//this.up('#xHomeView').fireEvent('getProfileHomeCommand', this);
 					}
 				}
-			}, {
+			}, */{
 				xtype: 'button',
 				text: 'Terms of Use',
 				margin: '20px 0px 0px 0px',
@@ -94,7 +94,8 @@
 				ui: 'plain',
 				listeners: {
 					tap: function () {
-						Ext.widget('contactusview').show();
+						//Ext.widget('contactusview').show();
+						Ext.getCmp('xOfferView').fireEvent('LoadContactUsCommand', this);
 					}
 				}
 			}, {
@@ -106,10 +107,14 @@
 				ui: 'plain',
 				listeners: {
 					tap: function () {
-						var members = Ext.getStore('Members');
-						members.removeAll();
-						alert('Log out!');
-						smiley360.animateViewLeft('loginview');//Ext.widget('contactusview').show();//this.up('#xHomeView').fireEvent('getProfileHomeCommand', this);
+					    var members = Ext.getStore('Members');
+
+					    members.removeAll();
+					    members.sync();
+
+					    smiley360.animateViewLeft('loginview');
+
+					    Ext.getCmp('xMainView').destroy();
 					}
 				}
 			}],

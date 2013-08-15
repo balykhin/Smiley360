@@ -323,7 +323,14 @@ smiley360.services.getHotBrands = function (onCompleted) {
 			onCompleted
 		);
 }
-
+smiley360.services.getContactUs = function (onCompleted) {
+	smiley360.services.ajax(
+		"commentCategories",
+		{
+		},
+			onCompleted
+		);
+}
 /*********************** Create Methods *************/
 
 smiley360.services.createComment = function (commentData, onCompleted) {
