@@ -697,7 +697,7 @@ Ext.define('smiley360.controller.Index', {
                         else {
                             console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
 
-                            Ext.Viewport.add({ xtype: 'loginview' });
+                            smiley360.animateViewLeft('loginview');
                             smiley360.destroySplash();
                         }
                     });
@@ -709,7 +709,7 @@ Ext.define('smiley360.controller.Index', {
         // if no data stored generate device id and show login view
         this.generateDeviceId();
 
-        Ext.Viewport.add({ xtype: 'loginview' });
+        smiley360.animateViewLeft('loginview');
         smiley360.destroySplash();
     },
 });
