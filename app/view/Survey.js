@@ -4,9 +4,9 @@ Ext.define('smiley360.view.Survey', {
     config: {
         title: 'Take This Survey',
         items: [{
-            xtype: 'container',
+        	xtype: 'container',        	
             cls: 'popup-survey-innerpanel',
-            html: '<iframe id="xSurveyFrame" frameborder="0" scrolling="no" class="popup-survey-iframe"></iframe>'
+            html: '<iframe id="xSurveyFrame" frameborder="0" scrolling="yes" class="popup-survey-iframe"></iframe>'
         }],
     },
 });

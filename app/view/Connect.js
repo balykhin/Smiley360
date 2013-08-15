@@ -90,20 +90,29 @@ Ext.define('smiley360.view.Connect', {
 							items: [{
 								xtype: 'container',
 								docked: 'left',
+								style: 'margin-top:-5px; ',
 								items: [{
-									xtype: 'label', style: 'padding: 15px 2px 15px 15px;',
+									xtype: 'label', style: 'border-radius: 5px 0px 0px 0px; margin-top:-5px; padding: 15px 2px 15px 15px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%);',
 									html: 'SEARCH',
 								}],
 							}, {
 								xtype: 'spacer',
-								style: 'background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%); height: 50px;',
+								style: 'margin-top:-5px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%); height: 45px;',
 							}, {
 								xtype: 'container',
-								docked: 'right',
+								width: 40,
+								style: 'margin-top:-5px; height: 45px; border-radius: 0px 5px 0px 0px; background: -webkit-linear-gradient(top, #9f9a98 0%, #423c39 100%); ',
+								//docked: 'right',
+								//cls: 'btn-icon-special',
 								items: [{
 									xtype: 'image',
+									height: 20,
+									width: 20,
+									style: 'margin-top: 10px;',
+									//cls: 'btn-icon-special',
+									//style: 'background-position: 5px 5px;',
 									src: 'resources/images/search_connect.png',
-									padding: '14px 15px',
+									//padding: '14px 15px',
 								}],
 							}],
 						},
@@ -147,7 +156,7 @@ Ext.define('smiley360.view.Connect', {
 						{
 							xtype: 'panel',
 							layout: 'hbox',
-							cls: 'menu-list-btn-recieve',
+							cls: 'menu-list-btn-recieve btn-icon-special',
 							listeners: {
 								element: 'element',
 								tap: function () {
@@ -167,10 +176,13 @@ Ext.define('smiley360.view.Connect', {
 							}, {
 								xtype: 'container',
 								docked: 'right',
+								style: 'margin-top: 8px;',
 								items: [{
 									xtype: 'image',
+									style: 'margin-right: 15px;',
+									//style: 'background-position: 5px 5px;',
 									src: 'resources/images/all_files_connect.png',
-									padding: '15px 25px',
+									padding: 14,
 
 								}],
 							}],

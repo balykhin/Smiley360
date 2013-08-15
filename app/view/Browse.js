@@ -196,6 +196,7 @@ Ext.define('smiley360.view.Browse', {
                                             	layout: 'vbox',
                                             	id: 'Auto',
                                             	cls: 'has-shadow browse_container',
+												style: 'margin-right: 20px;',
                                             	listeners: {
                                             		element: 'element',
                                             		tap: function () {
@@ -227,6 +228,7 @@ Ext.define('smiley360.view.Browse', {
                                             	layout: 'vbox',
                                             	id: 'Baby',
                                             	cls: 'has-shadow browse_container',
+                                            	style: 'margin-right: 20px;',
                                             	listeners: {
                                             		element: 'element',
                                             		tap: function () {
@@ -342,6 +344,7 @@ Ext.define('smiley360.view.Browse', {
                                             	xtype: 'container',
                                             	layout: 'vbox',
                                             	id: 'Computer',
+                                            	style: 'margin-right: 20px;',
                                             	cls: 'has-shadow browse_container',
                                             	listeners: {
                                             		element: 'element',
@@ -372,6 +375,7 @@ Ext.define('smiley360.view.Browse', {
                                             	xtype: 'container',
                                             	layout: 'vbox',
                                             	id: 'Eco_Friendly',
+                                            	style: 'margin-right: 20px;',
                                             	cls: 'has-shadow browse_container',
                                             	listeners: {
                                             		element: 'element',
@@ -484,6 +488,7 @@ Ext.define('smiley360.view.Browse', {
                                             	xtype: 'container',
                                             	layout: 'vbox',
                                             	id: 'Mobile',
+                                            	style: 'margin-right: 20px;',
                                             	cls: 'has-shadow browse_container',
                                             	listeners: {
                                             		element: 'element',
@@ -512,6 +517,7 @@ Ext.define('smiley360.view.Browse', {
                                             	xtype: 'container',
                                             	layout: 'vbox',
                                             	id: 'Finance',
+                                            	style: 'margin-right: 20px;',
                                             	cls: 'has-shadow browse_container',
                                             	listeners: {
                                             		element: 'element',
@@ -633,6 +639,7 @@ Ext.define('smiley360.view.Browse', {
                                             	xtype: 'container',
                                             	layout: 'vbox',
                                             	id: 'Health',
+                                            	style: 'margin-right: 20px;',
                                             	cls: 'has-shadow browse_container',
                                             	listeners: {
                                             		element: 'element',
@@ -662,6 +669,7 @@ Ext.define('smiley360.view.Browse', {
                                             	xtype: 'container',
                                             	layout: 'vbox',
                                             	id: 'Hobbies',
+                                            	style: 'margin-right: 20px;',
                                             	cls: 'has-shadow browse_container',
                                             	listeners: {
                                             		element: 'element',
@@ -792,6 +800,7 @@ Ext.define('smiley360.view.Browse', {
                                             {
                                             	xtype: 'container',
                                             	layout: 'vbox',
+                                            	style: 'margin-right: 20px;',
                                             	cls: 'has-shadow browse_container',
                                             	id: 'Media',
                                             	listeners: {
@@ -821,6 +830,7 @@ Ext.define('smiley360.view.Browse', {
                                             	xtype: 'container',
                                             	layout: 'vbox',
                                             	id: 'Music',
+                                            	style: 'margin-right: 20px;',
                                             	cls: 'has-shadow browse_container',
                                             	listeners: {
                                             		element: 'element',
@@ -939,6 +949,7 @@ Ext.define('smiley360.view.Browse', {
                                             	xtype: 'container',
                                             	layout: 'vbox',
                                             	id: 'People',
+                                            	style: 'margin-right: 20px;',
                                             	cls: 'has-shadow browse_container',
                                             	listeners: {
                                             		element: 'element',
@@ -967,6 +978,7 @@ Ext.define('smiley360.view.Browse', {
                                             	xtype: 'container',
                                             	layout: 'vbox',
                                             	id: 'Pets',
+                                            	style: 'margin-right: 20px;',
                                             	cls: 'has-shadow browse_container',
                                             	listeners: {
                                             		element: 'element',
@@ -1088,6 +1100,7 @@ Ext.define('smiley360.view.Browse', {
                                             	xtype: 'container',
                                             	layout: 'vbox',
                                             	id: 'Travel',
+                                            	style: 'margin-right: 20px;',
                                             	cls: 'has-shadow browse_container',
                                             	listeners: {
                                             		element: 'element',

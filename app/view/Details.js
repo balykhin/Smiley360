@@ -130,6 +130,7 @@ Ext.define('smiley360.view.Details', {
 						xtype: 'panel',
 						layout: 'hbox',
 						cls: 'menu-list-btn-recieve',
+						style: 'margin-bottom: 20px;',
 						listeners: {
 							element: 'element',
 							tap: function () {
@@ -151,10 +152,11 @@ Ext.define('smiley360.view.Details', {
 						}, {
 							xtype: 'container',
 							docked: 'right',
+							style: 'margin-top: 8px;',
 							items: [{
 								xtype: 'image',
 								src: 'resources/images/missions-box.png',
-								padding: 20,
+								padding: 14,
 							}],
 						}],
 					}, {
@@ -197,6 +199,7 @@ Ext.define('smiley360.view.Details', {
 						xtype: 'panel',
 						layout: 'hbox',
 						cls: 'menu-list-btn-recieve',
+						style: 'margin-bottom: 20px;',
 						listeners: {
 							element: 'element',
 							tap: function () {
@@ -219,11 +222,11 @@ Ext.define('smiley360.view.Details', {
 						}, {
 							xtype: 'container',
 							docked: 'right',
+							style: 'margin-top: 8px;',
 							items: [{
 								xtype: 'image',
-								style: 'margin-right: 5px;',
 								src: 'resources/images/code.png',
-								padding: '20px 15px',
+								padding: '14px 14px',
 							}],
 						}],
 					}, {
@@ -293,8 +296,9 @@ Ext.define('smiley360.view.Details', {
 						}, {
 							xtype: 'container',
 							docked: 'right',
+							style: 'margin-top: 8px;',
 							items: [{
-								xtype: 'image',
+								xtype: 'image',								
 								src: 'resources/images/bookmark-missions.png',
 								padding: '15px 25px',
 
