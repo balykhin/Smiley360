@@ -1,5 +1,5 @@
 Ext.define('smiley360.view.Login', {
-    extend: 'Ext.Panel',
+    extend: 'Ext.form.Panel',
     alias: 'widget.loginview',
     requires: [
         'Ext.Img',
