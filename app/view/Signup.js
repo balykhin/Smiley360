@@ -107,7 +107,12 @@ Ext.define('smiley360.view.Signup', {
                 ui: 'light',
                 id: 'birthdate_signup',
                 placeHolder: 'Date of birth',
-                required: true
+                picker: {
+                		yearFrom: 1900,
+                	},
+                required: true,
+				autoSelect: false
+
             }, {
                 xtype: 'selectfield',
                 itemId: 'ddlGender',
@@ -116,10 +121,10 @@ Ext.define('smiley360.view.Signup', {
                 placeHolder: 'Gender',
                 cls: 'cust-input cust-input-ddl',
                 options: [
-                    { text: '', value: '' },
                     { text: 'Male', value: 'male' },
                     { text: 'Female', value: 'female' }
-                ]
+                ],
+                autoSelect: false
             }, {
                 xtype: 'spacer', height: '10px'
             }, {
@@ -142,8 +147,7 @@ Ext.define('smiley360.view.Signup', {
                 cls: 'cust-btn signup-btn',
                 text: 'SIGN UP',
                 listeners: {
-                    tap: function () {
-                        this.up('#Signup').fireEvent('signupCommand', this);
+                    tap: function () {                        
                         console.log('siguptap');
 
                         var formData = this.up('#Signup').getValues();
@@ -170,8 +174,8 @@ Ext.define('smiley360.view.Signup', {
                             Ext.Msg.alert('ERROR', msg);
 
                         } else {
-                            Ext.Msg.alert('SUCCESS', 'Sign up is successful!');
-                            this.up('#Signup').fireEvent('AuthentificateCommand', this, formData.txtEmail, formData.txtPassword);
+                        	//Ext.Msg.alert('SUCCESS', 'Sign up is successful!');
+                        	this.up('#Signup').fireEvent('signupCommand', this);                            
                         }
                     }
                 }

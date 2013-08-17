@@ -74,11 +74,6 @@ Ext.define('smiley360.view.Login', {
                 id: 'xFacebookLoginButton',
                 text: 'LOG IN WITH FACEBOOK',
                 ui: 'action',
-            }, {
-                xtype: 'button',
-                id: 'xTwitterLoginButton',
-                text: 'LOG IN WITH TWITTER',
-                ui: 'action',
             }],
         }],
 
@@ -89,10 +84,6 @@ Ext.define('smiley360.view.Login', {
         }, {
             delegate: "#xFacebookLoginButton",
             fn: "onFacebookLoginTap",
-            event: "tap",
-        }, {
-            delegate: "#xTwitterLoginButton",
-            fn: "onTwitterLoginTap",
             event: "tap",
         }, {
             delegate: 'div#xSignup',
@@ -122,15 +113,15 @@ Ext.define('smiley360.view.Login', {
             'oauth/Facebook.html?deviceId=' + deviceId;
     },
 
-    onTwitterLoginTap: function () {
-        var deviceId = Ext.getStore('membersStore').getAt(0).data.deviceId;
+    //onTwitterLoginTap: function () {
+    //    var deviceId = Ext.getStore('membersStore').getAt(0).data.deviceId;
 
-        console.log('Login -> login to Twitter with deviceId: ', deviceId);
+    //    console.log('Login -> login to Twitter with deviceId: ', deviceId);
 
-        window.location =
-            smiley360.configuration.getServerDomain() +
-            'oauth/Twitter.html?deviceId=' + deviceId;
-    },
+    //    window.location =
+    //        smiley360.configuration.getServerDomain() +
+    //        'oauth/Twitter.html?deviceId=' + deviceId;
+    //},
 
     onSignupTap: function () {
         //================================

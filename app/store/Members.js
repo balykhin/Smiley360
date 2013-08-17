@@ -6,7 +6,7 @@
 		autoLoad: true,
 		proxy: {
 			type: 'localstorage',
-			id: 'membersStore'
+			id: 'membersProxy'
 		}
 	}
 });

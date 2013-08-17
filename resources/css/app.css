@@ -3118,7 +3118,7 @@ html, body {
 
 .x-input-el {
     padding: .4em;
-    min-height: 2.5em;
+    /*min-height: 2.5em;*/
     display: block;
     border-width: 0;
     background: transparent;

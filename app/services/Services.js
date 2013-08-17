@@ -99,22 +99,26 @@ smiley360.services.getMemberData = function (memberId, onCompleted) {
 															else { delete response.success; }
 
 															globalResponse.isProfileComplete = response;
-
-															smiley360.services.ajax("get_smileyConnect_details",
+															globalResponse.specialOffersBrands = [];
+															for (var key in globalResponse.SpecialOffers) {
+																smiley360.services.ajax("get_smileyConnect_details",
 																{
 																	memberID: memberId,
-																	brandID: globalResponse.SpecialOffers[0].brandID
+																	brandID: globalResponse.SpecialOffers[key].brandID
 																},
 																function (response) {
 																	if (!response.success) { onCompleted(response) }
 																	else { delete response.success; }
 
-																	globalResponse.specialOffersBrands = response;
-
+																	globalResponse.specialOffersBrands.push(response);
+																	//alert(response.smileyConnect_detailsImage_URL);
 																	globalResponse.success = true;
-
 																	onCompleted(globalResponse);
 																});
+																
+															};
+															
+
 														});
 												});
 										});
@@ -136,6 +140,7 @@ smiley360.services.getMissionDetails = function (missionID, memberID, onComplete
         	else { delete response.success; }
 
         	missionResponse.MissionDetails = response;
+
         	smiley360.services.ajax("getMissionPoints",
 				{
 					missionID: missionID,
@@ -146,7 +151,6 @@ smiley360.services.getMissionDetails = function (missionID, memberID, onComplete
 					else { delete response.success; }
 
 					missionResponse.MissionPoints = response;
-
 					missionResponse.success = true;
 
 					onCompleted(missionResponse);

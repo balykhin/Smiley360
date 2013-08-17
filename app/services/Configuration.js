@@ -25,3 +25,7 @@ smiley360.configuration.getOfferImagesUrl = function (missionID, imageName) {
     return Ext.String.format("{0}/images/missions/mission{1}/{2}",
         smiley360.configuration.getResourceDomain(), missionID, imageName);
 }
+smiley360.configuration.userPic = function () {
+	return Ext.String.format("{0}/{1}",
+        smiley360.configuration.getResourceDomain(), 'images/default-profile.jpg');
+}

@@ -96,6 +96,7 @@ Ext.define('smiley360.view.ReviewForFender', {
                         flex: 1,
                         maxRows: 5,
                         minLength: 70,
+                        isFocused: false,
                         id: 'xReviewText',
                         cls: 'popup-input popup-input-text',
                         listeners: {

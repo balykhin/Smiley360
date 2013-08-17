@@ -101,10 +101,9 @@ Ext.define('smiley360.view.EditProfile', {
 					id: 'gender',
 					cls: 'cust-input cust-input-ddl',
 					placeHolder: 'Gender',
+					autoSelect: false,
 					readOnly: true,
-					options: [
-                        { text: '', value: '' },
-					]
+					
 				}],//end items top vbox
 			}, {
 				xtype: 'spacer',
@@ -177,6 +176,7 @@ Ext.define('smiley360.view.EditProfile', {
 						id: 'stateID',
 						name: 'ddlState',
 						cls: 'cust-input cust-input-ddl',
+						autoSelect: false,
 						placeHolder: 'State',
 						options: [
                             { text: '', value: '' },
@@ -184,7 +184,7 @@ Ext.define('smiley360.view.EditProfile', {
 					}],
 				}, {
 					xtype: 'textfield',
-					placeHolder: 'CityStateZip',
+					placeHolder: 'Zip',
 					itemId: 'txtCityStateZip',
 					id: 'zip',
 					name: 'txtCityStateZip',
@@ -201,6 +201,7 @@ Ext.define('smiley360.view.EditProfile', {
 					id: 'country',
 					name: 'ddlCountry',
 					cls: 'cust-input cust-input-ddl',
+					autoSelect: true,
 					placeHolder: 'Country',
 					options: [
                         { text: '', value: '' },
@@ -227,16 +228,19 @@ Ext.define('smiley360.view.EditProfile', {
 				}],
 			}, {
 				xtype: 'container',
-				cls: 'has-shadow',
+				cls: 'has-shadow ',
 				layout: { type: 'vbox' },
 				style: 'background-color: #efecea;',
 				padding: 10,
 				items: [{
 					xtype: 'selectfield',
+					label: 'Marital status - ',
+					labelCls: 'custom-ddl-label',
 					itemId: 'ddlStatus',
 					name: 'ddlStatus',
 					id: 'marital',
-					cls: 'cust-input cust-input-ddl',
+					cls: 'cust-input cust-input-ddl marriage-status',
+					autoSelect: false,
 					placeHolder: 'Single',
 					options: [
                         { text: '', value: '' }
@@ -245,7 +249,10 @@ Ext.define('smiley360.view.EditProfile', {
 					xtype: 'selectfield',
 					itemId: 'ddlChildren',
 					name: 'ddlChildren',
+					label: 'Children? - ',
+					labelCls: 'custom-ddl-label',
 					id: 'children',
+					autoSelect: false,
 					cls: 'cust-input cust-input-ddl',
 					placeHolder: 'Do you have children?',
 					listeners: {
@@ -265,9 +272,12 @@ Ext.define('smiley360.view.EditProfile', {
 					xtype: 'selectfield',
 					itemId: 'ddlHaveChildren',
 					name: 'ddlHaveChildren',
+					label: 'How Many? - ',
+					labelCls: 'custom-ddl-label',
 					id: 'howmanychildren',
 					//style: 'my-ddl-color',
 					cls: 'cust-input cust-input-ddl',
+					autoSelect: false,
 					placeHolder: 'How many children do you have?',
 					listeners: {
 						element: 'element',
@@ -281,7 +291,10 @@ Ext.define('smiley360.view.EditProfile', {
 					xtype: 'selectfield',
 					itemId: 'ddlHousehold',
 					name: 'ddlHousehold',
+					label: 'Income - ',
+					labelCls: 'custom-ddl-label',
 					id: 'income',
+					autoSelect: false,
 					cls: 'cust-input cust-input-ddl',
 					placeHolder: 'Household Income',
 					options: [
