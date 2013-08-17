@@ -7,11 +7,11 @@ smiley360.configuration.isDebugMode = function () {
 }
 
 smiley360.configuration.getServerDomain = function () {
-    return "http://smileys.ekonx.net.ua/";
+    return "http://uat.smiley360.com/ws/includes/";
 }
 
 smiley360.configuration.getServerUrl = function () {
-    return "http://smileys.ekonx.net.ua/index.php/";
+    return "http://uat.smiley360.com/ws/includes/index.php/";
 }
 
 smiley360.configuration.getResourceDomain = function () {
