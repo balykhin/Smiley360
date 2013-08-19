@@ -1107,3 +1107,9 @@
 	font-weight: normal !important;
 	font-size: 1em !important;
 }
+.set-height {
+	line-height: 110%;
+}
+/*.x-field-input .x-clear-icon{
+
+}*/

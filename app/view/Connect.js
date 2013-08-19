@@ -247,7 +247,7 @@ Ext.define('smiley360.view.Connect', {
 			    height: 100,
 				listeners: {
 					tap: function () {
-						this.up('#xConnectView').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, oneItem.smileyconnectID, 0, 10);
+						this.up('#xConnectView').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, oneItem.smileyconnectID, 0, 100);
 					}
 				}
 			}));

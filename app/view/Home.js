@@ -194,7 +194,7 @@ Ext.define('smiley360.view.Home', {
 	setSpecialBrand: function () {
 
 	},
-	
+
 	setSpecialOffers: function () {
 		counter = 0;
 		var xSpecialOffersList = this.down('#xSpecialOffersList');
@@ -213,7 +213,8 @@ Ext.define('smiley360.view.Home', {
 				listeners: {
 					element: 'element',
 					tap: function () {
-						window.open(oneItem.link);
+						if (oneItem.link != '') window.open(oneItem.link)
+						else { this.up('#xHomeView').fireEvent('onBrandTapCommand', this, smiley360.memberData.UserId, oneItem.brandID, 0, 10); };
 					}
 				}
 			}));

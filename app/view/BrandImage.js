@@ -1,7 +1,7 @@
 Ext.define('smiley360.view.BrandImage', {
 	extend: 'Ext.Container',
 	alias: 'widget.brandimageview',
-	requires:[
+	requires: [
 	'Ext.util.DelayedTask'
 	],
 	config: {
@@ -27,7 +27,7 @@ Ext.define('smiley360.view.BrandImage', {
 			}, {
 				xtype: 'carousel',
 				height: 300,
-				id:'xBrandImageCarousel',
+				id: 'xBrandImageCarousel',
 				items: [{
 					xtype: 'container',
 					layout: 'vbox',
@@ -93,8 +93,10 @@ Ext.define('smiley360.view.BrandImage', {
 								},
 					],
 				},///fourth
-				],},
-			],},
+				],
+			},
+			],
+		},
 		],
 		listeners: {
 			initialize: function () {
@@ -112,13 +114,43 @@ Ext.define('smiley360.view.BrandImage', {
 						}
 						else {
 							slide_carousel.next();
-
 						}
 						//console.log(slide_carousel.pageTurner.valueOf());
 						slide_carousel.pageTurner.delay(3000); //comment this to avoid js-bug
 					}, carousel);
 					carousel.pageTurner.delay(3000);
-				}
+				},
+			show: function () {
+				
+			},
 		},
+	},
+	setItem: function (item_pict) {
+		var brandTopImages = smiley360.brandData.BrandDetails.smileyConnect_topTenCommentImages;
+		Ext.getCmp('xBrandImageCarousel').removeAll(true, true);
+		for (var item in brandTopImages) {
+			//alert('i am showed' + brandTopImages[item].sc_commentID);
+			this.addItem(Ext.getCmp('xBrandImageCarousel'), brandTopImages[item].fullImage_URL);
+		};
+		Ext.getCmp('xBrandImageCarousel').setActiveItem(item_pict);
+	},
+	addItem: function (control, imageURL) {
+		//alert('i add pict');
+		this.up('#xBrandImageCarousel').add(new Ext.Container({
+			layout: 'vbox',
+			style: 'background: transparent;',
+			items: [
+						{
+							id: 'xBrandImage_Pict' + id,
+							xtype: 'image',
+							height: '100%',
+							src: smiley360.configuration.getResourceDomain() + '/' + imageURL,
+						},
+						{
+							xtype: 'panel',
+							html: '<div class="left-btn-brandimage"></div><div class="right-btn-brandimage"></div>'
+						},
+			],
+		}));
 	},
 });

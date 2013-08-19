@@ -92,24 +92,28 @@ Ext.define('smiley360.view.Missions', {
             imgTag.setAttribute('id', 'OfferID_pict' + oneItem.missionID);
             imgTag.setAttribute('src', smiley360.configuration.getOfferImagesUrl(oneItem.missionID, oneItem.link));
             imgTag.setAttribute('class', 'has-shadow');
+            imgTag.style.borderRadius = '5px';
 
             domContainer.appendChild(imgTag);
 
             var titleTag = document.createElement("p");
             titleTag.style.margin = '0px';
-            titleTag.style.fontSize = '1.2em';
+            titleTag.style.fontSize = '1.3em';
             titleTag.style.fontFamily = 'din bold';
             titleTag.style.color = '#413f40';
             titleTag.innerText = oneItem.title;
+            titleTag.setAttribute('class', 'set-height');
 
             domContainer.appendChild(titleTag);
 
             var descTag = document.createElement("p");
             titleTag.style.margin = '0px';
-            descTag.style.fontSize = '1.1em';
+            descTag.style.paddingTop = '10px';
+            descTag.style.fontSize = '1em';
             descTag.style.fontFamily = 'din medium';
             descTag.style.color = '#413f40';
             descTag.innerText = oneItem.descr;
+            descTag.setAttribute('class', 'set-height');
 
             domContainer.appendChild(descTag);
 

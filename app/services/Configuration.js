@@ -7,13 +7,21 @@ smiley360.configuration.isDebugMode = function () {
 }
 
 smiley360.configuration.getServerDomain = function () {
-    return "http://uat.smiley360.com/ws/includes/";
+    return "http://smileys.ekonx.net.ua/";
 }
 
 smiley360.configuration.getServerUrl = function () {
-    return "http://uat.smiley360.com/ws/includes/index.php/";
+    return "http://smileys.ekonx.net.ua/index.php/";
 }
-
+smiley360.configuration.uploaddir = function () {
+	return "/home/uat360/uploadedImages/";
+}
+smiley360.configuration.store_img_path = function () {
+	return "/home/uat360/htdocs/images/comment_images/";
+}
+smiley360.configuration.store_img_path_full = function () {
+	return "/home/uat360/htdocs/images/comment_images/fulljpgs/";
+}
 smiley360.configuration.getResourceDomain = function () {
     return "http://uat.smiley360.com";
 }
