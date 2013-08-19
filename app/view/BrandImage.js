@@ -27,6 +27,7 @@ Ext.define('smiley360.view.BrandImage', {
 			}, {
 				xtype: 'carousel',
 				height: 300,
+				indicator: false,
 				id: 'xBrandImageCarousel',
 				items: [{
 					xtype: 'container',
@@ -44,55 +45,7 @@ Ext.define('smiley360.view.BrandImage', {
 								},
 					],
 				},
-				///first
-				{
-					xtype: 'container',
-					layout: 'vbox',
-					style: 'background: transparent;',
-					items: [
-								{
-									xtype: 'image',
-									height: '100%',
-									src: 'resources/images/guitar_3.png',
-								},
-								{
-									xtype: 'panel',
-									html: '<div class="left-btn-brandimage"></div><div class="right-btn-brandimage"></div>'
-								},
-					],
-				},///second
-				{
-					xtype: 'container',
-					layout: 'vbox',
-					style: 'background: transparent;',
-					items: [
-								{
-									xtype: 'image',
-									height: '100%',
-									src: 'resources/images/guitar_4.png',
-								},
-								{
-									xtype: 'panel',
-									html: '<div class="left-btn-brandimage"></div><div class="right-btn-brandimage"></div>'
-								},
-					],
-				},///third
-				{
-					xtype: 'container',
-					layout: 'vbox',
-					style: 'background: transparent;',
-					items: [
-								{
-									xtype: 'image',
-									height: '100%',
-									src: 'resources/images/guitar_5.png',
-								},
-								{
-									xtype: 'panel',
-									html: '<div class="left-btn-brandimage"></div><div class="right-btn-brandimage"></div>'
-								},
-					],
-				},///fourth
+				///first	
 				],
 			},
 			],
@@ -116,12 +69,13 @@ Ext.define('smiley360.view.BrandImage', {
 							slide_carousel.next();
 						}
 						//console.log(slide_carousel.pageTurner.valueOf());
-						slide_carousel.pageTurner.delay(3000); //comment this to avoid js-bug
+						//slide_carousel.pageTurner.delay(3000); //comment this to avoid js-bug
 					}, carousel);
 					carousel.pageTurner.delay(3000);
 				},
 			show: function () {
-				
+				this.setItem(smiley360.slideShowImages);
+				Ext.getCmp('xBrandImageCarousel').setActiveItem(Ext.getCmp('xBrandImage_Pict' + smiley360.slideShowImages));
 			},
 		},
 	},
@@ -130,13 +84,13 @@ Ext.define('smiley360.view.BrandImage', {
 		Ext.getCmp('xBrandImageCarousel').removeAll(true, true);
 		for (var item in brandTopImages) {
 			//alert('i am showed' + brandTopImages[item].sc_commentID);
-			this.addItem(Ext.getCmp('xBrandImageCarousel'), brandTopImages[item].fullImage_URL);
+			this.addItem(Ext.getCmp('xBrandImageCarousel'), brandTopImages[item].fullImage_URL, brandTopImages[item].sc_commentID);
 		};
-		Ext.getCmp('xBrandImageCarousel').setActiveItem(item_pict);
+		
 	},
-	addItem: function (control, imageURL) {
+	addItem: function (control, imageURL, id) {
 		//alert('i add pict');
-		this.up('#xBrandImageCarousel').add(new Ext.Container({
+		Ext.getCmp('xBrandImageCarousel').add(new Ext.Container({
 			layout: 'vbox',
 			style: 'background: transparent;',
 			items: [

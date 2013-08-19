@@ -291,13 +291,16 @@ Ext.define('smiley360.view.Brand', {
 					src: smiley360.configuration.getResourceDomain() + '/' + brandTopImages[item].thumbnailImage_URL,
 					listeners: {
 						tap: function () {
+							//Ext.getCmp('xBrandView').setItem(brandTopImages[item].sc_commentID);
+							smiley360.slideShowImages = brandTopImages[item].sc_commentID;
 							Ext.widget('brandimageview').show();
-							Ext.getCmp('xBrandImageCarousel').setActiveItem(Ext.getCmp('xBrandImage_Pict' + brandTopImages[item].sc_commentID));
+							//Ext.getCmp('xBrandImageCarousel').setActiveItem(Ext.getCmp('xBrandImage_Pict' + brandTopImages[item].sc_commentID));
 						},
 					},
 				}));
 		};
 	},
+	
 	setBrandComments: function () {
 		Ext.getCmp('xAllCommentsContainer').removeAll(true, true);
 		var BrComments = smiley360.brandData.BrandComments;

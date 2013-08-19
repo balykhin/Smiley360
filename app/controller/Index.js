@@ -831,6 +831,7 @@ smiley360.brandData = {};
 smiley360.SearchStr = {};
 smiley360.CategoryString = {};
 smiley360.AllMissionsList = [];
+smiley360.slideShowImages = {};
 //changeuserProfileImage
 smiley360.userProfileImage = 'http://uat.smiley360.com/images/default-profile.jpg';
 
