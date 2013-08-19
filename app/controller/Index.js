@@ -779,8 +779,8 @@ Ext.define('smiley360.controller.Index', {
 				console.log('Index -> [tryLoginUser] with stored memberId:' + memberId);
 
 				this.loadMemberData(memberId, function () {
-				    smiley360.destroySplash();
 				    smiley360.animateViewLeft('mainview');
+				    smiley360.destroySplash();
 				});
 
 				return;
@@ -797,16 +797,16 @@ Ext.define('smiley360.controller.Index', {
 
                     		me.updateMemberId(response.ID);
                     		me.loadMemberData(response.ID, function () {
-                    		    smiley360.destroySplash();
                     		    smiley360.animateViewLeft('mainview');
+                    		    smiley360.destroySplash();
                     		});
                     	}
                     	else {
                     		console.log('Index -> [tryLoginUser] don\'t received memberId for deviceId:' + deviceId);
 
-                    		smiley360.destroySplash();
                     		smiley360.animateViewLeft('loginview');
-                    	}
+                    		smiley360.destroySplash();
+                        }
                     });
 
 				return;
@@ -816,8 +816,8 @@ Ext.define('smiley360.controller.Index', {
 		// if no data stored generate device id and show login view
 		this.generateDeviceId();
 
-		smiley360.destroySplash();
 		smiley360.animateViewLeft('loginview');
+		smiley360.destroySplash();
 	},
 
 	missionsCounter: 0,
@@ -995,5 +995,10 @@ smiley360.destroySplash = function () {
     var appLoadingIndicator = Ext.fly('appLoadingIndicator');
     if (appLoadingIndicator) {
         appLoadingIndicator.destroy();
+
+        console.log('Index -> [appLoadingIndicator] destroyed!');
+    }
+    else {
+        console.log('Index -> [appLoadingIndicator] is NULL!');
     }
 }
